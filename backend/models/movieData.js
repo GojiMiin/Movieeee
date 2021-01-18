@@ -2,34 +2,34 @@ var mongoose = require('mongoose')
 var Schema = mongoose.Schema;
 
 var movieSchema = new Schema({
-    Source: {
+    source: {
         type: String
     },
-    Code: {
+    code: {
         type: String
     },
-    Year: {
+    year: {
         type: Number
     },
-    Name: {
+    name: {
         type: String
     },
-    Time: {
+    time: {
         type: String
     },
-    Category: {
+    category: {
         type: String
     },
-    Rate: {
+    rate: {
         type: String
     },
-    Score: {
+    score: {
         type: Number
     },
-    Poster: {
+    poster: {
         type: String
     },
-    Description: {
+    description: {
         type: String
     }
 })
