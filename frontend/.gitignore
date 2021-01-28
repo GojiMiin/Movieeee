@@ -3,8 +3,13 @@
 # dependencies
 /node_modules
 /.pnp
-/.idea
 .pnp.js
+
+# jetbrain
+/.idea
+
+#eslint
+.eslintcache
 
 # testing
 /coverage
