@@ -1,23 +1,29 @@
-import logo from './logo.svg';
 import './App.css';
+import TopBar from "./components/TopBar";
+import MainPage from "./page/MainPage";
+import MoviePage from "./page/MoviePage";
+import Typography from "@material-ui/core/Typography"
+import { BrowserRouter as  Switch, Route } from 'react-router-dom';
+import {makeStyles} from "@material-ui/core";
+
+const useStyles = makeStyles({
+    typographyStyle: {
+        //import font here
+    }
+});
 
 function App() {
+    const classes = useStyles()
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <Typography className={classes.typographyStyle}>
+            <TopBar/>
+            <Switch>
+                <Route path="/" exact component={MainPage} />
+                <Route path="/movie" exact component={MoviePage} />
+            </Switch>
+        </Typography>
+
     </div>
   );
 }
