@@ -29,7 +29,7 @@ function TopBar(props) {
         <AppBar className={classes.root} position="relative">
             <Container>
                 <Toolbar  className={classes.test}>
-                    <Typography className={classes.textTopbar} edge="start">
+                    <Typography className={classes.textTopbar} edge="start" variant='h6'>
                         Movie Review Classification
                     </Typography>
                     <div>
