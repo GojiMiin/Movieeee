@@ -37,7 +37,9 @@ const TextBox = withStyles({
 })(Box);
 
 function MainPage() {
+
     const classes = useStyles()
+
     return (
         <div className="MainPage">
             <SearchBar/>

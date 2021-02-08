@@ -1,5 +1,6 @@
 import {Box, Container, makeStyles,withStyles, TextField,InputAdornment,IconButton} from "@material-ui/core";
 import SearchIcon from '@material-ui/icons/Search';
+import {useEffect, useState} from "react";
 
 const useStyles = makeStyles({
     center: {
@@ -34,7 +35,17 @@ const SearchTextField = withStyles({
 
 
 function SearchBar() {
+
     const classes = useStyles()
+    const [keyWord, setKeyWord] = useState("")
+    const getKeyWord = (event) => {
+        setKeyWord(event.target.value)
+    }
+
+    /*useEffect(() => {
+        console.log(keyWord)
+    })*/
+
     return (
         <div className="SearchBar">
             <Container className={classes.center}>
@@ -44,6 +55,7 @@ function SearchBar() {
                         placeholder="Search Movie Here..."
                         variant="outlined"
                         fullWidth={true}
+                        onChange={getKeyWord}
                         InputProps={{
                             endAdornment: (
                                 <InputAdornment>
