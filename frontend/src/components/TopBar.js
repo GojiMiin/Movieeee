@@ -4,7 +4,7 @@ import {AppBar,Container,Toolbar,Typography,Button,Menu,MenuItem, makeStyles} fr
 const useStyles = makeStyles({
     root: {
         backgroundColor: '#E5E5E5',
-        marginBottom: '60px'
+        marginBottom: '60px',
     },
     test: {
         display: 'flex',
@@ -19,7 +19,6 @@ function TopBar(props) {
     const classes = useStyles(props)
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [anchorEl2, setAnchorEl2] = React.useState(null);
-
     const handleClose = () => {
         setAnchorEl(null);
         setAnchorEl2(null);
@@ -28,7 +27,7 @@ function TopBar(props) {
     return (
         <AppBar className={classes.root} position="relative">
             <Container>
-                <Toolbar  className={classes.test}>
+                <Toolbar className={classes.test}>
                     <Typography className={classes.textTopbar} edge="start" variant='h6'>
                         Movie Review Classification
                     </Typography>

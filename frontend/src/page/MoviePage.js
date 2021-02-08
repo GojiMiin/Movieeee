@@ -70,7 +70,7 @@ function MoviePage() {
                 <DetailBox>
                     <Grid container spacing={3}>
                         <Grid className={classes.centeralignitem} item xs={4}> {/* need to use props instead of img component*/}
-                            <img style={{ width: '100%', height: 'auto' }} src="https://m.media-amazon.com/images/M/MV5BMjMxNjY2MDU1OV5BMl5BanBnXkFtZTgwNzY1MTUwNTM@._V1_UY209_CR0,0,140,209_AL_.jpg" />
+                            <img style={{ width: '100%', height: 'auto' }} src="https://m.media-amazon.com/images/M/MV5BMjMxNjY2MDU1OV5BMl5BanBnXkFtZTgwNzY1MTUwNTM@._V1_.jpg" />
                         </Grid>
                         <Grid className={classes.centeralignitem} item xs={8}>
                             <Grid container direction={"column"}  spacing={5}>

@@ -2,6 +2,7 @@ import './App.css';
 import TopBar from "./components/TopBar";
 import MainPage from "./page/MainPage";
 import MoviePage from "./page/MoviePage";
+import SearchPage from "./page/SearchPage";
 import Typography from "@material-ui/core/Typography"
 import { BrowserRouter as  Switch, Route } from 'react-router-dom';
 import {makeStyles} from "@material-ui/core";
@@ -25,6 +26,7 @@ function App() {
             <Switch>
                 <Route path="/" exact component={MainPage} />
                 <Route path="/movie" exact component={MoviePage} />
+                <Route path="/search" exact component={SearchPage} />
             </Switch>
         </MuiThemeProvider>
     </div>
