@@ -41,32 +41,32 @@ const ResultDetailBox = withStyles({
     }
 })(Box);
 
-function ResultBoxs() {
+function ResultBoxs({mName, mPoster, mCate}) {
     const classes = useStyles()
     return (
-            <ResultBox>
-                <Grid container>
-                    <Grid item xs={4}>
-                        <img style={{ width: '75%', height: 'auto' }} src="https://m.media-amazon.com/images/M/MV5BMjMxNjY2MDU1OV5BMl5BanBnXkFtZTgwNzY1MTUwNTM@._V1_.jpg" />
-                    </Grid>
-                    <Grid item xs={8} className={classes.centerColumn}>
-                        <Box>
-                            <ResultDetailBox borderRadius={8}>
-                                <HeaderBox>
-                                    <Typography variant='h6' align='left'>
-                                        Movie Name
-                                    </Typography>
-                                </HeaderBox>
-                                <TextBox>
-                                    <Typography align='left'>
-                                        Action, Drama, History
-                                    </Typography>
-                                </TextBox>
-                            </ResultDetailBox>
-                        </Box>
-                    </Grid>
+        <ResultBox>
+            <Grid container>
+                <Grid item xs={4}>
+                    <img style={{ width: '75%', height: 'auto' }} src={mPoster} />
                 </Grid>
-            </ResultBox>
+                <Grid item xs={8} className={classes.centerColumn}>
+                    <Box>
+                        <ResultDetailBox borderRadius={8}>
+                            <HeaderBox>
+                                <Typography variant='h6' align='left'>
+                                    {mName}
+                                </Typography>
+                            </HeaderBox>
+                            <TextBox>
+                                <Typography align='left'>
+                                    {mCate}
+                                </Typography>
+                            </TextBox>
+                        </ResultDetailBox>
+                    </Box>
+                </Grid>
+            </Grid>
+        </ResultBox>
 
     );
 }

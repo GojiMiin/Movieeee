@@ -1,9 +1,8 @@
 import {
-    Box, TextField, fade,
-    ThemeProvider,
+    Box,
     withStyles,
     makeStyles,
-    createMuiTheme, Container, Typography
+    Container, Typography
 } from "@material-ui/core";
 import SearchBar from "../components/SearchBar";
 import ContactBox from "../components/ContactBox";

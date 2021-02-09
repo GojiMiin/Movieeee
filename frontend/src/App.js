@@ -3,9 +3,7 @@ import TopBar from "./components/TopBar";
 import MainPage from "./page/MainPage";
 import MoviePage from "./page/MoviePage";
 import SearchPage from "./page/SearchPage";
-import Typography from "@material-ui/core/Typography"
 import { BrowserRouter as  Switch, Route } from 'react-router-dom';
-import {makeStyles} from "@material-ui/core";
 import {MuiThemeProvider, createMuiTheme} from "@material-ui/core";
 
 const THEME = createMuiTheme({
