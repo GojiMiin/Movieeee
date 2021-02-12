@@ -1,5 +1,7 @@
 import {Box, Container, Grid, makeStyles, Typography} from "@material-ui/core";
-import {withStyles} from "@material-ui/core";
+import {withStyles, Link} from "@material-ui/core";
+import { useLocation } from "react-router-dom"
+import {useEffect} from "react";
 
 const useStyles = makeStyles({
     root: {
@@ -41,8 +43,10 @@ const ResultDetailBox = withStyles({
     }
 })(Box);
 
-function ResultBoxs({mName, mPoster, mCate}) {
+function ResultBoxs({mName, mPoster, mCate, mCode}) {
     const classes = useStyles()
+    const location = useLocation()
+
     return (
         <ResultBox>
             <Grid container>
@@ -54,7 +58,7 @@ function ResultBoxs({mName, mPoster, mCate}) {
                         <ResultDetailBox borderRadius={8}>
                             <HeaderBox>
                                 <Typography variant='h6' align='left'>
-                                    {mName}
+                                    <Link href={"/movie/"+mCode} style={{ textDecoration: 'none' }}>{mName}</Link>
                                 </Typography>
                             </HeaderBox>
                             <TextBox>

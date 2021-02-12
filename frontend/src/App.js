@@ -23,7 +23,7 @@ function App() {
             <TopBar/>
             <Switch>
                 <Route path="/" exact component={MainPage} />
-                <Route path="/movie" exact component={MoviePage} />
+                <Route path="/movie/:movieCode" exact component={MoviePage} />
                 <Route path="/search" exact component={SearchPage} />
             </Switch>
         </MuiThemeProvider>

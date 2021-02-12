@@ -19,17 +19,17 @@ const MovieDescBox = withStyles({
     }
 })(Box);
 
-function MovieDescBoxs() {
+function MovieDescBoxs({movieName, movieCate}) {
     return (
         <MovieDescBox borderRadius={8}>
             <HeaderBox>
                 <Typography variant='h6' align='left'>
-                    Movie Title
+                    {movieName}
                 </Typography>
             </HeaderBox>
             <TextBox>
                 <Typography align='left'>
-                    Action, Drama, History
+                    {movieCate}
                 </Typography>
             </TextBox>
         </MovieDescBox>

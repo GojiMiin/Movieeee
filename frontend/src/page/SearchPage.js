@@ -58,6 +58,8 @@ function SearchPage() {
         setMovie(result.data)
     }, [])
 
+    console.log(movie)
+
     return (
         <div className="SearchPage">
             <Container className={classes.center}>
@@ -66,7 +68,7 @@ function SearchPage() {
             <Container className={classes.centerColumn}>
 
                 {movie.map((oneMovie) =>
-                    <ResultBox key={oneMovie.code} mName={oneMovie.name} mPoster={oneMovie.poster} mCate={oneMovie.category}/>
+                    <ResultBox key={oneMovie.code} mName={oneMovie.name} mPoster={oneMovie.poster} mCate={oneMovie.category} mCode={oneMovie.code}/>
                 )}
 
             </Container>

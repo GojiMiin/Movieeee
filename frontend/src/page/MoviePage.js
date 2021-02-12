@@ -4,6 +4,9 @@ import {Box, Container, makeStyles, TextField, Typography, withStyles, Grid, Pap
 import {LinearProgress} from "@material-ui/core";
 import ContactBox from "../components/ContactBox";
 import ReviewBox from "../components/ReviewBox";
+import {useEffect, useState} from "react";
+import {useParams} from "react-router-dom"
+import axios from "axios";
 
 const useStyles = makeStyles({
     root: {
@@ -61,16 +64,27 @@ const BorderLinearProgress = withStyles((theme) => ({
 
 function MoviePage() {
     const classes = useStyles()
+    const [detail, setDetail] = useState([])
+    let mCode = useParams();
+    var movieDetail = []
+
+    useEffect(async () => {
+        movieDetail = await axios.post("http://localhost:3000/moviedetail", {code:mCode.movieCode})
+        await setDetail(movieDetail.data)
+    }, [])
+
+    console.log(detail)
+
     return (
         <div className="MoviePage">
             <Container className={classes.center}>
-                <MovieDescBoxs></MovieDescBoxs>
+                <MovieDescBoxs movieName={detail.name} movieCate={detail.category}></MovieDescBoxs>
             </Container>
             <Container className={classes.center}>
                 <DetailBox>
                     <Grid container spacing={3}>
-                        <Grid className={classes.centeralignitem} item xs={4}> {/* need to use props instead of img component*/}
-                            <img style={{ width: '100%', height: 'auto' }} src="https://m.media-amazon.com/images/M/MV5BMjMxNjY2MDU1OV5BMl5BanBnXkFtZTgwNzY1MTUwNTM@._V1_.jpg" />
+                        <Grid className={classes.centeralignitem} item xs={4}>
+                            <img style={{ width: '100%', height: 'auto' }} src={detail.poster} />
                         </Grid>
                         <Grid className={classes.centeralignitem} item xs={8}>
                             <Grid container direction={"column"}  spacing={5}>
@@ -93,7 +107,7 @@ function MoviePage() {
                                                     </Box>
                                                     <Box>
                                                         <Typography>
-                                                            5.0
+                                                            {detail.imdbscore}
                                                         </Typography>
                                                     </Box>
                                                 </Grid>
@@ -123,7 +137,7 @@ function MoviePage() {
                                             </HeaderBox>
                                             <TextBox>
                                                 <Typography>
-                                                    The Avengers and their allies must be willing to sacrifice all in an attempt to defeat the powerful Thanos before his blitz of devastation and ruin puts an end to the universe.
+                                                    {detail.description}
                                                 </Typography>
                                             </TextBox>
                                         </Container>

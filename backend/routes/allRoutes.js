@@ -1,7 +1,7 @@
 module.exports = function(app){
     var movie = require('../controllers/movieController')
 
-    app.route('/imdbmovie')
+    app.route('/moviedetail')
         .post(movie.loadDetail)
     app.route('/yearfil')
         .post(movie.yearFilter)
