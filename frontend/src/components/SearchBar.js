@@ -1,5 +1,7 @@
 import {Box, Container, makeStyles,withStyles, TextField,InputAdornment,IconButton} from "@material-ui/core";
 import SearchIcon from '@material-ui/icons/Search';
+import { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles({
     center: {
@@ -34,7 +36,23 @@ const SearchTextField = withStyles({
 
 
 function SearchBar() {
+
     const classes = useStyles()
+    const history = useHistory()
+    const [keyWord, setKeyWord] = useState("")
+    const getKeyWord = event => {
+        setKeyWord(event.target.value)
+    }
+
+    const toSearch = event => {
+        if(event.key === "Enter" ){
+            history.push({
+                pathname: "/search",
+                state: { keyword: keyWord }
+            })
+        }
+    }
+
     return (
         <div className="SearchBar">
             <Container className={classes.center}>
@@ -44,6 +62,8 @@ function SearchBar() {
                         placeholder="Search Movie Here..."
                         variant="outlined"
                         fullWidth={true}
+                        onChange={getKeyWord}
+                        onKeyPress={toSearch}
                         InputProps={{
                             endAdornment: (
                                 <InputAdornment>

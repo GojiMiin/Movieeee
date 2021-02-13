@@ -1,14 +1,16 @@
 import {
-    Box, TextField, fade,
-    ThemeProvider,
+    Box,
     withStyles,
     makeStyles,
-    createMuiTheme, Container, Typography
+    Container
 } from "@material-ui/core";
 import ContactBox from "../components/ContactBox";
 import MovieDescBoxs from "../components/MovieDescBox";
 import ResultHeaderBox from "../components/ResultHeaderBox";
 import ResultBox from "../components/ResultBox";
+import {useEffect, useState} from "react";
+import { useLocation } from "react-router-dom"
+import axios from "axios"
 
 const useStyles = makeStyles({
     root: {
@@ -46,18 +48,28 @@ const TextBox = withStyles({
 
 function SearchPage() {
     const classes = useStyles()
+    const location = useLocation()
+    const [movie, setMovie] = useState([])
+    var result
+
+    useEffect(async () => {
+        const keyWord = location.state.keyword
+        result = await axios.post("http://localhost:3000/namesearch", {sname:keyWord})
+        setMovie(result.data)
+    }, [])
+
+    console.log(movie)
+
     return (
         <div className="SearchPage">
             <Container className={classes.center}>
-                <ResultHeaderBox></ResultHeaderBox>
-
+                <ResultHeaderBox showKey={location.state.keyword}></ResultHeaderBox>
             </Container>
             <Container className={classes.centerColumn}>
 
-                    {/*loop result here*/}
-                    <ResultBox></ResultBox>
-                    <ResultBox></ResultBox>
-
+                {movie.map((oneMovie) =>
+                    <ResultBox key={oneMovie.code} mName={oneMovie.name} mPoster={oneMovie.poster} mCate={oneMovie.category} mCode={oneMovie.code}/>
+                )}
 
             </Container>
             <ContactBox></ContactBox>
