@@ -25,7 +25,7 @@ const ReviewBox = withStyles({
     root:{
         position:'relative',
         backgroundColor: '#E5E5E5',
-        width:'800px',
+        maxWidth:'800px',
         height:'auto',
         margin:'24px 0px 24px 0px',
     }

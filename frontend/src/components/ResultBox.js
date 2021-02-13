@@ -31,9 +31,11 @@ const TextBox = withStyles({
 const ResultBox = withStyles({
     root:{
         backgroundColor: '#fff',
-        maxWidth:'800px',
         height:'auto',
-        marginTop:'24px'
+        marginTop:'24px',
+        ['@media (min-width:780px)']: { // eslint-disable-line no-useless-computed-key
+            width: '800px'
+        }
     }
 })(Box);
 const ResultDetailBox = withStyles({

@@ -1,4 +1,5 @@
 import {Box, Container, Typography} from "@material-ui/core";
+import {Grid} from "@material-ui/core";
 import {withStyles} from "@material-ui/core";
 
 const HeaderBox = withStyles({
@@ -28,9 +29,25 @@ function MovieDescBoxs({movieName, movieCate}) {
                 </Typography>
             </HeaderBox>
             <TextBox>
-                <Typography align='left'>
-                    {movieCate}
-                </Typography>
+                <Grid container spacing={3}>
+                    <Grid item>
+                        <Typography align='left'>
+                            Movie Time
+                        </Typography>
+                    </Grid>
+                    <Grid item>
+                        <Typography align='left'>
+                            {movieCate}
+                        </Typography>
+                    </Grid>
+                    <Grid item>
+                        <Typography align='left'>
+                            Movie Rate
+                        </Typography>
+                    </Grid>
+
+                </Grid>
+
             </TextBox>
         </MovieDescBox>
     );

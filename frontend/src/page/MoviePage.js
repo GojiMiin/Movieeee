@@ -35,7 +35,7 @@ const TextBox = withStyles({
 })(Box);
 const DetailBox = withStyles({
     root:{
-        width:'800px',
+        maxWidth:'800px',
         marginTop:'24px'
     }
 })(Box);

@@ -1,8 +1,10 @@
 import React from 'react';
 import {AppBar,Container,Toolbar,Typography,Button,Menu,MenuItem, makeStyles} from "@material-ui/core";
+import {withStyles} from "@material-ui/core";
 
 const useStyles = makeStyles({
     root: {
+        margin:0,
         backgroundColor: '#E5E5E5',
         marginBottom: '60px',
     },
@@ -14,6 +16,24 @@ const useStyles = makeStyles({
         color: "black"
     }
 });
+
+const StyledMenu = withStyles({
+    paper: {
+        border: '1px solid #d3d4d5',
+    },
+})((props) => (
+    <Menu
+        elevation={0}
+        getContentAnchorEl={null}
+        anchorOrigin={{
+            vertical: 'bottom',
+        }}
+        transformOrigin={{
+            vertical: 'top',
+        }}
+        {...props}
+    />
+));
 
 function TopBar(props) {
     const classes = useStyles(props)
@@ -35,7 +55,7 @@ function TopBar(props) {
                         <Button aria-controls="menu-year" aria-haspopup="true" onClick={e => setAnchorEl(e.currentTarget)} className={classes.textTopbar}>
                             Year
                         </Button>
-                        <Menu
+                        <StyledMenu
                             id="menu-year"
                             anchorEl={anchorEl}
                             keepMounted
@@ -45,11 +65,11 @@ function TopBar(props) {
                             <MenuItem onClick={handleClose}>Profile</MenuItem>
                             <MenuItem onClick={handleClose}>My account</MenuItem>
                             <MenuItem onClick={handleClose}>Logout</MenuItem>
-                        </Menu>
+                        </StyledMenu>
                         <Button aria-controls="menu-genre" aria-haspopup="true" onClick={e => setAnchorEl2(e.currentTarget)} className={classes.textTopbar}>
                             Genre
                         </Button>
-                        <Menu
+                        <StyledMenu
                             id="menu-genre"
                             anchorEl={anchorEl2}
                             keepMounted
@@ -59,7 +79,7 @@ function TopBar(props) {
                             <MenuItem onClick={handleClose}>Profile1</MenuItem>
                             <MenuItem onClick={handleClose}>My account1</MenuItem>
                             <MenuItem onClick={handleClose}>Logout1</MenuItem>
-                        </Menu>
+                        </StyledMenu>
                         <Button className={classes.textTopbar}>
                             Rate
                         </Button>
@@ -68,6 +88,7 @@ function TopBar(props) {
             </Container>
 
         </AppBar>
+
 
     );
 }
