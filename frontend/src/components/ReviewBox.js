@@ -9,6 +9,10 @@ const useStyles = makeStyles({
     center: {
         display:"flex",
         justifyContent:"center"
+    },
+    centeralignitem: {
+        display:"flex",
+        alignItems:"center"
     }
 });
 const HeaderBox = withStyles({
@@ -58,25 +62,36 @@ function ReviewBoxs() {
     return (
         <Container className={classes.center}>
             <ReviewBox borderRadius={8}>
-                <ReviewFromBox>
-                    <Typography>
-                        Show all reviews
-                    </Typography>
-                    <Button>
-                        <Typography>
-                            IMDB
-                        </Typography>
-                    </Button>
-                    <Button>
-                        <Typography>
-                            Rotten
-                        </Typography>
-                    </Button>
-                </ReviewFromBox>
                 <HeaderBox>
-                    <Typography variant='h6' align='left'>
-                        Movie Review
-                    </Typography>
+                    <Grid container>
+                        <Grid item xs={6}>
+                            <Typography variant='h6' align='left'>
+                                Movie Review
+                            </Typography>
+                        </Grid>
+                        <Grid item container xs={6}>
+                            <Grid item xs={6} style={{display:'flex', alignItems:'center', justifyContent:'flex-end'}}>
+                                <Typography variant='subtitle2' align='right'>
+                                    Show all reviews
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={3}>
+                                <Button>
+                                    <Typography>
+                                        IMDB
+                                    </Typography>
+                                </Button>
+                            </Grid>
+                            <Grid item xs={3}>
+                                <Button>
+                                    <Typography>
+                                        Rotten
+                                    </Typography>
+                                </Button>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+
                 </HeaderBox>
                 <TextBox>
                     <Grid container spacing={3}>
