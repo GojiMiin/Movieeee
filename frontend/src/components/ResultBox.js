@@ -64,16 +64,29 @@ function ResultBoxs({mName, mPoster, mCate, mCode}) {
                                 </Typography>
                             </HeaderBox>
                             <TextBox>
-                                <Typography align='left'>
-                                    {mCate}
-                                </Typography>
+                                <Grid container spacing={3}>
+                                    <Grid item>
+                                        <Typography align='left'>
+                                            Movie Time
+                                        </Typography>
+                                    </Grid>
+                                    <Grid item>
+                                        <Typography align='left'>
+                                            {mCate}
+                                        </Typography>
+                                    </Grid>
+                                    <Grid item>
+                                        <Typography align='left'>
+                                            Movie Rate
+                                        </Typography>
+                                    </Grid>
+                                </Grid>
                             </TextBox>
                         </ResultDetailBox>
                     </Box>
                 </Grid>
             </Grid>
         </ResultBox>
-
     );
 }
 
