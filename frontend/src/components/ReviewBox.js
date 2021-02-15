@@ -57,7 +57,7 @@ const ReadMoreBox = withStyles({
 })(Box);
 
 
-function ReviewBoxs() {
+function ReviewBoxs({onePageReview}) {
     const classes = useStyles()
     return (
         <Container className={classes.center}>
@@ -111,7 +111,7 @@ function ReviewBoxs() {
                                 </ReviewFromBox>
                                 <HeaderBox>
                                     <Typography align='left'>
-                                        Movie Review
+                                        Movie Review {/*add review title and show positive negative score*/}
                                     </Typography>
                                 </HeaderBox>
                                 <TextBox>
@@ -137,7 +137,7 @@ function ReviewBoxs() {
                                 </ReviewFromBox>
                                 <HeaderBox>
                                     <Typography align='left'>
-                                        Movie Review
+                                        Movie Review {/*add review title and show positive negative score*/}
                                     </Typography>
                                 </HeaderBox>
                                 <TextBox>

@@ -45,7 +45,7 @@ const ResultDetailBox = withStyles({
     }
 })(Box);
 
-function ResultBoxs({mName, mPoster, mCate, mCode}) {
+function ResultBoxs({mName, mPoster, mCate, mCode, mTime, mRate}) {
     const classes = useStyles()
     const location = useLocation()
 
@@ -67,7 +67,7 @@ function ResultBoxs({mName, mPoster, mCate, mCode}) {
                                 <Grid container spacing={3}>
                                     <Grid item>
                                         <Typography align='left'>
-                                            Movie Time
+                                            {mTime}
                                         </Typography>
                                     </Grid>
                                     <Grid item>
@@ -77,7 +77,7 @@ function ResultBoxs({mName, mPoster, mCate, mCode}) {
                                     </Grid>
                                     <Grid item>
                                         <Typography align='left'>
-                                            Movie Rate
+                                            {mRate}
                                         </Typography>
                                     </Grid>
                                 </Grid>

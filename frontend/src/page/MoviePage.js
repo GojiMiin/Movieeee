@@ -65,15 +65,28 @@ const BorderLinearProgress = withStyles((theme) => ({
 function MoviePage() {
     const classes = useStyles()
     const [detail, setDetail] = useState([])
+    const [pageReview, setPageReview] = useState([])
     let mCode = useParams();
+    var mCodeForm = new FormData();
     var movieDetail = []
+    var onePageReview = []
+
+    const config = {
+        headers: { 'content-type': 'multipart/form-data' }
+    }
+
+    mCodeForm.append("moviecode", mCode.movieCode)
 
     useEffect(async () => {
+        console.log(mCodeForm)
         movieDetail = await axios.post("http://localhost:3000/moviedetail", {code:mCode.movieCode})
         await setDetail(movieDetail.data)
+        onePageReview = await axios.post("http://localhost:5000/predict_review", mCodeForm)
+        await setPageReview(onePageReview)
     }, [])
 
     console.log(detail)
+    console.log(pageReview)
 
     return (
         <div className="MoviePage">
@@ -148,7 +161,7 @@ function MoviePage() {
                     </Grid>
                 </DetailBox>
             </Container>
-            <ReviewBox></ReviewBox>
+            <ReviewBox onePageReview={pageReview}></ReviewBox>
             <ContactBox></ContactBox>
         </div>
     );
