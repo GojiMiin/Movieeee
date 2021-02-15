@@ -78,7 +78,7 @@ function MoviePage() {
     return (
         <div className="MoviePage">
             <Container className={classes.center}>
-                <MovieDescBoxs movieName={detail.name} movieCate={detail.category}></MovieDescBoxs>
+                <MovieDescBoxs movieName={detail.name} movieCate={detail.category} movieTime={detail.time} movieRate={detail.rate}></MovieDescBoxs>
             </Container>
             <Container className={classes.center}>
                 <DetailBox>
