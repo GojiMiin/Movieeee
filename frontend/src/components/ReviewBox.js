@@ -1,5 +1,6 @@
 import {Box, Button, Container, Grid, makeStyles, Typography} from "@material-ui/core";
 import {withStyles} from "@material-ui/core";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles({
     root: {
@@ -57,8 +58,19 @@ const ReadMoreBox = withStyles({
 })(Box);
 
 
-function ReviewBoxs({onePageReview}) {
+function ReviewBoxs({onePageReview, mCode}) {
     const classes = useStyles()
+    const history = useHistory()
+
+    console.log(onePageReview)
+
+    const readMoreReview = (reviewDetail) => {
+        history.push({
+            pathname: "/review/"+mCode.movieCode,
+            state: {allDetail: reviewDetail}
+        })
+    }
+
     return (
         <Container className={classes.center}>
             <ReviewBox borderRadius={8}>
@@ -95,10 +107,13 @@ function ReviewBoxs({onePageReview}) {
                 </HeaderBox>
                 <TextBox>
                     <Grid container spacing={3}>
-                        <Grid item xs={6}>
-                            <ReviewTextBox borderRadius={8}>
+
+
+                        {onePageReview.allReview.map((oneReview) =>
+                            <Grid item xs={6}> {/*imdb review box*/}
+                            <ReviewTextBox borderRadius={8} key={oneReview.score}>
                                 <ReadMoreBox>
-                                    <Button>
+                                    <Button onClick={() => readMoreReview(oneReview)}>
                                         <Typography>
                                             Read More
                                         </Typography>
@@ -111,16 +126,19 @@ function ReviewBoxs({onePageReview}) {
                                 </ReviewFromBox>
                                 <HeaderBox>
                                     <Typography align='left'>
-                                        Movie Review {/*add review title and show positive negative score*/}
+                                        {oneReview.title} {/*add review title and show positive negative score*/}
                                     </Typography>
                                 </HeaderBox>
                                 <TextBox>
                                     <Typography align='left' noWrap={true}>
-                                        Test Review Veryyyyyyyyyyyyyyyyyyyyyyyyyyyy Long
+                                        {oneReview.review}
                                     </Typography>
                                 </TextBox>
                             </ReviewTextBox>
                         </Grid>
+                        )}
+
+
                         <Grid item xs={6}>
                             <ReviewTextBox borderRadius={8}>
                                 <ReadMoreBox>

@@ -64,8 +64,8 @@ const BorderLinearProgress = withStyles((theme) => ({
 
 function MoviePage() {
     const classes = useStyles()
-    const [detail, setDetail] = useState([])
-    const [pageReview, setPageReview] = useState([])
+    const [detail, setDetail] = useState(null)
+    const [pageReview, setPageReview] = useState(null)
     let mCode = useParams();
     var mCodeForm = new FormData();
     var movieDetail = []
@@ -75,18 +75,29 @@ function MoviePage() {
         headers: { 'content-type': 'multipart/form-data' }
     }
 
+    const detailFetching = async () => {
+        movieDetail = await axios.post("http://localhost:3000/moviedetail", {code:mCode.movieCode})
+        await setDetail(movieDetail.data)
+    }
+
+    const predictFetching = async () => {
+        onePageReview = await axios.post("http://localhost:5000/predict_review", mCodeForm)
+        await setPageReview(onePageReview.data[0])
+    }
+
     mCodeForm.append("moviecode", mCode.movieCode)
 
     useEffect(async () => {
         console.log(mCodeForm)
-        movieDetail = await axios.post("http://localhost:3000/moviedetail", {code:mCode.movieCode})
-        await setDetail(movieDetail.data)
-        onePageReview = await axios.post("http://localhost:5000/predict_review", mCodeForm)
-        await setPageReview(onePageReview)
+        detailFetching()
+        predictFetching()
     }, [])
 
     console.log(detail)
-    console.log(pageReview)
+
+    if(pageReview === null || detail === null){
+        return <p>Loading review...</p>;
+    }
 
     return (
         <div className="MoviePage">
@@ -161,7 +172,7 @@ function MoviePage() {
                     </Grid>
                 </DetailBox>
             </Container>
-            <ReviewBox onePageReview={pageReview}></ReviewBox>
+            <ReviewBox onePageReview={pageReview} mCode={mCode}></ReviewBox>
             <ContactBox></ContactBox>
         </div>
     );

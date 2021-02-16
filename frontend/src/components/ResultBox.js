@@ -47,7 +47,6 @@ const ResultDetailBox = withStyles({
 
 function ResultBoxs({mName, mPoster, mCate, mCode, mTime, mRate}) {
     const classes = useStyles()
-    const location = useLocation()
 
     return (
         <ResultBox>

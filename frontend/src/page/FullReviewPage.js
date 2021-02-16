@@ -46,7 +46,7 @@ const PosterBox = withStyles({
 
 
 
-function FullReviewPage() {
+function FullReviewPage(allDetailReview) {
     const classes = useStyles()
     const [detail, setDetail] = useState([])
     let mCode = useParams();
