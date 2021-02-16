@@ -1,4 +1,4 @@
-import {Box, Container, Typography} from "@material-ui/core";
+import {Box, Button, Container, Typography} from "@material-ui/core";
 import {Grid} from "@material-ui/core";
 import {withStyles} from "@material-ui/core";
 
@@ -15,31 +15,31 @@ const TextBox = withStyles({
 const FullReviewBox = withStyles({
     root:{
         backgroundColor: '#E5E5E5',
-        width:'800px',
+        maxWidth:'800px',
         marginTop:'24px',
         height:'auto'
     }
 })(Box);
 
-function FullReviewBoxs() {
+function AllReviewBox() {
     return (
         <FullReviewBox borderRadius={8}>
             <HeaderBox>
                 <Grid container>
                     <Grid item xs={6}>
-                        <Typography variant='h6' align='left'>
+                        <Typography variant='subtitle2' align='left'>
                             Positive / Negative
                         </Typography>
                     </Grid>
                     <Grid item xs={6}>
-                        <Typography variant='h6' align='right'>
+                        <Typography variant='subtitle2' align='right'>
                             IMDB / Rotten
                         </Typography>
                     </Grid>
                 </Grid>
             </HeaderBox>
             <TextBox>
-                <Typography variant='body1'>
+                <Typography variant='body2' noWrap={true}>
                     What persuaded me to watch this movie was the blessing bestowed upon it by the stories original creator, Stephen King, who claimed: "I wasn't prepared for how good it really was".
                     He's not wrong.
 
@@ -54,10 +54,20 @@ function FullReviewBoxs() {
 
                     Watched the pre-release as a critic - August 28th.
                 </Typography>
-
             </TextBox>
+            <Box display={'flex'} justifyContent={'flex-end'}>
+                <Box style={{padding:'0px 20px 20px 20px'}}>
+                    <Button style={{padding:'0px', textTransform: 'none'}}>
+                        <Typography variant='subtitle2' align='right'>
+                            Read More
+                        </Typography>
+                    </Button>
+                </Box>
+
+            </Box>
+
         </FullReviewBox>
     );
 }
 
-export default FullReviewBoxs;
+export default AllReviewBox;

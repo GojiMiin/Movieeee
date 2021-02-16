@@ -113,7 +113,7 @@ function ReviewBoxs({onePageReview, mCode}) {
                             <Grid item xs={6}> {/*imdb review box*/}
                             <ReviewTextBox borderRadius={8} key={oneReview.score}>
                                 <ReadMoreBox>
-                                    <Button onClick={() => readMoreReview(oneReview)}>
+                                    <Button style={{textTransform: 'none'}} onClick={() => readMoreReview(oneReview)} >
                                         <Typography variant={'subtitle2'}>
                                             Read More
                                         </Typography>

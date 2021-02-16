@@ -4,6 +4,7 @@ import MainPage from "./page/MainPage";
 import MoviePage from "./page/MoviePage";
 import SearchPage from "./page/SearchPage";
 import FullReviewPage from "./page/FullReviewPage";
+import AllReviewsPage from "./page/AllReviewPage";
 import { BrowserRouter as  Switch, Route } from 'react-router-dom';
 import {MuiThemeProvider, createMuiTheme} from "@material-ui/core";
 
@@ -27,6 +28,7 @@ function App() {
                 <Route path="/movie/:movieCode" exact component={MoviePage} />
                 <Route path="/search" exact component={SearchPage} />
                 <Route path="/review" exact component={FullReviewPage} />
+                <Route path="/allreviews" exact component={AllReviewsPage} />
             </Switch>
         </MuiThemeProvider>
     </div>
