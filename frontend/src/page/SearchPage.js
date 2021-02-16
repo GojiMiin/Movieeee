@@ -68,7 +68,7 @@ function SearchPage() {
             <Container className={classes.centerColumn}>
 
                 {movie.map((oneMovie) =>
-                    <ResultBox key={oneMovie.code} mName={oneMovie.name} mPoster={oneMovie.poster} mCate={oneMovie.category} mCode={oneMovie.code}/>
+                    <ResultBox key={oneMovie.code} mName={oneMovie.name} mPoster={oneMovie.poster} mCate={oneMovie.category} mCode={oneMovie.code} mTime={oneMovie.time} mRate={oneMovie.rate}/>
                 )}
 
             </Container>
