@@ -49,7 +49,7 @@ function ContactBoxs() {
                     </Typography>
                 </HeaderBox>
                 <TextBox>
-                    <Typography>
+                    <Typography variant='body1'>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean at eleifend turpis. Sed efficitur tincidunt lacus in volutpat. Nullam vitae dapibus sapien. Curabitur ac nunc non lacus faucibus efficitur ut quis ex. Etiam pharetra, ipsum a blandit elementum
                     </Typography>
                 </TextBox>

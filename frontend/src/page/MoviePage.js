@@ -130,7 +130,7 @@ function MoviePage() {
                                                         </Typography>
                                                     </Box>
                                                     <Box>
-                                                        <Typography>
+                                                        <Typography variant={'body2'}>
                                                             {detail.imdbscore}
                                                         </Typography>
                                                     </Box>
@@ -142,7 +142,7 @@ function MoviePage() {
                                                         </Typography>
                                                     </Box>
                                                     <Box>
-                                                        <Typography>
+                                                        <Typography variant={'body2'}>
                                                             5.5
                                                         </Typography>
                                                     </Box>
@@ -160,7 +160,7 @@ function MoviePage() {
                                                 </Typography>
                                             </HeaderBox>
                                             <TextBox>
-                                                <Typography>
+                                                <Typography variant={'body2'}>
                                                     {detail.description}
                                                 </Typography>
                                             </TextBox>

@@ -55,7 +55,9 @@ function TopBar(props) {
                     </Typography>
                     <div>
                         <Button aria-controls="menu-year" aria-haspopup="true" onClick={e => setAnchorEl(e.currentTarget)} className={classes.textTopbar}>
-                            Year
+                            <Typography variant={'subtitle2'}>
+                                Year
+                            </Typography>
                         </Button>
                         <StyledMenu
                             id="menu-year"
@@ -64,12 +66,26 @@ function TopBar(props) {
                             open={Boolean(anchorEl)}
                             onClose={handleClose}
                         >
-                            <MenuItem onClick={handleClose}>Profile</MenuItem>
-                            <MenuItem onClick={handleClose}>My account</MenuItem>
-                            <MenuItem onClick={handleClose}>Logout</MenuItem>
+                            <MenuItem onClick={handleClose}>
+                                <Typography variant={'body2'}>
+                                    Profile
+                                </Typography>
+                            </MenuItem>
+                            <MenuItem onClick={handleClose}>
+                                <Typography variant={'body2'}>
+                                    My account
+                                </Typography>
+                            </MenuItem>
+                            <MenuItem onClick={handleClose}>
+                                <Typography variant={'body2'}>
+                                    Logout
+                                </Typography>
+                            </MenuItem>
                         </StyledMenu>
                         <Button aria-controls="menu-genre" aria-haspopup="true" onClick={e => setAnchorEl2(e.currentTarget)} className={classes.textTopbar}>
-                            Genre
+                            <Typography variant={'subtitle2'}>
+                                Genre
+                            </Typography>
                         </Button>
                         <StyledMenu
                             id="menu-genre"
@@ -78,12 +94,26 @@ function TopBar(props) {
                             open={Boolean(anchorEl2)}
                             onClose={handleClose}
                         >
-                            <MenuItem onClick={handleClose}>Profile1</MenuItem>
-                            <MenuItem onClick={handleClose}>My account1</MenuItem>
-                            <MenuItem onClick={handleClose}>Logout1</MenuItem>
+                            <MenuItem onClick={handleClose}>
+                                <Typography variant={'body2'}>
+                                    Profile1
+                                </Typography>
+                            </MenuItem>
+                            <MenuItem onClick={handleClose}>
+                                <Typography variant={'body2'}>
+                                    My account 1
+                                </Typography>
+                            </MenuItem>
+                            <MenuItem onClick={handleClose}>
+                                <Typography variant={'body2'}>
+                                    Logout 1
+                                </Typography>
+                            </MenuItem>
                         </StyledMenu>
                         <Button className={classes.textTopbar}>
-                            Rate
+                            <Typography variant={'subtitle2'}>
+                                Rate
+                            </Typography>
                         </Button>
                     </div>
                 </Toolbar>

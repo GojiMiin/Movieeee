@@ -31,17 +31,17 @@ function MovieDescBoxs({movieName, movieCate, movieTime, movieRate}) {
             <TextBox>
                 <Grid container spacing={3}>
                     <Grid item>
-                        <Typography align='left'>
+                        <Typography variant={'body2'} align='left'>
                             {movieTime}
                         </Typography>
                     </Grid>
                     <Grid item>
-                        <Typography align='left'>
+                        <Typography variant={'body2'} align='left'>
                             {movieCate}
                         </Typography>
                     </Grid>
                     <Grid item>
-                        <Typography align='left'>
+                        <Typography variant={'body2'} align='left'>
                             {movieRate}
                         </Typography>
                     </Grid>

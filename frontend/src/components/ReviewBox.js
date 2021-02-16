@@ -89,14 +89,14 @@ function ReviewBoxs({onePageReview, mCode}) {
                             </Grid>
                             <Grid item xs={3}>
                                 <Button>
-                                    <Typography>
+                                    <Typography variant={'subtitle2'}>
                                         IMDB
                                     </Typography>
                                 </Button>
                             </Grid>
                             <Grid item xs={3}>
                                 <Button>
-                                    <Typography>
+                                    <Typography variant={'subtitle2'}>
                                         Rotten
                                     </Typography>
                                 </Button>
@@ -114,23 +114,31 @@ function ReviewBoxs({onePageReview, mCode}) {
                             <ReviewTextBox borderRadius={8} key={oneReview.score}>
                                 <ReadMoreBox>
                                     <Button onClick={() => readMoreReview(oneReview)}>
-                                        <Typography>
+                                        <Typography variant={'subtitle2'}>
                                             Read More
                                         </Typography>
                                     </Button>
                                 </ReadMoreBox>
-                                <ReviewFromBox>
-                                    <Typography align='right'>
-                                        IMDB
-                                    </Typography>
-                                </ReviewFromBox>
-                                <HeaderBox>
-                                    <Typography align='left'>
-                                        {oneReview.title} {/*add review title and show positive negative score*/}
-                                    </Typography>
-                                </HeaderBox>
+                                <Grid container>
+                                    <Grid item xs={9}>
+                                        <HeaderBox>
+                                            <Typography align={'left'} variant={'subtitle2'} noWrap={true}>
+                                                {oneReview.title} {/*add review title and show positive negative score*/}
+                                            </Typography>
+                                        </HeaderBox>
+                                    </Grid>
+                                    <Grid item xs={3}>
+                                        <HeaderBox>
+                                            <Typography align={'right'} variant={'subtitle2'}>
+                                                IMDB
+                                            </Typography>
+                                        </HeaderBox>
+
+                                    </Grid>
+                                </Grid>
+
                                 <TextBox>
-                                    <Typography align='left' noWrap={true}>
+                                    <Typography align='left' variant={'body2'} noWrap={true}>
                                         {oneReview.review}
                                     </Typography>
                                 </TextBox>
@@ -139,32 +147,32 @@ function ReviewBoxs({onePageReview, mCode}) {
                         )}
 
 
-                        <Grid item xs={6}>
-                            <ReviewTextBox borderRadius={8}>
-                                <ReadMoreBox>
-                                    <Button>
-                                        <Typography>
-                                            Read More
-                                        </Typography>
-                                    </Button>
-                                </ReadMoreBox>
-                                <ReviewFromBox>
-                                    <Typography align='right'>
-                                        Rotten
-                                    </Typography>
-                                </ReviewFromBox>
-                                <HeaderBox>
-                                    <Typography align='left'>
-                                        Movie Review {/*add review title and show positive negative score*/}
-                                    </Typography>
-                                </HeaderBox>
-                                <TextBox>
-                                    <Typography align='left' noWrap={true}>
-                                        Test Review Veryyyyyyyyyyyyyyyyyyyyyyyyyyyy Long
-                                    </Typography>
-                                </TextBox>
-                            </ReviewTextBox>
-                        </Grid>
+                        {/*<Grid item xs={6}>*/}
+                        {/*    <ReviewTextBox borderRadius={8}>*/}
+                        {/*        <ReadMoreBox>*/}
+                        {/*            <Button>*/}
+                        {/*                <Typography>*/}
+                        {/*                    Read More*/}
+                        {/*                </Typography>*/}
+                        {/*            </Button>*/}
+                        {/*        </ReadMoreBox>*/}
+                        {/*        <ReviewFromBox>*/}
+                        {/*            <Typography align='right'>*/}
+                        {/*                Rotten*/}
+                        {/*            </Typography>*/}
+                        {/*        </ReviewFromBox>*/}
+                        {/*        <HeaderBox>*/}
+                        {/*            <Typography align='left'>*/}
+                        {/*                Movie Review /!*add review title and show positive negative score*!/*/}
+                        {/*            </Typography>*/}
+                        {/*        </HeaderBox>*/}
+                        {/*        <TextBox>*/}
+                        {/*            <Typography align='left' noWrap={true}>*/}
+                        {/*                Test Review Veryyyyyyyyyyyyyyyyyyyyyyyyyyyy Long*/}
+                        {/*            </Typography>*/}
+                        {/*        </TextBox>*/}
+                        {/*    </ReviewTextBox>*/}
+                        {/*</Grid>*/}
                     </Grid>
                 </TextBox>
             </ReviewBox>

@@ -52,10 +52,12 @@ function ResultBoxs({mName, mPoster, mCate, mCode, mTime, mRate}) {
         <ResultBox>
             <Grid container>
                 <Grid item xs={4}>
-                    <img style={{ width: '75%', height: 'auto' }} src={mPoster} />
+                    <Container>
+                        <img style={{ width: '75%', height: 'auto' }} src={mPoster} />
+                    </Container>
                 </Grid>
                 <Grid item xs={8} className={classes.centerColumn}>
-                    <Box>
+                    <Container>
                         <ResultDetailBox borderRadius={8}>
                             <HeaderBox>
                                 <Typography variant='h6' align='left'>
@@ -65,24 +67,24 @@ function ResultBoxs({mName, mPoster, mCate, mCode, mTime, mRate}) {
                             <TextBox>
                                 <Grid container spacing={3}>
                                     <Grid item>
-                                        <Typography align='left'>
+                                        <Typography align='left' variant={'body2'}>
                                             {mTime}
                                         </Typography>
                                     </Grid>
                                     <Grid item>
-                                        <Typography align='left'>
+                                        <Typography align='left' variant={'body2'}>
                                             {mCate}
                                         </Typography>
                                     </Grid>
                                     <Grid item>
-                                        <Typography align='left'>
+                                        <Typography align='left' variant={'body2'}>
                                             {mRate}
                                         </Typography>
                                     </Grid>
                                 </Grid>
                             </TextBox>
                         </ResultDetailBox>
-                    </Box>
+                    </Container>
                 </Grid>
             </Grid>
         </ResultBox>
