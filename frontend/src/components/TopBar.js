@@ -1,8 +1,23 @@
 import React from 'react';
-import {AppBar,Container,Toolbar,Typography,Button,Menu,MenuItem, makeStyles} from "@material-ui/core";
+import {
+    AppBar,
+    Container,
+    Toolbar,
+    Typography,
+    Button,
+    Menu,
+    MenuItem,
+    makeStyles,
+    Box,
+    InputAdornment, IconButton
+} from "@material-ui/core";
 import {withStyles} from "@material-ui/core";
+import CategoryIcon from '@material-ui/icons/Category';
+import ScheduleIcon from '@material-ui/icons/Schedule';
+import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 
-const useStyles = makeStyles({
+
+const useStyles = makeStyles(theme => ({
     root: {
         margin:0,
         backgroundColor: '#E5E5E5',
@@ -14,8 +29,35 @@ const useStyles = makeStyles({
     },
     textTopbar: {
         color: "black"
-    }
-});
+    },
+    appButton: {
+
+    },
+}));
+
+const ScheduleIconStyled = withStyles((theme) => ({
+    root: {
+        [theme.breakpoints.up('md')]: { display: 'none', }
+    },
+}))(ScheduleIcon);
+
+const CategoryIconStyled = withStyles((theme) => ({
+    root: {
+        [theme.breakpoints.up('md')]: { display: 'none', }
+    },
+}))(CategoryIcon);
+
+const ThumbUpIconStyled = withStyles((theme) => ({
+    root: {
+        [theme.breakpoints.up('md')]: { display: 'none', }
+    },
+}))(ThumbUpIcon);
+
+const TypoStyled = withStyles((theme) => ({
+    root: {
+        [theme.breakpoints.down('sm')]: { display: 'none', }
+    },
+}))(Typography);
 
 const StyledMenu = withStyles({
     paper: {
@@ -38,7 +80,7 @@ const StyledMenu = withStyles({
 ));
 
 function TopBar(props) {
-    const classes = useStyles(props)
+    const classes = useStyles()
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [anchorEl2, setAnchorEl2] = React.useState(null);
     const handleClose = () => {
@@ -53,11 +95,12 @@ function TopBar(props) {
                     <Typography className={classes.textTopbar} edge="start" variant='h6'>
                         Movie Review Classification
                     </Typography>
-                    <div>
+                    <Box>
                         <Button aria-controls="menu-year" aria-haspopup="true" onClick={e => setAnchorEl(e.currentTarget)} className={classes.textTopbar}>
-                            <Typography variant={'subtitle2'}>
+                            <TypoStyled variant={'subtitle2'}>
                                 Year
-                            </Typography>
+                            </TypoStyled>
+                            <ScheduleIconStyled/>
                         </Button>
                         <StyledMenu
                             id="menu-year"
@@ -83,9 +126,10 @@ function TopBar(props) {
                             </MenuItem>
                         </StyledMenu>
                         <Button aria-controls="menu-genre" aria-haspopup="true" onClick={e => setAnchorEl2(e.currentTarget)} className={classes.textTopbar}>
-                            <Typography variant={'subtitle2'}>
+                            <TypoStyled variant={'subtitle2'}>
                                 Genre
-                            </Typography>
+                            </TypoStyled>
+                            <CategoryIconStyled/>
                         </Button>
                         <StyledMenu
                             id="menu-genre"
@@ -111,11 +155,12 @@ function TopBar(props) {
                             </MenuItem>
                         </StyledMenu>
                         <Button className={classes.textTopbar}>
-                            <Typography variant={'subtitle2'}>
+                            <TypoStyled variant={'subtitle2'}>
                                 Rate
-                            </Typography>
+                            </TypoStyled>
+                            <ThumbUpIconStyled/>
                         </Button>
-                    </div>
+                    </Box>
                 </Toolbar>
             </Container>
 
