@@ -4,6 +4,7 @@ import ContactBox from "../components/ContactBox";
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom"
 import FullReviewBox from "../components/FullReviewBox";
+import { useLocation } from "react-router-dom"
 import axios from "axios";
 
 const useStyles = makeStyles({
@@ -48,13 +49,20 @@ const PosterBox = withStyles({
 
 function FullReviewPage(allDetailReview) {
     const classes = useStyles()
+    const location = useLocation()
     const [detail, setDetail] = useState([])
+    const [reviewDetail, setReviewDetail] = useState(null)
+    const [reviewSource, setReviewSource] = useState(null)
     let mCode = useParams();
     var movieDetail = []
 
     useEffect(async () => {
+        const reviewToShow = location.state.reviewAllDetail
+        const rSource = location.search.split('?')[1]
         movieDetail = await axios.post("http://localhost:3000/moviedetail", {code:mCode.movieCode})
         await setDetail(movieDetail.data)
+        await setReviewDetail(reviewToShow)
+        await setReviewSource(rSource)
     }, [])
 
     console.log(detail)
@@ -62,10 +70,10 @@ function FullReviewPage(allDetailReview) {
     return (
         <div className="MoviePage">
             <Container className={classes.center}>
-                <MovieDescBoxs movieName={'TestName'} movieCate={'Action, Drama'}></MovieDescBoxs>
+                <MovieDescBoxs movieName={detail.name} movieCate={detail.category} movieTime={detail.time} movieRate={detail.rate}></MovieDescBoxs>
             </Container>
             <Container className={classes.center}>
-                <FullReviewBox></FullReviewBox>
+                <FullReviewBox toShowSource={reviewSource} toShowReviewDetail={reviewDetail}></FullReviewBox>
             </Container>
             <ContactBox></ContactBox>
         </div>

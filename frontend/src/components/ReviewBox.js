@@ -62,12 +62,11 @@ function ReviewBoxs({onePageReview, mCode}) {
     const classes = useStyles()
     const history = useHistory()
 
-    console.log(onePageReview)
-
     const readMoreReview = (reviewDetail) => {
         history.push({
             pathname: "/review/"+mCode.movieCode,
-            state: {allDetail: reviewDetail}
+            search: "IMDb",
+            state: {reviewAllDetail: reviewDetail}
         })
     }
 
@@ -110,8 +109,8 @@ function ReviewBoxs({onePageReview, mCode}) {
 
 
                         {onePageReview.allReview.map((oneReview) =>
-                            <Grid item xs={6}> {/*imdb review box*/}
-                            <ReviewTextBox borderRadius={8} key={oneReview.score}>
+                            <Grid item xs={6} key={oneReview.score}> {/*imdb review box*/}
+                            <ReviewTextBox borderRadius={8}>
                                 <ReadMoreBox>
                                     <Button onClick={() => readMoreReview(oneReview)}>
                                         <Typography>
@@ -119,8 +118,8 @@ function ReviewBoxs({onePageReview, mCode}) {
                                         </Typography>
                                     </Button>
                                 </ReadMoreBox>
-                                <ReviewFromBox>
-                                    <Typography align='right'>
+                                <ReviewFromBox key={oneReview.score}>
+                                    <Typography className="imdbSource" align='right'>
                                         IMDB
                                     </Typography>
                                 </ReviewFromBox>
