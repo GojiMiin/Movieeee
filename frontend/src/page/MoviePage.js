@@ -88,12 +88,9 @@ function MoviePage() {
     mCodeForm.append("moviecode", mCode.movieCode)
 
     useEffect(async () => {
-        console.log(mCodeForm)
         detailFetching()
         predictFetching()
     }, [])
-
-    console.log(detail)
 
     if(pageReview === null || detail === null){
         return <p>Loading review...</p>;
