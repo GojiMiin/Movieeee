@@ -1,4 +1,4 @@
-import {Box, Button, Container, Grid, makeStyles, Typography} from "@material-ui/core";
+import {Box, Button, Container, Grid, Link, makeStyles, Typography} from "@material-ui/core";
 import {withStyles} from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 
@@ -23,7 +23,7 @@ const HeaderBox = withStyles({
 })(Box);
 const TextBox = withStyles({
     root:{
-        padding:'20px 20px 40px 20px'
+        padding:'20px'
     }
 })(Box);
 const ReviewBox = withStyles({
@@ -49,11 +49,9 @@ const ReviewFromBox = withStyles({
         top:'10px'
     }
 })(Box);
-const ReadMoreBox = withStyles({
+const BottomBox = withStyles({
     root:{
-        position: 'absolute',
-        right: '5px',
-        bottom: '5px',
+        padding:'0px 20px 20px 20px'
     }
 })(Box);
 
@@ -106,18 +104,9 @@ function ReviewBoxs({onePageReview, mCode}) {
                 </HeaderBox>
                 <TextBox>
                     <Grid container spacing={3}>
-
-
                         {onePageReview.allReview.map((oneReview) =>
                             <Grid item xs={6} key={oneReview.score}> {/*imdb review box*/}
                             <ReviewTextBox borderRadius={8}>
-                                <ReadMoreBox>
-                                    <Button style={{textTransform: 'none'}} onClick={() => readMoreReview(oneReview)} >
-                                        <Typography variant={'subtitle2'}>
-                                            Read More
-                                        </Typography>
-                                    </Button>
-                                </ReadMoreBox>
                                 <Grid container>
                                     <Grid item xs={9}>
                                         <HeaderBox>
@@ -132,15 +121,31 @@ function ReviewBoxs({onePageReview, mCode}) {
                                                 IMDB
                                             </Typography>
                                         </HeaderBox>
-
                                     </Grid>
                                 </Grid>
-
                                 <TextBox>
                                     <Typography align='left' variant={'body2'} noWrap={true}>
                                         {oneReview.review}
                                     </Typography>
                                 </TextBox>
+                                <Grid container>
+                                    <Grid item xs={8}>
+                                        <BottomBox>
+                                            <Typography variant='subtitle2' align='left'>
+                                                Predict Score : {oneReview.score}
+                                            </Typography>
+                                        </BottomBox>
+                                    </Grid>
+                                    <Grid item xs={4}>
+                                        <BottomBox>
+                                            <Typography variant='subtitle2' align='right' onClick={() => readMoreReview(oneReview)}>
+                                                Read More
+                                            </Typography>
+                                        </BottomBox>
+                                    </Grid>
+                                </Grid>
+
+
                             </ReviewTextBox>
                         </Grid>
                         )}

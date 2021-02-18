@@ -1,6 +1,16 @@
 import MovieDescBox from "../components/MovieDescBox";
 import MovieDescBoxs from "../components/MovieDescBox";
-import {Box, Container, makeStyles, TextField, Typography, withStyles, Grid, Paper} from "@material-ui/core";
+import {
+    Box,
+    Container,
+    makeStyles,
+    TextField,
+    Typography,
+    withStyles,
+    Grid,
+    Paper,
+    CircularProgress
+} from "@material-ui/core";
 import {LinearProgress} from "@material-ui/core";
 import ContactBox from "../components/ContactBox";
 import ReviewBox from "../components/ReviewBox";
@@ -46,20 +56,6 @@ const PosterBox = withStyles({
     }
 })(Box);
 
-const BorderLinearProgress = withStyles((theme) => ({
-    root: {
-        height: 20,
-        borderRadius: 0,
-    },
-    colorPrimary: {
-        backgroundColor: '#000',
-    },
-    bar: {
-        borderRadius: 0,
-        backgroundColor: '#fff',
-    },
-}))(LinearProgress);
-
 
 
 function MoviePage() {
@@ -93,7 +89,7 @@ function MoviePage() {
     }, [])
 
     if(pageReview === null || detail === null){
-        return <p>Loading review...</p>;
+        return <CircularProgress />;
     }
 
     return (

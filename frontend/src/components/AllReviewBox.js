@@ -12,6 +12,11 @@ const TextBox = withStyles({
         padding:'20px'
     }
 })(Box);
+const BottomBox = withStyles({
+    root:{
+        padding:'0px 20px 20px 20px'
+    }
+})(Box);
 const FullReviewBox = withStyles({
     root:{
         backgroundColor: '#E5E5E5',
@@ -20,6 +25,15 @@ const FullReviewBox = withStyles({
         height:'auto'
     }
 })(Box);
+const TypoNoWrap2Line = withStyles({
+    root:{
+        display: '-webkit-box',
+        '-webkit-line-clamp': 2,
+        '-webkit-box-orient': 'vertical',
+        overflow:'hidden',
+        textOverflow: 'ellipsis'
+    }
+})(Typography);
 
 function AllReviewBox() {
     return (
@@ -28,7 +42,7 @@ function AllReviewBox() {
                 <Grid container>
                     <Grid item xs={6}>
                         <Typography variant='subtitle2' align='left'>
-                            Positive / Negative
+                            Review Title
                         </Typography>
                     </Grid>
                     <Grid item xs={6}>
@@ -39,7 +53,7 @@ function AllReviewBox() {
                 </Grid>
             </HeaderBox>
             <TextBox>
-                <Typography variant='body2' noWrap={true}>
+                <TypoNoWrap2Line variant='body2'>
                     What persuaded me to watch this movie was the blessing bestowed upon it by the stories original creator, Stephen King, who claimed: "I wasn't prepared for how good it really was".
                     He's not wrong.
 
@@ -53,18 +67,24 @@ function AllReviewBox() {
                     which is why it's perfectly suited for those who like Horror movies but without the obnoxious gore.
 
                     Watched the pre-release as a critic - August 28th.
-                </Typography>
+                </TypoNoWrap2Line>
             </TextBox>
-            <Box display={'flex'} justifyContent={'flex-end'}>
-                <Box style={{padding:'0px 20px 20px 20px'}}>
-                    <Button style={{padding:'0px', textTransform: 'none'}}>
+            <BottomBox>
+                <Grid container>
+                    <Grid item xs={6}>
+                        <Typography variant='subtitle2' align='left'>
+                            Predict Score : 1234
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={6}>
                         <Typography variant='subtitle2' align='right'>
                             Read More
                         </Typography>
-                    </Button>
-                </Box>
+                    </Grid>
+                </Grid>
+            </BottomBox>
 
-            </Box>
+
 
         </FullReviewBox>
     );

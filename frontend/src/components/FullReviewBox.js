@@ -1,6 +1,7 @@
 import {Box, Container, Typography} from "@material-ui/core";
 import {Grid} from "@material-ui/core";
 import {withStyles} from "@material-ui/core";
+import {CircularProgress} from "@material-ui/core";
 import { useLocation } from "react-router-dom"
 import {useEffect, useState} from "react";
 
@@ -26,7 +27,7 @@ const FullReviewBox = withStyles({
 function FullReviewBoxs({toShowSource, toShowReviewDetail}) {
 
     if(toShowSource === null || toShowReviewDetail === null){
-        return <p>Loading review...</p>;
+        return <CircularProgress />;
     }
 
     return (
@@ -35,7 +36,8 @@ function FullReviewBoxs({toShowSource, toShowReviewDetail}) {
                 <Grid container>
                     <Grid item xs={6}>
                         <Typography variant='h6' align='left'>
-                            {toShowReviewDetail.title}
+                            {/*{toShowReviewDetail.title}*/}
+                            Predict Score : 1234
                         </Typography>
                     </Grid>
                     <Grid item xs={6}>
@@ -45,8 +47,13 @@ function FullReviewBoxs({toShowSource, toShowReviewDetail}) {
                     </Grid>
                 </Grid>
             </HeaderBox>
+            <HeaderBox>
+                <Typography variant='subtitle2' align='left'>
+                    {toShowReviewDetail.title}
+                </Typography>
+            </HeaderBox>
             <TextBox>
-                <Typography>
+                <Typography variant={'body2'}>
                     {toShowReviewDetail.review}
                 </Typography>
 

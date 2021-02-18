@@ -11,6 +11,7 @@ import ResultBox from "../components/ResultBox";
 import {useEffect, useState} from "react";
 import { useLocation } from "react-router-dom"
 import axios from "axios"
+import SearchBar from "../components/SearchBar";
 
 const useStyles = makeStyles({
     root: {
@@ -62,6 +63,7 @@ function SearchPage() {
 
     return (
         <div className="SearchPage">
+            <SearchBar/>
             <Container className={classes.center}>
                 <ResultHeaderBox showKey={location.state.keyword}></ResultHeaderBox>
             </Container>

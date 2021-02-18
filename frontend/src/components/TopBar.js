@@ -37,25 +37,25 @@ const useStyles = makeStyles(theme => ({
 
 const ScheduleIconStyled = withStyles((theme) => ({
     root: {
-        [theme.breakpoints.up('md')]: { display: 'none', }
+        [theme.breakpoints.up('sm')]: { display: 'none', }
     },
 }))(ScheduleIcon);
 
 const CategoryIconStyled = withStyles((theme) => ({
     root: {
-        [theme.breakpoints.up('md')]: { display: 'none', }
+        [theme.breakpoints.up('sm')]: { display: 'none', }
     },
 }))(CategoryIcon);
 
 const ThumbUpIconStyled = withStyles((theme) => ({
     root: {
-        [theme.breakpoints.up('md')]: { display: 'none', }
+        [theme.breakpoints.up('sm')]: { display: 'none', }
     },
 }))(ThumbUpIcon);
 
 const TypoStyled = withStyles((theme) => ({
     root: {
-        [theme.breakpoints.down('sm')]: { display: 'none', }
+        [theme.breakpoints.down(600)]: { display: 'none', }
     },
 }))(Typography);
 
