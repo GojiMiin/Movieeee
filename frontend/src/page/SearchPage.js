@@ -12,6 +12,8 @@ import {useEffect, useState} from "react";
 import { useLocation } from "react-router-dom"
 import axios from "axios"
 import SearchBar from "../components/SearchBar";
+import { useSelector, useDispatch } from 'react-redux';
+import { setNewDetail } from '../actions/actionindex'
 
 const useStyles = makeStyles({
     root: {
@@ -50,6 +52,7 @@ const TextBox = withStyles({
 function SearchPage() {
     const classes = useStyles()
     const location = useLocation()
+    const dispatch = useDispatch()
     const [movie, setMovie] = useState([])
     var result
 
@@ -57,6 +60,10 @@ function SearchPage() {
         const keyWord = location.state.keyword
         result = await axios.post("http://localhost:3000/namesearch", {sname:keyWord})
         setMovie(result.data)
+        //await dispatch(setNewDetail(result.data))
+        dispatch(setNewDetail())
+        /*TODO: move axios into redux*/
+
     }, [])
 
     console.log(movie)
