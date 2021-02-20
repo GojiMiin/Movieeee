@@ -60,10 +60,6 @@ function SearchPage() {
         const keyWord = location.state.keyword
         result = await axios.post("http://localhost:3000/namesearch", {sname:keyWord})
         setMovie(result.data)
-        //await dispatch(setNewDetail(result.data))
-        dispatch(setNewDetail())
-        /*TODO: move axios into redux*/
-
     }, [])
 
     console.log(movie)
