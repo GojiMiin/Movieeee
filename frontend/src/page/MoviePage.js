@@ -70,7 +70,7 @@ function MoviePage() {
     }
 
     const predictFetching = async () => {
-        onePageReview = await axios.post("http://localhost:5000/predict_review", mCodeForm)
+        onePageReview = await axios.post("http://localhost:5000/predict_review_imdb", mCodeForm)
         await setPageReview(onePageReview.data[0])
     }
 
