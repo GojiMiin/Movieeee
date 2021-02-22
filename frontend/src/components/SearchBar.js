@@ -47,8 +47,10 @@ function SearchBar() {
     const toSearch = event => {
         if(event.key === "Enter" ){
             history.push({
-                pathname: "/search",
-                state: { keyword: keyWord }
+                pathname: "/search/"+keyWord,
+                state: { keyword: keyWord,
+                        type: "nameSearch"
+                }
             })
         }
     }

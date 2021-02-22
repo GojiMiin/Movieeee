@@ -14,6 +14,8 @@ const store = createStore(
     composeWithDevTools(applyMiddleware(thunk))
 )
 
+//TODO: Apply persistStore
+
 ReactDOM.render(
     <Provider store={store}>
         <React.StrictMode>

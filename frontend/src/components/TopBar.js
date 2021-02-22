@@ -11,10 +11,12 @@ import {
     Box,
     InputAdornment, IconButton
 } from "@material-ui/core";
-import {withStyles} from "@material-ui/core";
+import { useHistory } from "react-router-dom";
+import { withStyles } from "@material-ui/core";
 import CategoryIcon from '@material-ui/icons/Category';
 import ScheduleIcon from '@material-ui/icons/Schedule';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
+
 
 
 const useStyles = makeStyles(theme => ({
@@ -81,12 +83,51 @@ const StyledMenu = withStyles({
 
 function TopBar(props) {
     const classes = useStyles()
+    const history = useHistory()
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [anchorEl2, setAnchorEl2] = React.useState(null);
+    const allCate = ['Action',
+        'Adventure',
+        'Animation',
+        'Biography',
+        'Comedy',
+        'Crime',
+        'Drama',
+        'Family',
+        'Fantasy',
+        'History',
+        'Horror',
+        'Music',
+        'Musical',
+        'Mystery',
+        'Romance',
+        'Sci-Fi',
+        'Sport',
+        'Thriller',
+        'War',
+        'Western']
     const handleClose = () => {
         setAnchorEl(null);
         setAnchorEl2(null);
     };
+
+    const yearClick = year => {
+        history.push({
+            pathname: "/search/"+year,
+            state: { keyword: year,
+                type: "yearSearch"
+            }
+        })
+    }
+
+    const cateClick = cate => {
+        history.push({
+            pathname: "/search/"+cate,
+            state: { keyword: cate,
+                type: "cateSearch"
+            }
+        })
+    }
 
     return (
         <AppBar className={classes.root} position="relative">
@@ -109,19 +150,15 @@ function TopBar(props) {
                             open={Boolean(anchorEl)}
                             onClose={handleClose}
                         >
-                            <MenuItem onClick={handleClose}>
-                                <Typography variant={'body2'}>
-                                    Profile
+                            {/*<MenuItem onClick={handleClose}>*/}
+                            <MenuItem onClick={() => yearClick(2018)}>
+                                <Typography variant={'body2'} >
+                                    2018
                                 </Typography>
                             </MenuItem>
                             <MenuItem onClick={handleClose}>
-                                <Typography variant={'body2'}>
-                                    My account
-                                </Typography>
-                            </MenuItem>
-                            <MenuItem onClick={handleClose}>
-                                <Typography variant={'body2'}>
-                                    Logout
+                                <Typography variant={'body2'} onClick={() => yearClick(2019)}>
+                                    2019
                                 </Typography>
                             </MenuItem>
                         </StyledMenu>
@@ -138,21 +175,15 @@ function TopBar(props) {
                             open={Boolean(anchorEl2)}
                             onClose={handleClose}
                         >
-                            <MenuItem onClick={handleClose}>
-                                <Typography variant={'body2'}>
-                                    Profile1
-                                </Typography>
-                            </MenuItem>
-                            <MenuItem onClick={handleClose}>
-                                <Typography variant={'body2'}>
-                                    My account 1
-                                </Typography>
-                            </MenuItem>
-                            <MenuItem onClick={handleClose}>
-                                <Typography variant={'body2'}>
-                                    Logout 1
-                                </Typography>
-                            </MenuItem>
+
+                            {allCate.map((eachCategory) =>
+                                <MenuItem onClick={handleClose} key={allCate.indexOf(eachCategory)}>
+                                    <Typography variant={'body2'} onClick={() => cateClick(eachCategory)}>
+                                        {eachCategory}
+                                    </Typography>
+                                </MenuItem>
+                            )}
+
                         </StyledMenu>
                         <Button className={classes.textTopbar}>
                             <TypoStyled variant={'subtitle2'}>
@@ -170,4 +201,5 @@ function TopBar(props) {
     );
 }
 
+/*export default TopBar;*/
 export default TopBar;

@@ -10,7 +10,7 @@ exports.loadDetail = async function(req, res) { //input string movie code
     let movieCode = {
         code: req.body.code
     }
-    let detail = await movie.findOne(movieCode)
+    let detail = await movie.findOne(movieCode).sort( { index: 1 } )
     res.send(detail)
 }
 
@@ -18,13 +18,13 @@ exports.yearFilter = async function(req, res) { //input int year
     let movieYear = {
         year: req.body.year
     }
-    let yearFilter = await movie.find(movieYear)
+    let yearFilter = await movie.find(movieYear).sort( { index: 1 } )
     res.send(yearFilter)
 }
 
 exports.nameSearch = async function(req, res) {
     const sname = req.body.sname.toLowerCase()
-    let allMovie = await movie.find({})
+    let allMovie = await movie.find({}).sort( { index: 1 } )
     let result = []
     for(i in allMovie){
         if(allMovie[i].name.toLowerCase().includes(sname)){
@@ -36,7 +36,7 @@ exports.nameSearch = async function(req, res) {
 
 exports.rateSearch = async function(req, res) {
     const srate = req.body.srate.toLowerCase()
-    let allMovie = await movie.find({})
+    let allMovie = await movie.find({}).sort( { index: 1 } )
     let rateResult = []
     for(i in allMovie){
         if(allMovie[i].rate.toLowerCase().includes(srate)){
@@ -48,7 +48,7 @@ exports.rateSearch = async function(req, res) {
 
 exports.cateSearch = async function(req, res) {
     const scate = req.body.scate.toLowerCase()
-    let allMovie = await movie.find({})
+    let allMovie = await movie.find({}).sort( { index: 1 } )
     let cateResult = []
     for(i in allMovie){
         if(allMovie[i].category.toLowerCase().includes(scate)){

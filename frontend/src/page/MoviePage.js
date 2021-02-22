@@ -61,7 +61,7 @@ function MoviePage() {
     const [pageReview, setPageReview] = useState(null)
     const dispatch = useDispatch();
     const mCode = useParams();
-    const movieDetail = useSelector(state => state.allDetail);
+    const movieDetail = useSelector(state => state.mDetail.allDetail);
     var mCodeForm = new FormData();
     var onePageReview = []
 

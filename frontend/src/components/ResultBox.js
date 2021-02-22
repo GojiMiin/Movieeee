@@ -45,7 +45,7 @@ const ResultDetailBox = withStyles({
     }
 })(Box);
 
-function ResultBoxs({mName, mPoster, mCate, mCode, mTime, mRate}) {
+function ResultBoxs({mName, mPoster, mCate, mCode, mTime, mRate, mYear}) {
     const classes = useStyles()
 
     return (
@@ -66,6 +66,11 @@ function ResultBoxs({mName, mPoster, mCate, mCode, mTime, mRate}) {
                             </HeaderBox>
                             <TextBox>
                                 <Grid container spacing={3}>
+                                    <Grid item>
+                                        <Typography align='left' variant={'body2'}>
+                                            Year {mYear}
+                                        </Typography>
+                                    </Grid>
                                     <Grid item>
                                         <Typography align='left' variant={'body2'}>
                                             {mTime}
