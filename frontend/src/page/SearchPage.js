@@ -9,7 +9,7 @@ import MovieDescBoxs from "../components/MovieDescBox";
 import ResultHeaderBox from "../components/ResultHeaderBox";
 import ResultBox from "../components/ResultBox";
 import {useEffect, useState} from "react";
-import { useLocation } from "react-router-dom"
+import { useLocation, BrowserRouter } from "react-router-dom"
 import axios from "axios"
 import SearchBar from "../components/SearchBar";
 
@@ -51,26 +51,40 @@ function SearchPage() {
     const classes = useStyles()
     const location = useLocation()
     const [movie, setMovie] = useState([])
+    const keyWord = location.state.keyword
+    const type = location.state.type
     var result
 
     useEffect(async () => {
-        const keyWord = location.state.keyword
-        result = await axios.post("http://localhost:3000/namesearch", {sname:keyWord})
-        setMovie(result.data)
-    }, [])
+        switch(type){
+            case "nameSearch":
+                result = await axios.post("http://localhost:3000/namesearch", {sname:keyWord})
+                setMovie(result.data)
+                break;
+            case "yearSearch":
+                result = await axios.post("http://localhost:3000/yearfil", {year:keyWord})
+                setMovie(result.data)
+                break;
+            case "cateSearch":
+                result = await axios.post("http://localhost:3000/catesearch", {scate:keyWord})
+                setMovie(result.data)
+                break;
+            default: break;
+        };
+    },[keyWord])
 
     console.log(movie)
 
     return (
         <div className="SearchPage">
-            <SearchBar/>
+                <SearchBar/>
             <Container className={classes.center}>
                 <ResultHeaderBox showKey={location.state.keyword}></ResultHeaderBox>
             </Container>
             <Container className={classes.centerColumn}>
 
                 {movie.map((oneMovie) =>
-                    <ResultBox key={oneMovie.code} mName={oneMovie.name} mPoster={oneMovie.poster} mCate={oneMovie.category} mCode={oneMovie.code} mTime={oneMovie.time} mRate={oneMovie.rate}/>
+                    <ResultBox key={oneMovie.code} mName={oneMovie.name} mPoster={oneMovie.poster} mCate={oneMovie.category} mCode={oneMovie.code} mTime={oneMovie.time} mRate={oneMovie.rate} mYear={oneMovie.year}/>
                 )}
 
             </Container>

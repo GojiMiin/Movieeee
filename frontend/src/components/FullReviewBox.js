@@ -26,6 +26,8 @@ const FullReviewBox = withStyles({
 
 function FullReviewBoxs({toShowSource, toShowReviewDetail}) {
 
+    const predictScore = parseFloat(toShowReviewDetail.score.replace(/[^0-9.]/g, '')).toFixed(4)
+
     if(toShowSource === null || toShowReviewDetail === null){
         return <CircularProgress />;
     }
@@ -37,7 +39,7 @@ function FullReviewBoxs({toShowSource, toShowReviewDetail}) {
                     <Grid item xs={6}>
                         <Typography variant='h6' align='left'>
                             {/*{toShowReviewDetail.title}*/}
-                            Predict Score : 1234
+                            Predict Score : {predictScore}
                         </Typography>
                     </Grid>
                     <Grid item xs={6}>

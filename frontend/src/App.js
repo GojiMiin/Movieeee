@@ -5,7 +5,7 @@ import MoviePage from "./page/MoviePage";
 import SearchPage from "./page/SearchPage";
 import FullReviewPage from "./page/FullReviewPage";
 import AllReviewsPage from "./page/AllReviewPage";
-import { BrowserRouter as  Switch, Route } from 'react-router-dom';
+import {BrowserRouter, BrowserRouter as Switch, Route} from 'react-router-dom';
 import {MuiThemeProvider, createMuiTheme} from "@material-ui/core";
 
 const THEME = createMuiTheme({
@@ -22,11 +22,11 @@ function App() {
     return (
     <div className="App">
         <MuiThemeProvider theme={THEME}>
-            <TopBar/>
             <Switch>
+                <TopBar/>
                 <Route path="/" exact component={MainPage} />
                 <Route path="/movie/:movieCode" exact component={MoviePage} />
-                <Route path="/search" exact component={SearchPage} />
+                <Route path="/search/:keyword" exact component={SearchPage} />
                 <Route path="/review/:movieCode" exact component={FullReviewPage} />
                 <Route path="/allreviews" exact component={AllReviewsPage} />
             </Switch>

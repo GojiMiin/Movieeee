@@ -1,4 +1,3 @@
-import MovieDescBox from "../components/MovieDescBox";
 import MovieDescBoxs from "../components/MovieDescBox";
 import {
     Box,
@@ -11,12 +10,13 @@ import {
     Paper,
     CircularProgress
 } from "@material-ui/core";
-import {LinearProgress} from "@material-ui/core";
 import ContactBox from "../components/ContactBox";
 import ReviewBox from "../components/ReviewBox";
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom"
 import axios from "axios";
+import {setNewDetail} from "../actions/actionindex";
+import {useSelector, useDispatch, connect} from "react-redux";
 
 const useStyles = makeStyles({
     root: {
@@ -56,24 +56,17 @@ const PosterBox = withStyles({
     }
 })(Box);
 
-
-
 function MoviePage() {
     const classes = useStyles()
-    const [detail, setDetail] = useState(null)
     const [pageReview, setPageReview] = useState(null)
-    let mCode = useParams();
+    const dispatch = useDispatch();
+    const mCode = useParams();
+    const movieDetail = useSelector(state => state.mDetail.allDetail);
     var mCodeForm = new FormData();
-    var movieDetail = []
     var onePageReview = []
 
     const config = {
         headers: { 'content-type': 'multipart/form-data' }
-    }
-
-    const detailFetching = async () => {
-        movieDetail = await axios.post("http://localhost:3000/moviedetail", {code:mCode.movieCode})
-        await setDetail(movieDetail.data)
     }
 
     const predictFetching = async () => {
@@ -84,24 +77,24 @@ function MoviePage() {
     mCodeForm.append("moviecode", mCode.movieCode)
 
     useEffect(async () => {
-        detailFetching()
-        predictFetching()
+        dispatch(setNewDetail(mCode))
+        await predictFetching()
     }, [])
 
-    if(pageReview === null || detail === null){
+    if(pageReview === null || movieDetail === null){
         return <CircularProgress />;
     }
 
     return (
         <div className="MoviePage">
             <Container className={classes.center}>
-                <MovieDescBoxs movieName={detail.name} movieCate={detail.category} movieTime={detail.time} movieRate={detail.rate}></MovieDescBoxs>
+                <MovieDescBoxs movieName={movieDetail.name} movieCate={movieDetail.category} movieTime={movieDetail.time} movieRate={movieDetail.rate}></MovieDescBoxs>
             </Container>
             <Container className={classes.center}>
                 <DetailBox>
                     <Grid container spacing={3}>
                         <Grid className={classes.centeralignitem} item xs={4}>
-                            <img style={{ width: '100%', height: 'auto' }} src={detail.poster} />
+                            <img style={{ width: '100%', height: 'auto' }} src={movieDetail.poster} />
                         </Grid>
                         <Grid className={classes.centeralignitem} item xs={8}>
                             <Grid container direction={"column"}  spacing={5}>
@@ -124,7 +117,7 @@ function MoviePage() {
                                                     </Box>
                                                     <Box>
                                                         <Typography variant={'body2'}>
-                                                            {detail.imdbscore}
+                                                            {movieDetail.imdbscore}
                                                         </Typography>
                                                     </Box>
                                                 </Grid>
@@ -154,7 +147,7 @@ function MoviePage() {
                                             </HeaderBox>
                                             <TextBox>
                                                 <Typography variant={'body2'}>
-                                                    {detail.description}
+                                                    {movieDetail.description}
                                                 </Typography>
                                             </TextBox>
                                         </Container>
@@ -171,4 +164,8 @@ function MoviePage() {
     );
 }
 
+
+/*const mapStateToProps = (state) => ({ movieDetail: state.mDetail.allDetail })
+
+export default connect(mapStateToProps)(MoviePage);*/
 export default MoviePage;

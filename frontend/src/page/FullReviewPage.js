@@ -1,11 +1,22 @@
 import MovieDescBoxs from "../components/MovieDescBox";
-import {Box, Container, makeStyles, TextField, Typography, withStyles, Grid, Paper} from "@material-ui/core";
+import {
+    Box,
+    Container,
+    makeStyles,
+    TextField,
+    Typography,
+    withStyles,
+    Grid,
+    Paper,
+    CircularProgress
+} from "@material-ui/core";
 import ContactBox from "../components/ContactBox";
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom"
 import FullReviewBox from "../components/FullReviewBox";
 import { useLocation } from "react-router-dom"
 import axios from "axios";
+import {useSelector} from "react-redux";
 
 const useStyles = makeStyles({
     root: {
@@ -50,22 +61,23 @@ const PosterBox = withStyles({
 function FullReviewPage(allDetailReview) {
     const classes = useStyles()
     const location = useLocation()
-    const [detail, setDetail] = useState([])
     const [reviewDetail, setReviewDetail] = useState(null)
     const [reviewSource, setReviewSource] = useState(null)
-    let mCode = useParams();
-    var movieDetail = []
+    const detail = useSelector(state => state.mDetail.allDetail);
 
     useEffect(async () => {
         const reviewToShow = location.state.reviewAllDetail
         const rSource = location.search.split('?')[1]
-        movieDetail = await axios.post("http://localhost:3000/moviedetail", {code:mCode.movieCode})
-        await setDetail(movieDetail.data)
         await setReviewDetail(reviewToShow)
         await setReviewSource(rSource)
+        console.log(reviewDetail)
     }, [])
 
     console.log(detail)
+
+    if(reviewDetail === null || reviewSource === null){
+        return <CircularProgress />;
+    }
 
     return (
         <div className="MoviePage">
