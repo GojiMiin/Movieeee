@@ -11,7 +11,8 @@ import {
     CircularProgress
 } from "@material-ui/core";
 import ContactBox from "../components/ContactBox";
-import ReviewBox from "../components/ReviewBox";
+import ReviewBoxImdb from "../components/ReviewBoxImdb";
+import ReviewBoxRotten from "../components/ReviewBoxRotten";
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom"
 import axios from "axios";
@@ -159,7 +160,11 @@ function MoviePage() {
                     </Grid>
                 </DetailBox>
             </Container>
-            <ReviewBox onePageReview={pageReview} mCode={mCode}></ReviewBox>
+            <ReviewBoxImdb onePageReview={pageReview} mCode={mCode}></ReviewBoxImdb>
+
+            {/*Rotten*/}
+            <ReviewBoxRotten onePageReview={pageReview} mCode={mCode}></ReviewBoxRotten>
+            {/**/}
             <ContactBox></ContactBox>
         </div>
     );

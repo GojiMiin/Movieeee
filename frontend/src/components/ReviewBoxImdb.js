@@ -26,7 +26,7 @@ const TextBox = withStyles({
         padding:'20px'
     }
 })(Box);
-const ReviewBox = withStyles({
+const ReviewBoxImdb = withStyles({
     root:{
         position:'relative',
         backgroundColor: '#E5E5E5',
@@ -56,7 +56,7 @@ const BottomBox = withStyles({
 })(Box);
 
 
-function ReviewBoxs({onePageReview, mCode}) {
+function ReviewBoxImdbs({onePageReview, mCode}) {
     const classes = useStyles()
     const history = useHistory()
 
@@ -70,7 +70,7 @@ function ReviewBoxs({onePageReview, mCode}) {
 
     return (
         <Container className={classes.center}>
-            <ReviewBox borderRadius={8}>
+            <ReviewBoxImdb borderRadius={8}>
                 <HeaderBox>
                     <Grid container>
                         <Grid item xs={6}>
@@ -79,7 +79,7 @@ function ReviewBoxs({onePageReview, mCode}) {
                             </Typography>
                         </Grid>
                         <Grid item container xs={6}>
-                            <Grid item xs={6} style={{display:'flex', alignItems:'center', justifyContent:'flex-end'}}>
+                            <Grid item xs={9} style={{display:'flex', alignItems:'center', justifyContent:'flex-end'}}>
                                 <Typography variant='subtitle2' align='right'>
                                     Show all reviews
                                 </Typography>
@@ -88,13 +88,6 @@ function ReviewBoxs({onePageReview, mCode}) {
                                 <Button>
                                     <Typography variant={'subtitle2'}>
                                         IMDB
-                                    </Typography>
-                                </Button>
-                            </Grid>
-                            <Grid item xs={3}>
-                                <Button>
-                                    <Typography variant={'subtitle2'}>
-                                        Rotten
                                     </Typography>
                                 </Button>
                             </Grid>
@@ -144,44 +137,14 @@ function ReviewBoxs({onePageReview, mCode}) {
                                         </BottomBox>
                                     </Grid>
                                 </Grid>
-
-
                             </ReviewTextBox>
                         </Grid>
                         )}
-
-
-                        {/*<Grid item xs={6}>*/}
-                        {/*    <ReviewTextBox borderRadius={8}>*/}
-                        {/*        <ReadMoreBox>*/}
-                        {/*            <Button>*/}
-                        {/*                <Typography>*/}
-                        {/*                    Read More*/}
-                        {/*                </Typography>*/}
-                        {/*            </Button>*/}
-                        {/*        </ReadMoreBox>*/}
-                        {/*        <ReviewFromBox>*/}
-                        {/*            <Typography align='right'>*/}
-                        {/*                Rotten*/}
-                        {/*            </Typography>*/}
-                        {/*        </ReviewFromBox>*/}
-                        {/*        <HeaderBox>*/}
-                        {/*            <Typography align='left'>*/}
-                        {/*                Movie Review /!*add review title and show positive negative score*!/*/}
-                        {/*            </Typography>*/}
-                        {/*        </HeaderBox>*/}
-                        {/*        <TextBox>*/}
-                        {/*            <Typography align='left' noWrap={true}>*/}
-                        {/*                Test Review Veryyyyyyyyyyyyyyyyyyyyyyyyyyyy Long*/}
-                        {/*            </Typography>*/}
-                        {/*        </TextBox>*/}
-                        {/*    </ReviewTextBox>*/}
-                        {/*</Grid>*/}
                     </Grid>
                 </TextBox>
-            </ReviewBox>
+            </ReviewBoxImdb>
         </Container>
     );
 }
 
-export default ReviewBoxs;
+export default ReviewBoxImdbs;
