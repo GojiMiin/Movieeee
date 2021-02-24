@@ -28,7 +28,7 @@ function App() {
                 <Route path="/movie/:movieCode" exact component={MoviePage} />
                 <Route path="/search/:keyword" exact component={SearchPage} />
                 <Route path="/review/:movieCode" exact component={FullReviewPage} />
-                <Route path="/allreviews" exact component={AllReviewsPage} />
+                <Route path="/allreviews/:movieCode" exact component={AllReviewsPage} />
             </Switch>
         </MuiThemeProvider>
     </div>

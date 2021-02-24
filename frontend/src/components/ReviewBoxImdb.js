@@ -1,6 +1,7 @@
 import {Box, Button, Container, Grid, Link, makeStyles, Typography} from "@material-ui/core";
 import {withStyles} from "@material-ui/core";
 import { useHistory } from "react-router-dom";
+import {useSelector} from "react-redux";
 
 const useStyles = makeStyles({
     root: {
@@ -56,15 +57,23 @@ const BottomBox = withStyles({
 })(Box);
 
 
-function ReviewBoxImdbs({onePageReview, mCode}) {
+function ReviewBoxImdbs({onePageReview}) {
     const classes = useStyles()
     const history = useHistory()
+    const movieDetail = useSelector(state => state.mDetail.allDetail);
 
     const readMoreReview = (reviewDetail) => {
         history.push({
-            pathname: "/review/"+mCode.movieCode,
+            pathname: "/review/"+movieDetail.code,
             search: "IMDb",
             state: {reviewAllDetail: reviewDetail}
+        })
+    }
+
+    const toAllReviewPage = () => {
+        history.push({
+            pathname: "/allreviews/"+movieDetail.code,
+            search: "IMDb"
         })
     }
 
@@ -75,7 +84,7 @@ function ReviewBoxImdbs({onePageReview, mCode}) {
                     <Grid container>
                         <Grid item xs={6}>
                             <Typography variant='h6' align='left'>
-                                Movie Review
+                                IMDb Movie Review
                             </Typography>
                         </Grid>
                         <Grid item container xs={6}>
@@ -86,7 +95,7 @@ function ReviewBoxImdbs({onePageReview, mCode}) {
                             </Grid>
                             <Grid item xs={3}>
                                 <Button>
-                                    <Typography variant={'subtitle2'}>
+                                    <Typography variant={'subtitle2'} onClick={() => toAllReviewPage()}>
                                         IMDB
                                     </Typography>
                                 </Button>
@@ -125,7 +134,7 @@ function ReviewBoxImdbs({onePageReview, mCode}) {
                                     <Grid item xs={8}>
                                         <BottomBox>
                                             <Typography variant='subtitle2' align='left'>
-                                                Predict Score : {oneReview.score}
+                                                Predict Score : {parseFloat(oneReview.score.replace(/[^0-9.]/g, '')).toFixed(4)}
                                             </Typography>
                                         </BottomBox>
                                     </Grid>

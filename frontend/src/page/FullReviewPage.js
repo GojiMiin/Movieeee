@@ -70,10 +70,8 @@ function FullReviewPage(allDetailReview) {
         const rSource = location.search.split('?')[1]
         await setReviewDetail(reviewToShow)
         await setReviewSource(rSource)
-        console.log(reviewDetail)
     }, [])
 
-    console.log(detail)
 
     if(reviewDetail === null || reviewSource === null){
         return <CircularProgress />;
