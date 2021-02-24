@@ -59,38 +59,47 @@ const PosterBox = withStyles({
 
 function MoviePage() {
     const classes = useStyles()
-    const [pageReview, setPageReview] = useState(null)
+    const [imdbPageReview, setImdbPageReview] = useState(null)
+    const [rottenPageReview, setRottenPageReview] = useState(null)
     const dispatch = useDispatch();
     const mCode = useParams();
     const movieDetail = useSelector(state => state.mDetail.allDetail);
     var mCodeForm = new FormData();
-    var onePageReview = []
+    var imdbOnePageReview = []
+    var rottenOnePageReview = []
 
     const config = {
         headers: { 'content-type': 'multipart/form-data' }
     }
 
-    const predictFetching = async () => {
-        onePageReview = await axios.post("http://localhost:5000/predict_review_imdb", mCodeForm)
-        await setPageReview(onePageReview.data[0])
-        console.log(onePageReview)
+    const imdbPredictFetching = async (getImdbMcode) => {
+        imdbOnePageReview = await axios.post("http://localhost:5000/predict_review_imdb", getImdbMcode)
+        await setImdbPageReview(imdbOnePageReview.data[0])
+        console.log(imdbOnePageReview)
+    }
+
+    const rottenPredictFetching = async (getRottenMcode) => {
+        rottenOnePageReview = await axios.post("http://localhost:5000/predict_review_rotten", getRottenMcode)
+        await setRottenPageReview(rottenOnePageReview.data[0])
+        console.log(rottenPageReview)
     }
 
     mCodeForm.append("moviecode", mCode.movieCode)
 
     useEffect(async () => {
         dispatch(setNewDetail(mCode))
-        await predictFetching()
+        await imdbPredictFetching(mCodeForm)
+        //await rottenPredictFetching(mCodeForm)
     }, [])
 
-    if(pageReview === null || movieDetail === null){
+    if(imdbPageReview === null || movieDetail === null){
         return <CircularProgress />;
     }
 
     return (
         <div className="MoviePage">
             <Container className={classes.center}>
-                <MovieDescBoxs movieName={movieDetail.name} movieCate={movieDetail.category} movieTime={movieDetail.time} movieRate={movieDetail.rate}></MovieDescBoxs>
+                <MovieDescBoxs movieName={movieDetail.name} movieCate={movieDetail.category} movieTime={movieDetail.time} movieRate={movieDetail.rate} movieYear={movieDetail.year}></MovieDescBoxs>
             </Container>
             <Container className={classes.center}>
                 <DetailBox>
@@ -119,7 +128,7 @@ function MoviePage() {
                                                     </Box>
                                                     <Box>
                                                         <Typography variant={'body2'}>
-                                                            {pageReview.imdbScore}
+                                                            {imdbPageReview.imdbScore}
                                                         </Typography>
                                                     </Box>
                                                 </Grid>
@@ -160,18 +169,14 @@ function MoviePage() {
                     </Grid>
                 </DetailBox>
             </Container>
-            <ReviewBoxImdb onePageReview={pageReview} mCode={mCode}></ReviewBoxImdb>
+            <ReviewBoxImdb onePageReview={imdbPageReview}></ReviewBoxImdb>
 
             {/*Rotten*/}
-            <ReviewBoxRotten onePageReview={pageReview} mCode={mCode}></ReviewBoxRotten>
+            <ReviewBoxRotten onePageReview={imdbPageReview} mCode={mCode}></ReviewBoxRotten>
             {/**/}
             <ContactBox></ContactBox>
         </div>
     );
 }
 
-
-/*const mapStateToProps = (state) => ({ movieDetail: state.mDetail.allDetail })
-
-export default connect(mapStateToProps)(MoviePage);*/
 export default MoviePage;

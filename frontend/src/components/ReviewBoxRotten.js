@@ -75,7 +75,7 @@ function ReviewBoxRottens({onePageReview, mCode}) {
                     <Grid container>
                         <Grid item xs={6}>
                             <Typography variant='h6' align='left'>
-                                Movie Review
+                                Rotten Tomatoes Movie Review
                             </Typography>
                         </Grid>
                         <Grid item container xs={6}>

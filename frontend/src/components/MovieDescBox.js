@@ -20,7 +20,7 @@ const MovieDescBox = withStyles({
     }
 })(Box);
 
-function MovieDescBoxs({movieName, movieCate, movieTime, movieRate}) {
+function MovieDescBoxs({movieName, movieCate, movieTime, movieRate, movieYear}) {
     return (
         <MovieDescBox borderRadius={8}>
             <HeaderBox>
@@ -30,6 +30,11 @@ function MovieDescBoxs({movieName, movieCate, movieTime, movieRate}) {
             </HeaderBox>
             <TextBox>
                 <Grid container spacing={3}>
+                    <Grid item>
+                        <Typography variant={'body2'} align='left'>
+                            Year {movieYear}
+                        </Typography>
+                    </Grid>
                     <Grid item>
                         <Typography variant={'body2'} align='left'>
                             {movieTime}
