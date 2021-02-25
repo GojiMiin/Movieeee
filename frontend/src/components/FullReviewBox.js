@@ -24,6 +24,8 @@ const FullReviewBox = withStyles({
     }
 })(Box);
 
+
+
 function FullReviewBoxs({toShowSource, toShowReviewDetail}) {
 
     const predictScore = parseFloat(toShowReviewDetail.score.replace(/[^0-9.]/g, '')).toFixed(4)
@@ -33,8 +35,8 @@ function FullReviewBoxs({toShowSource, toShowReviewDetail}) {
     }
 
     return (
-        <FullReviewBox borderRadius={8}>
-            <HeaderBox>
+        <FullReviewBox boxShadow={3} borderRadius={8} checkReviewVibe>
+            <HeaderBox >
                 <Grid container>
                     <Grid item xs={6}>
                         <Typography variant='h6' align='left'>

@@ -13,7 +13,7 @@ import {
 import ContactBox from "../components/ContactBox";
 import ReviewBoxImdb from "../components/ReviewBoxImdb";
 import ReviewBoxRotten from "../components/ReviewBoxRotten";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom"
 import axios from "axios";
 import {setNewDetail} from "../actions/actionindex";
@@ -53,7 +53,7 @@ const DetailBox = withStyles({
 const PosterBox = withStyles({
     root:{
         borderRadius:'8px',
-        backgroundColor: '#E5E5E5',
+        backgroundColor: '#fff',
     }
 })(Box);
 
@@ -89,11 +89,16 @@ function MoviePage() {
     useEffect(async () => {
         dispatch(setNewDetail(mCode))
         await imdbPredictFetching(mCodeForm)
-        //await rottenPredictFetching(mCodeForm)
+        await rottenPredictFetching(mCodeForm)
     }, [])
 
-    if(imdbPageReview === null || movieDetail === null){
-        return <CircularProgress />;
+    if(imdbPageReview === null || rottenPageReview === null || movieDetail === null){
+        return(
+            <div style={{position:'absolute',top:'45%',left:'50%'}}>
+                <CircularProgress />
+            </div>
+        );
+
     }
 
     return (
@@ -105,12 +110,12 @@ function MoviePage() {
                 <DetailBox>
                     <Grid container spacing={3}>
                         <Grid className={classes.centeralignitem} item xs={4}>
-                            <img style={{ width: '100%', height: 'auto' }} src={movieDetail.poster} />
+                            <img style={{ width: '100%', height: 'auto', borderRadius: '8px'}} src={movieDetail.poster} />
                         </Grid>
                         <Grid className={classes.centeralignitem} item xs={8}>
                             <Grid container direction={"column"}  spacing={5}>
                                 <Grid item>
-                                    <PosterBox>
+                                    <PosterBox boxShadow={3}>
                                         <Container>
                                             <HeaderBox>
                                                 <Typography variant='h6' align='left'>
@@ -140,7 +145,7 @@ function MoviePage() {
                                                     </Box>
                                                     <Box>
                                                         <Typography variant={'body2'}>
-                                                            5.5
+                                                            {rottenPageReview.rottenScore}
                                                         </Typography>
                                                     </Box>
                                                 </Grid>
@@ -149,7 +154,7 @@ function MoviePage() {
                                     </PosterBox>
                                 </Grid>
                                 <Grid item>
-                                    <PosterBox>
+                                    <PosterBox boxShadow={3}>
                                         <Container>
                                             <HeaderBox>
                                                 <Typography variant='h6' align='left'>
@@ -172,7 +177,7 @@ function MoviePage() {
             <ReviewBoxImdb onePageReview={imdbPageReview}></ReviewBoxImdb>
 
             {/*Rotten*/}
-            <ReviewBoxRotten onePageReview={imdbPageReview} mCode={mCode}></ReviewBoxRotten>
+            <ReviewBoxRotten onePageReview={rottenPageReview} mCode={mCode}></ReviewBoxRotten>
             {/**/}
             <ContactBox></ContactBox>
         </div>

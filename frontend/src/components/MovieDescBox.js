@@ -14,7 +14,7 @@ const TextBox = withStyles({
 })(Box);
 const MovieDescBox = withStyles({
     root:{
-        backgroundColor: '#E5E5E5',
+        backgroundColor: '#fff',
         width:'800px',
         height:'auto'
     }
@@ -22,7 +22,7 @@ const MovieDescBox = withStyles({
 
 function MovieDescBoxs({movieName, movieCate, movieTime, movieRate, movieYear}) {
     return (
-        <MovieDescBox borderRadius={8}>
+        <MovieDescBox boxShadow={3} borderRadius={8}>
             <HeaderBox>
                 <Typography variant='h6' align='left'>
                     {movieName}

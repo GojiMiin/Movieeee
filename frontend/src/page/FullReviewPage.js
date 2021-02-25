@@ -1,4 +1,5 @@
 import MovieDescBoxs from "../components/MovieDescBox";
+import React from "react";
 import {
     Box,
     Container,
@@ -74,7 +75,12 @@ function FullReviewPage(allDetailReview) {
 
 
     if(reviewDetail === null || reviewSource === null){
-        return <CircularProgress />;
+        return(
+            <div style={{position:'absolute',top:'45%',left:'50%'}}>
+                <CircularProgress />
+            </div>
+        );
+
     }
 
     return (

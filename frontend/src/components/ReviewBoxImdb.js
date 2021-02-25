@@ -30,7 +30,7 @@ const TextBox = withStyles({
 const ReviewBoxImdb = withStyles({
     root:{
         position:'relative',
-        backgroundColor: '#E5E5E5',
+        backgroundColor: '#fff',
         maxWidth:'800px',
         height:'auto',
         margin:'24px 0px 24px 0px',
@@ -39,7 +39,6 @@ const ReviewBoxImdb = withStyles({
 const ReviewTextBox = withStyles({
     root:{
         position:'relative',
-        backgroundColor: '#fff',
         height:'auto'
     }
 })(Box);
@@ -77,9 +76,10 @@ function ReviewBoxImdbs({onePageReview}) {
         })
     }
 
+
     return (
         <Container className={classes.center}>
-            <ReviewBoxImdb borderRadius={8}>
+            <ReviewBoxImdb borderRadius={8} boxShadow={3}>
                 <HeaderBox>
                     <Grid container>
                         <Grid item xs={6}>
@@ -108,7 +108,7 @@ function ReviewBoxImdbs({onePageReview}) {
                     <Grid container spacing={3}>
                         {onePageReview.allReview.map((oneReview) =>
                             <Grid item xs={6} key={oneReview.score}> {/*imdb review box*/}
-                            <ReviewTextBox borderRadius={8}>
+                            <ReviewTextBox boxShadow={3} borderRadius={8} style={parseFloat(oneReview.score.replace(/[^0-9.]/g, '')).toFixed(4) <= 0.5 ? { borderStyle:'solid',borderColor:'#ff6961'} : {borderStyle:'solid', borderColor:'#aeffda'}}>
                                 <Grid container>
                                     <Grid item xs={9}>
                                         <HeaderBox>

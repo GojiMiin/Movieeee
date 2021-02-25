@@ -55,7 +55,7 @@ const ButtonBox = withStyles({
 })(Box);
 const BorderLinearProgress = withStyles((theme) => ({
     root: {
-        height: 10,
+        height: 20,
         borderRadius: 5,
     },
     colorPrimary: {
@@ -121,13 +121,13 @@ function AllReviewsPage() {
                                         </Typography>
                                     </HeaderBox>
                                     <TextBox>
-                                        <Typography variant={'body2'}>
+                                        <Typography variant={'body2'} align={"left"}>
                                             {mDetail.time}
                                         </Typography>
-                                        <Typography variant={'body2'}>
+                                        <Typography variant={'body2'} align={"left"}>
                                             {mDetail.category}
                                         </Typography>
-                                        <Typography variant={'body2'}>
+                                        <Typography variant={'body2'} align={"left"}>
                                             {mDetail.rate}
                                         </Typography>
                                     </TextBox>
@@ -136,14 +136,14 @@ function AllReviewsPage() {
                             </ColorBox>
                         </Grid>
                         <Grid item xs={8}>
-                            <ColorBox borderRadius={8}>
+                            <ColorBox borderRadius={8} height={'100%'} display={'flex'} flexDirection={'column'} justifyContent={'center'}>
                                 <HeaderBox>
-                                    <Typography variant={'subtitle1'} align={'left'}>
+                                    <Typography variant={'h6'} align={'left'}>
                                         From {allReview.reviewCount} Reviews
                                     </Typography>
                                 </HeaderBox>
                                 <TextBox>
-                                    <BorderLinearProgress variant="determinate" value={50} />
+                                    <BorderLinearProgress variant="determinate" value={(allReview.positiveReview/allReview.reviewCount)*100} />
                                 </TextBox>
                                 <TextBox>
                                     <Typography variant={'body2'} align={'left'}>

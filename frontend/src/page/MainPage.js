@@ -43,7 +43,7 @@ function MainPage() {
         <div className="MainPage">
             <SearchBar/>
             <Container className={classes.center}>
-                <AboutProjectBox borderRadius={8}>
+                <AboutProjectBox boxShadow={3} borderRadius={8}>
                     <HeaderBox>
                         <Typography variant='h6' align='left'>
                             About Project

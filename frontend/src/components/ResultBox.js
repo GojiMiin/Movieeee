@@ -53,12 +53,12 @@ function ResultBoxs({mName, mPoster, mCate, mCode, mTime, mRate, mYear}) {
             <Grid container>
                 <Grid item xs={4}>
                     <Container>
-                        <img style={{ width: '75%', height: 'auto' }} src={mPoster} />
+                        <img style={{ width: '100%', height: 'auto', borderRadius: '8px'}} src={mPoster} />
                     </Container>
                 </Grid>
                 <Grid item xs={8} className={classes.centerColumn}>
                     <Container>
-                        <ResultDetailBox borderRadius={8}>
+                        <ResultDetailBox boxShadow={3} borderRadius={8}>
                             <HeaderBox>
                                 <Typography variant='h6' align='left'>
                                     <Link href={"/movie/"+mCode} style={{ textDecoration: 'none' }}>{mName}</Link>

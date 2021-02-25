@@ -21,7 +21,7 @@ const ResultHeaderBox = withStyles({
 
 function ResultHeaderBoxs({showKey}) {
     return (
-        <ResultHeaderBox borderRadius={8}>
+        <ResultHeaderBox boxShadow={3} borderRadius={8}>
             <HeaderBox>
                 <Typography variant='h6' align='left'>
                     Result for "{showKey}"

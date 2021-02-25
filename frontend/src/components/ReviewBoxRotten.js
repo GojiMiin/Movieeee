@@ -29,7 +29,7 @@ const TextBox = withStyles({
 const ReviewBoxRotten = withStyles({
     root:{
         position:'relative',
-        backgroundColor: '#E5E5E5',
+        backgroundColor: '#fff',
         maxWidth:'800px',
         height:'auto',
         margin:'24px 0px 24px 0px',
@@ -63,14 +63,14 @@ function ReviewBoxRottens({onePageReview, mCode}) {
     const readMoreReview = (reviewDetail) => {
         history.push({
             pathname: "/review/"+mCode.movieCode,
-            search: "IMDb",
+            search: "RottenTomatoes",
             state: {reviewAllDetail: reviewDetail}
         })
     }
 
     return (
         <Container className={classes.center}>
-            <ReviewBoxRotten borderRadius={8}>
+            <ReviewBoxRotten boxShadow={3} borderRadius={8}>
                 <HeaderBox>
                     <Grid container>
                         <Grid item xs={6}>
@@ -98,8 +98,8 @@ function ReviewBoxRottens({onePageReview, mCode}) {
                 <TextBox>
                     <Grid container spacing={3}>
                         {onePageReview.allReview.map((oneReview) =>
-                            <Grid item xs={6} key={oneReview.score}> {/*imdb review box*/}
-                                <ReviewTextBox borderRadius={8}>
+                            <Grid item xs={6} key={oneReview.score}> {/*rotten review box*/}
+                                <ReviewTextBox boxShadow={3} borderRadius={8} style={parseFloat(oneReview.score.replace(/[^0-9.]/g, '')).toFixed(4) <= 0.5 ? { borderStyle:'solid',borderColor:'#ff6961'} : {borderStyle:'solid', borderColor:'#aeffda'}}>
                                     <Grid container>
                                         <Grid item xs={9}>
                                             <HeaderBox>
@@ -111,7 +111,7 @@ function ReviewBoxRottens({onePageReview, mCode}) {
                                         <Grid item xs={3}>
                                             <HeaderBox>
                                                 <Typography align={'right'} variant={'subtitle2'}>
-                                                    IMDB
+                                                    Rotten
                                                 </Typography>
                                             </HeaderBox>
                                         </Grid>
@@ -125,7 +125,7 @@ function ReviewBoxRottens({onePageReview, mCode}) {
                                         <Grid item xs={8}>
                                             <BottomBox>
                                                 <Typography variant='subtitle2' align='left'>
-                                                    Predict Score : {oneReview.score}
+                                                    Predict Score : {parseFloat(oneReview.score.replace(/[^0-9.]/g, '')).toFixed(4)}
                                                 </Typography>
                                             </BottomBox>
                                         </Grid>

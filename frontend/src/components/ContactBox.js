@@ -42,7 +42,7 @@ function ContactBoxs() {
     const classes = useStyles()
     return (
         <Container className={classes.center}>
-            <ContactBox borderRadius={8}>
+            <ContactBox boxShadow={3} borderRadius={8}>
                 <HeaderBox>
                     <Typography variant='h6' align='left'>
                         Contact Us
