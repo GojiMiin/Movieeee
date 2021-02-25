@@ -104,7 +104,7 @@ function ReviewBoxRottens({onePageReview, mCode}) {
                                         <Grid item xs={9}>
                                             <HeaderBox>
                                                 <Typography align={'left'} variant={'subtitle2'} noWrap={true}>
-                                                    {oneReview.title} {/*add review title and show positive negative score*/}
+                                                    Untitled review {/*add review title and show positive negative score*/}
                                                 </Typography>
                                             </HeaderBox>
                                         </Grid>
