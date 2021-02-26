@@ -1,6 +1,7 @@
 import {Box, Button, Container, Grid, Link, makeStyles, Typography} from "@material-ui/core";
 import {withStyles} from "@material-ui/core";
 import { useHistory } from "react-router-dom";
+import {useSelector} from "react-redux";
 
 const useStyles = makeStyles({
     root: {
@@ -59,12 +60,20 @@ const BottomBox = withStyles({
 function ReviewBoxRottens({onePageReview, mCode}) {
     const classes = useStyles()
     const history = useHistory()
+    const movieDetail = useSelector(state => state.mDetail.allDetail);
 
     const readMoreReview = (reviewDetail) => {
         history.push({
             pathname: "/review/"+mCode.movieCode,
             search: "RottenTomatoes",
             state: {reviewAllDetail: reviewDetail}
+        })
+    }
+
+    const toAllRottenReviewPage = () => {
+        history.push({
+            pathname: "/allreviews/"+movieDetail.code,
+            search: "Rotten"
         })
     }
 
@@ -86,7 +95,7 @@ function ReviewBoxRottens({onePageReview, mCode}) {
                             </Grid>
                             <Grid item xs={3}>
                                 <Button>
-                                    <Typography variant={'subtitle2'}>
+                                    <Typography variant={'subtitle2'} onClick={() => toAllRottenReviewPage()}>
                                         Rotten
                                     </Typography>
                                 </Button>

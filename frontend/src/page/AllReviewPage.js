@@ -70,7 +70,7 @@ const BorderLinearProgress = withStyles((theme) => ({
 function AllReviewsPage() {
     const classes = useStyles()
     const location = useLocation()
-    const [allReview, setAllReview] = useState(null)
+    const [allSourceReview, setAllSourceReview] = useState(null)
     const [allSource, setAllSource] = useState(null)
     const mDetail = useSelector(state => state.mDetail.allDetail);
     var fetchResult = []
@@ -78,21 +78,31 @@ function AllReviewsPage() {
 
     mCodeForm.append("moviecode", mDetail.code)
 
-    const fetchAllReview = async (getAllReviewCode) => {
-        console.log(mCodeForm)
-        fetchResult = await axios.post("http://localhost:5000/predict_allreview_imdb", getAllReviewCode) /*error on fetching review*/
-        setAllReview(fetchResult.data[0])
+    const fetchImdbAllReview = async (getAllImdbReviewCode) => {
+        console.log(getAllImdbReviewCode)
+        fetchResult = await axios.post("http://localhost:5000/predict_allreview_imdb", getAllImdbReviewCode) /*error on fetching review*/
+        setAllSourceReview(fetchResult.data[0])
+    }
+
+    const fetchRottenAllReview = async (getAllRottenReviewCode) => {
+        console.log(getAllRottenReviewCode)
+        fetchResult = await axios.post("http://localhost:5000/predict_allreview_rotten", getAllRottenReviewCode) /*error on fetching review*/
+        setAllSourceReview(fetchResult.data[0])
         console.log(fetchResult.data[0])
     }
 
     useEffect(async () => {
-        await fetchAllReview(mCodeForm)
         let source = location.search.split('?')[1]
-
+        console.log(mDetail.code)
         setAllSource(source)
+        if(source === "IMDb") {
+            await fetchImdbAllReview(mCodeForm)
+        } else if (source === "Rotten") {
+            await fetchRottenAllReview(mCodeForm)
+        }
     }, [])
 
-    if(allReview === null){
+    if(allSourceReview === null || allSource === null){
         return <CircularProgress />;
     }
 
@@ -139,18 +149,18 @@ function AllReviewsPage() {
                             <ColorBox borderRadius={8} height={'100%'} display={'flex'} flexDirection={'column'} justifyContent={'center'}>
                                 <HeaderBox>
                                     <Typography variant={'h6'} align={'left'}>
-                                        From {allReview.reviewCount} Reviews
+                                        From {allSourceReview.reviewCount} Reviews
                                     </Typography>
                                 </HeaderBox>
                                 <TextBox>
-                                    <BorderLinearProgress variant="determinate" value={(allReview.positiveReview/allReview.reviewCount)*100} />
+                                    <BorderLinearProgress variant="determinate" value={(allSourceReview.positiveReview/allSourceReview.reviewCount)*100} />
                                 </TextBox>
                                 <TextBox>
                                     <Typography variant={'body2'} align={'left'}>
-                                        Positive reviews calculate as {(allReview.positiveReview/allReview.reviewCount)*100} % of all reviews
+                                        Positive reviews calculate as {(allSourceReview.positiveReview/allSourceReview.reviewCount)*100} % of all reviews
                                     </Typography>
                                     <Typography variant={'body2'} align={'left'}>
-                                        Negative reviews calculate as {(allReview.negativeReview/allReview.reviewCount)*100} % of all reviews
+                                        Negative reviews calculate as {(allSourceReview.negativeReview/allSourceReview.reviewCount)*100} % of all reviews
                                     </Typography>
                                 </TextBox>
                             </ColorBox>
@@ -163,21 +173,13 @@ function AllReviewsPage() {
             <Container className={classes.center}>
                 <Grid container direction={'column'} alignItems={'center'}>
                     {/*loop review here*/}
-                    <Grid item xs={12}>
-                        <AllReviewBox></AllReviewBox>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <AllReviewBox></AllReviewBox>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <AllReviewBox></AllReviewBox>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <AllReviewBox></AllReviewBox>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <AllReviewBox></AllReviewBox>
-                    </Grid>
+
+                    {allSourceReview.allReview.map((oneAllReview) =>
+                        <Grid item xs={12}>
+                            <AllReviewBox thisReview={oneAllReview}></AllReviewBox>
+                        </Grid>
+                    )}
+
                 </Grid>
             </Container>
 

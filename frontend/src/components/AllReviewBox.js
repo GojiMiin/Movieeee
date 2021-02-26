@@ -1,6 +1,8 @@
 import {Box, Button, Container, Typography} from "@material-ui/core";
 import {Grid} from "@material-ui/core";
 import {withStyles} from "@material-ui/core";
+import {useSelector} from "react-redux";
+import {useHistory, useLocation} from "react-router-dom";
 
 const HeaderBox = withStyles({
     root:{
@@ -35,49 +37,50 @@ const TypoNoWrap2Line = withStyles({
     }
 })(Typography);
 
-function AllReviewBox() {
+function AllReviewBox(thisReview) {
+
+    const history = useHistory()
+    const location = useLocation()
+    const mDetail = useSelector(state => state.mDetail.allDetail);
+
+    const readMoreReview = (reviewDetail) => {
+        history.push({
+            pathname: "/review/"+mDetail.code,
+            search: "IMDb",
+            state: {reviewAllDetail: reviewDetail}
+        })
+    }
+
     return (
         <FullReviewBox borderRadius={8}>
             <HeaderBox>
                 <Grid container>
                     <Grid item xs={6}>
                         <Typography variant='subtitle2' align='left'>
-                            Review Title
+                            {thisReview.thisReview.title}
                         </Typography>
                     </Grid>
                     <Grid item xs={6}>
                         <Typography variant='subtitle2' align='right'>
-                            IMDB / Rotten
+                            {location.search.split('?')}
                         </Typography>
                     </Grid>
                 </Grid>
             </HeaderBox>
             <TextBox>
                 <TypoNoWrap2Line variant='body2'>
-                    What persuaded me to watch this movie was the blessing bestowed upon it by the stories original creator, Stephen King, who claimed: "I wasn't prepared for how good it really was".
-                    He's not wrong.
-
-                    "IT" is quite extraordinary. The attention to detail, the subtle but effective comedic undertone and the
-                    exquisite cinematography not only do the original title proud, they make this re-imagining of the original
-                    classic even better than its predecessor.
-
-                    It's a very scary film but what impressed me was how true the film sticks to the original's tricks; it isn't
-                    filled with loud in-your-face jump scares, in fact, a lot of what makes this film scary is the slick cinematography
-                    and intricate shadow play. The use of lighting and creation of atmosphere is what makes this film so tense,
-                    which is why it's perfectly suited for those who like Horror movies but without the obnoxious gore.
-
-                    Watched the pre-release as a critic - August 28th.
+                    {thisReview.thisReview.review}
                 </TypoNoWrap2Line>
             </TextBox>
             <BottomBox>
                 <Grid container>
                     <Grid item xs={6}>
                         <Typography variant='subtitle2' align='left'>
-                            Predict Score : 1234
+                            Predict Score : {parseFloat(thisReview.thisReview.score.replace(/[^0-9.]/g, '')).toFixed(4)}
                         </Typography>
                     </Grid>
                     <Grid item xs={6}>
-                        <Typography variant='subtitle2' align='right'>
+                        <Typography variant='subtitle2' align='right' onClick={() => readMoreReview(thisReview.thisReview)}>
                             Read More
                         </Typography>
                     </Grid>
