@@ -13,14 +13,14 @@ import {
 import {LinearProgress} from "@material-ui/core";
 import ContactBox from "../components/ContactBox";
 import AllReviewBox from "../components/AllReviewBox";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {useSelector} from "react-redux";
 import {useLocation} from "react-router-dom";
 
 const useStyles = makeStyles({
     root: {
-        backgroundColor: '#E5E5E5',
+        backgroundColor: '#fff',
         marginBottom: '30px'
     },
     center: {
@@ -45,7 +45,12 @@ const TextBox = withStyles({
 })(Box);
 const ColorBox = withStyles({
     root:{
-        backgroundColor: '#E5E5E5',
+        backgroundColor: '#fff',
+    }
+})(Box);
+const ColorButton = withStyles({
+    root:{
+        backgroundColor: '#e5e5e5',
     }
 })(Box);
 const ButtonBox = withStyles({
@@ -103,7 +108,11 @@ function AllReviewsPage() {
     }, [])
 
     if(allSourceReview === null || allSource === null){
-        return <CircularProgress />;
+        return(
+            <div style={{position:'absolute',top:'45%',left:'50%'}}>
+                <CircularProgress />
+            </div>
+        );
     }
 
     return (
@@ -123,7 +132,7 @@ function AllReviewsPage() {
                 <Box width={800} height={'auto'}>
                     <Grid container spacing={3}>
                         <Grid item xs={4}>
-                            <ColorBox borderRadius={8} height={'100%'} display={'flex'} flexDirection={'column'} justifyContent={'center'}>
+                            <ColorBox boxShadow={3} borderRadius={8} height={'100%'} display={'flex'} flexDirection={'column'} justifyContent={'center'}>
                                 <Container>
                                     <HeaderBox>
                                         <Typography variant={'h6'}>
@@ -146,7 +155,7 @@ function AllReviewsPage() {
                             </ColorBox>
                         </Grid>
                         <Grid item xs={8}>
-                            <ColorBox borderRadius={8} height={'100%'} display={'flex'} flexDirection={'column'} justifyContent={'center'}>
+                            <ColorBox boxShadow={3} borderRadius={8} height={'100%'} display={'flex'} flexDirection={'column'} justifyContent={'center'}>
                                 <HeaderBox>
                                     <Typography variant={'h6'} align={'left'}>
                                         From {allSourceReview.reviewCount} Reviews
@@ -186,11 +195,11 @@ function AllReviewsPage() {
             <Container className={classes.center}>
                 <Box width={800}>
                     <ButtonBox>
-                        <ColorBox>
+                        <ColorButton>
                             <Button fullWidth={100}>
                                 Load more
                             </Button>
-                        </ColorBox>
+                        </ColorButton>
                     </ButtonBox>
                 </Box>
             </Container>

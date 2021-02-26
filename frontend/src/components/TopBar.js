@@ -183,14 +183,7 @@ function TopBar(props) {
                                     </Typography>
                                 </MenuItem>
                             )}
-
                         </StyledMenu>
-                        <Button className={classes.textTopbar}>
-                            <TypoStyled variant={'subtitle2'}>
-                                Rate
-                            </TypoStyled>
-                            <ThumbUpIconStyled/>
-                        </Button>
                     </Box>
                 </Toolbar>
             </Container>

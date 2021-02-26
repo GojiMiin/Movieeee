@@ -21,8 +21,13 @@ const BottomBox = withStyles({
 })(Box);
 const FullReviewBox = withStyles({
     root:{
-        backgroundColor: '#E5E5E5',
-        maxWidth:'800px',
+        backgroundColor: '#fff',
+        ['@media (min-width:780px)']: { // eslint-disable-line no-useless-computed-key
+            width: '800px'
+        },
+        ['@media (max-width:780px)']: { // eslint-disable-line no-useless-computed-key
+            width: '600px'
+        },
         marginTop:'24px',
         height:'auto'
     }
@@ -52,13 +57,21 @@ function AllReviewBox(thisReview) {
     }
 
     return (
-        <FullReviewBox borderRadius={8}>
+        <FullReviewBox boxShadow={3} borderRadius={8} style={parseFloat(thisReview.thisReview.score.replace(/[^0-9.]/g, '')).toFixed(4) <= 0.5 ? { borderStyle:'solid',borderColor:'#ff6961'} : {borderStyle:'solid', borderColor:'#aeffda'}}>
             <HeaderBox>
                 <Grid container>
                     <Grid item xs={6}>
-                        <Typography variant='subtitle2' align='left'>
-                            {thisReview.thisReview.title}
-                        </Typography>
+                        {
+                            thisReview.thisReview.title == null ?
+                                <Typography variant='subtitle2' align='left'>
+                                    Untitled Review
+                                </Typography> :
+                                <Typography variant='subtitle2' align='left'>
+                                    {thisReview.thisReview.title}
+                                </Typography>
+
+                        }
+
                     </Grid>
                     <Grid item xs={6}>
                         <Typography variant='subtitle2' align='right'>
@@ -86,9 +99,6 @@ function AllReviewBox(thisReview) {
                     </Grid>
                 </Grid>
             </BottomBox>
-
-
-
         </FullReviewBox>
     );
 }
