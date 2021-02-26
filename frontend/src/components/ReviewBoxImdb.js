@@ -1,6 +1,6 @@
 import {Box, Button, Container, Grid, Link, makeStyles, Typography} from "@material-ui/core";
 import {withStyles} from "@material-ui/core";
-import { useHistory } from "react-router-dom";
+import {useHistory, useLocation} from "react-router-dom";
 import {useSelector} from "react-redux";
 
 const useStyles = makeStyles({
@@ -61,6 +61,7 @@ function ReviewBoxImdbs({onePageReview}) {
     const history = useHistory()
     const movieDetail = useSelector(state => state.mDetail.allDetail);
 
+
     const readMoreReview = (reviewDetail) => {
         history.push({
             pathname: "/review/"+movieDetail.code,
@@ -69,7 +70,7 @@ function ReviewBoxImdbs({onePageReview}) {
         })
     }
 
-    const toAllReviewPage = () => {
+    const toImdbAllReviewPage = () => {
         history.push({
             pathname: "/allreviews/"+movieDetail.code,
             search: "IMDb"
@@ -95,7 +96,7 @@ function ReviewBoxImdbs({onePageReview}) {
                             </Grid>
                             <Grid item xs={3}>
                                 <Button>
-                                    <Typography variant={'subtitle2'} onClick={() => toAllReviewPage()}>
+                                    <Typography variant={'subtitle2'} onClick={() => toImdbAllReviewPage()}>
                                         IMDB
                                     </Typography>
                                 </Button>
