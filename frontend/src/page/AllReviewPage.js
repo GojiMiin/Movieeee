@@ -166,10 +166,10 @@ function AllReviewsPage() {
                                 </TextBox>
                                 <TextBox>
                                     <Typography variant={'body2'} align={'left'}>
-                                        Positive reviews calculate as {(allSourceReview.positiveReview/allSourceReview.reviewCount)*100} % of all reviews
+                                        Positive reviews calculate as {((allSourceReview.positiveReview/allSourceReview.reviewCount)*100).toFixed(2)} % of all reviews
                                     </Typography>
                                     <Typography variant={'body2'} align={'left'}>
-                                        Negative reviews calculate as {(allSourceReview.negativeReview/allSourceReview.reviewCount)*100} % of all reviews
+                                        Negative reviews calculate as {((allSourceReview.negativeReview/allSourceReview.reviewCount)*100).toFixed(2)} % of all reviews
                                     </Typography>
                                 </TextBox>
                             </ColorBox>
