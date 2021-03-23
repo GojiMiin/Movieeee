@@ -87,6 +87,7 @@ function AllReviewsPage() {
     var mCodeForm = new FormData();
 
     mCodeForm.append("moviecode", mDetail.code)
+    //mCodeForm.append("numclick","1") Key for choose page to scrape rotten
 
     const onStartLoopThroughPosts = (count) => {
         for (
