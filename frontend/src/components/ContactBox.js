@@ -10,6 +10,9 @@ const useStyles = makeStyles({
     center: {
         display:"flex",
         justifyContent:"center"
+    },
+    white:{
+        color: "white"
     }
 });
 const AboutProjectBox = withStyles({
@@ -31,7 +34,7 @@ const TextBox = withStyles({
 })(Box);
 const ContactBox =  withStyles({
     root:{
-        backgroundColor: '#E5E5E5',
+        backgroundColor: '#1A95B0',
         margin:'60px 0px 60px 0px',
         width:'1200px',
         height:'auto'
@@ -44,12 +47,12 @@ function ContactBoxs() {
         <Container className={classes.center}>
             <ContactBox boxShadow={3} borderRadius={8}>
                 <HeaderBox>
-                    <Typography variant='h6' align='left'>
+                    <Typography className={classes.white} variant='h6' align='left'>
                         Contact Us
                     </Typography>
                 </HeaderBox>
                 <TextBox>
-                    <Typography variant='body1'>
+                    <Typography className={classes.white} variant='body1'>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean at eleifend turpis. Sed efficitur tincidunt lacus in volutpat. Nullam vitae dapibus sapien. Curabitur ac nunc non lacus faucibus efficitur ut quis ex. Etiam pharetra, ipsum a blandit elementum
                     </Typography>
                 </TextBox>

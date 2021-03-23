@@ -29,8 +29,12 @@ const useStyles = makeStyles(theme => ({
         display: 'flex',
         justifyContent: 'space-between',
     },
-    textTopbar: {
-        color: "black"
+    blue: {
+        color: "#485477",
+        fontWeight: "bold"
+    },
+    cyan: {
+        color: "#8BABBE"
     },
     appButton: {
 
@@ -133,12 +137,12 @@ function TopBar(props) {
         <AppBar className={classes.root} position="relative">
             <Container>
                 <Toolbar className={classes.test}>
-                    <Typography className={classes.textTopbar} edge="start" variant='h6'>
+                    <Typography className={classes.blue} edge="start" variant='h6'>
                         Movie Review Classification
                     </Typography>
                     <Box>
                         <Button aria-controls="menu-year" aria-haspopup="true" onClick={e => setAnchorEl(e.currentTarget)} className={classes.textTopbar}>
-                            <TypoStyled variant={'subtitle2'}>
+                            <TypoStyled variant={'subtitle2'} className={classes.blue}>
                                 Year
                             </TypoStyled>
                             <ScheduleIconStyled/>
@@ -163,7 +167,7 @@ function TopBar(props) {
                             </MenuItem>
                         </StyledMenu>
                         <Button aria-controls="menu-genre" aria-haspopup="true" onClick={e => setAnchorEl2(e.currentTarget)} className={classes.textTopbar}>
-                            <TypoStyled variant={'subtitle2'}>
+                            <TypoStyled variant={'subtitle2'} className={classes.blue}>
                                 Genre
                             </TypoStyled>
                             <CategoryIconStyled/>

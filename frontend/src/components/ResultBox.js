@@ -16,6 +16,9 @@ const useStyles = makeStyles({
         display:"flex",
         flexDirection:"column",
         justifyContent:"center"
+    },
+    cyan:{
+        color:"#485477"
     }
 });
 const HeaderBox = withStyles({
@@ -61,28 +64,28 @@ function ResultBoxs({mName, mPoster, mCate, mCode, mTime, mRate, mYear}) {
                         <ResultDetailBox boxShadow={3} borderRadius={8}>
                             <HeaderBox>
                                 <Typography variant='h6' align='left'>
-                                    <Link href={"/movie/"+mCode} style={{ textDecoration: 'none' }}>{mName}</Link>
+                                    <Link href={"/movie/"+mCode} style={{ textDecoration: 'none' , color:"#485477", fontWeight: 'bold'}}>{mName}</Link>
                                 </Typography>
                             </HeaderBox>
                             <TextBox>
                                 <Grid container spacing={3}>
                                     <Grid item>
-                                        <Typography align='left' variant={'body2'}>
+                                        <Typography align='left' variant={'body2'} className={classes.cyan}>
                                             Year {mYear}
                                         </Typography>
                                     </Grid>
                                     <Grid item>
-                                        <Typography align='left' variant={'body2'}>
+                                        <Typography align='left' variant={'body2'} className={classes.cyan}>
                                             {mTime}
                                         </Typography>
                                     </Grid>
                                     <Grid item>
-                                        <Typography align='left' variant={'body2'}>
+                                        <Typography align='left' variant={'body2'} className={classes.cyan}>
                                             {mCate}
                                         </Typography>
                                     </Grid>
                                     <Grid item>
-                                        <Typography align='left' variant={'body2'}>
+                                        <Typography align='left' variant={'body2'} className={classes.cyan}>
                                             {mRate}
                                         </Typography>
                                     </Grid>
