@@ -53,7 +53,7 @@ const DetailBox = withStyles({
 const PosterBox = withStyles({
     root:{
         borderRadius:'8px',
-        backgroundColor: '#E5E5E5',
+        backgroundColor: '#fff',
     }
 })(Box);
 

@@ -15,6 +15,12 @@ const useStyles = makeStyles({
     centeralignitem: {
         display:"flex",
         alignItems:"center"
+    },
+    blue: {
+        color:"#485477"
+    },
+    white: {
+        color: "white"
     }
 });
 const HeaderBox = withStyles({
@@ -31,6 +37,9 @@ const ReviewBoxRotten = withStyles({
     root:{
         position:'relative',
         backgroundColor: '#fff',
+        borderStyle: 'solid',
+        borderWidth: '1px',
+        borderColor: '#8BABBE',
         maxWidth:'800px',
         height:'auto',
         margin:'24px 0px 24px 0px',
@@ -55,6 +64,12 @@ const BottomBox = withStyles({
         padding:'0px 20px 20px 20px'
     }
 })(Box);
+const ButtonBlue = withStyles({
+    root:{
+        backgroundColor: "#1A95B0",
+        borderRadius: "10px"
+    }
+})(Button);
 
 
 function ReviewBoxRottens({onePageReview, mCode}) {
@@ -79,7 +94,7 @@ function ReviewBoxRottens({onePageReview, mCode}) {
 
     return (
         <Container className={classes.center}>
-            <ReviewBoxRotten boxShadow={3} borderRadius={8}>
+            <ReviewBoxRotten className={classes.blue} boxShadow={3} borderRadius={8}>
                 <HeaderBox>
                     <Grid container>
                         <Grid item xs={6}>
@@ -94,11 +109,11 @@ function ReviewBoxRottens({onePageReview, mCode}) {
                                 </Typography>
                             </Grid>
                             <Grid item xs={3}>
-                                <Button>
-                                    <Typography variant={'subtitle2'} onClick={() => toAllRottenReviewPage()}>
+                                <ButtonBlue>
+                                    <Typography className={classes.white} variant={'subtitle2'} onClick={() => toAllRottenReviewPage()}>
                                         Rotten
                                     </Typography>
-                                </Button>
+                                </ButtonBlue>
                             </Grid>
                         </Grid>
                     </Grid>

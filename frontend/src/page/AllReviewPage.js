@@ -30,7 +30,14 @@ const useStyles = makeStyles({
     centeralignitem: {
         display:"flex",
         alignItems:"center"
+    },
+    blue:{
+        color:"#485477"
+    },
+    white: {
+        color: "white"
     }
+
 });
 
 const HeaderBox = withStyles({
@@ -46,11 +53,15 @@ const TextBox = withStyles({
 const ColorBox = withStyles({
     root:{
         backgroundColor: '#fff',
+        borderStyle: 'solid',
+        borderWidth: '1px',
+        borderColor: '#8BABBE',
     }
 })(Box);
 const ColorButton = withStyles({
     root:{
-        backgroundColor: '#e5e5e5',
+        backgroundColor: '#1A95B0',
+        borderRadius: '10px'
     }
 })(Box);
 const ButtonBox = withStyles({
@@ -64,11 +75,11 @@ const BorderLinearProgress = withStyles((theme) => ({
         borderRadius: 5,
     },
     colorPrimary: {
-        backgroundColor: theme.palette.grey[theme.palette.type === 'light' ? 200 : 700],
+        backgroundColor: '#FF6961',
     },
     bar: {
         borderRadius: 5,
-        backgroundColor: '#000',
+        backgroundColor: '#3FA987',
     },
 }))(LinearProgress);
 
@@ -83,7 +94,7 @@ function AllReviewsPage() {
     const mDetail = useSelector(state => state.mDetail.allDetail)
     var startPage = true
     var arrayForHoldingPosts = [];
-    var fetchResult = []
+    var fetchResult = [];
     var mCodeForm = new FormData();
 
     mCodeForm.append("moviecode", mDetail.code)
@@ -168,7 +179,7 @@ function AllReviewsPage() {
             <Container className={classes.center}>
                 <Box width={800}>
                     <TextBox>
-                        <Typography variant={'h6'} align={'left'}>
+                        <Typography className={classes.blue} variant={'h6'} align={'left'}>
                             All review from {allSource}
                         </Typography>
                     </TextBox>
@@ -176,7 +187,7 @@ function AllReviewsPage() {
             </Container>
 
             <Container className={classes.center}>
-                <Box width={800} height={'auto'}>
+                <Box className={classes.blue} width={800} height={'auto'}>
                     <Grid container spacing={3}>
                         <Grid item xs={4}>
                             <ColorBox boxShadow={3} borderRadius={8} height={'100%'} display={'flex'} flexDirection={'column'} justifyContent={'center'}>
@@ -243,7 +254,7 @@ function AllReviewsPage() {
                 <Box width={800}>
                     <ButtonBox>
                         <ColorButton>
-                            <Button fullWidth={100} onClick={handleShowMorePosts}>
+                            <Button className={classes.white} fullWidth={100} onClick={handleShowMorePosts}>
                                 Load more
                             </Button>
                         </ColorButton>

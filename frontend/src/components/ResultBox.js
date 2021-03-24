@@ -17,7 +17,7 @@ const useStyles = makeStyles({
         flexDirection:"column",
         justifyContent:"center"
     },
-    cyan:{
+    blue:{
         color:"#485477"
     }
 });
@@ -43,7 +43,10 @@ const ResultBox = withStyles({
 })(Box);
 const ResultDetailBox = withStyles({
     root:{
-        backgroundColor: '#E5E5E5',
+        backgroundColor: '#fff',
+        borderStyle: 'solid',
+        borderWidth: '1px',
+        borderColor: '#8BABBE',
         height:'auto'
     }
 })(Box);
@@ -70,22 +73,22 @@ function ResultBoxs({mName, mPoster, mCate, mCode, mTime, mRate, mYear}) {
                             <TextBox>
                                 <Grid container spacing={3}>
                                     <Grid item>
-                                        <Typography align='left' variant={'body2'} className={classes.cyan}>
+                                        <Typography align='left' variant={'body2'} className={classes.blue}>
                                             Year {mYear}
                                         </Typography>
                                     </Grid>
                                     <Grid item>
-                                        <Typography align='left' variant={'body2'} className={classes.cyan}>
+                                        <Typography align='left' variant={'body2'} className={classes.blue}>
                                             {mTime}
                                         </Typography>
                                     </Grid>
                                     <Grid item>
-                                        <Typography align='left' variant={'body2'} className={classes.cyan}>
+                                        <Typography align='left' variant={'body2'} className={classes.blue}>
                                             {mCate}
                                         </Typography>
                                     </Grid>
                                     <Grid item>
-                                        <Typography align='left' variant={'body2'} className={classes.cyan}>
+                                        <Typography align='left' variant={'body2'} className={classes.blue}>
                                             {mRate}
                                         </Typography>
                                     </Grid>

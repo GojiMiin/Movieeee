@@ -28,9 +28,13 @@ const useStyles = makeStyles({
         display:"flex",
         justifyContent:"center"
     },
-    centeralignitem: {
+    directionCenter: {
         display:"flex",
-        alignItems:"center"
+        flexDirection:"column",
+        justifyContent:"center",
+    },
+    blue: {
+        color:"#485477"
     }
 });
 
@@ -52,8 +56,10 @@ const DetailBox = withStyles({
 })(Box);
 const PosterBox = withStyles({
     root:{
-        borderRadius:'8px',
         backgroundColor: '#fff',
+        borderStyle: 'solid',
+        borderWidth: '1px',
+        borderColor: '#8BABBE',
     }
 })(Box);
 
@@ -112,39 +118,38 @@ function MoviePage() {
                         <Grid className={classes.centeralignitem} item xs={4}>
                             <img style={{ width: '100%', height: 'auto', borderRadius: '8px'}} src={movieDetail.poster} />
                         </Grid>
-                        <Grid className={classes.centeralignitem} item xs={8}>
-                            <Grid container direction={"column"}  spacing={5}>
-                                <Grid item>
-                                    <PosterBox boxShadow={3}>
+                        <Grid item xs={8} className={classes.directionCenter}>
+                                <div style={{margin:"20px"}}>
+                                    <PosterBox boxShadow={3} borderRadius={8}>
                                         <Container>
                                             <HeaderBox>
-                                                <Typography variant='h6' align='left'>
+                                                <Typography className={classes.blue} variant='h6' align='left'>
                                                     Score
                                                 </Typography>
                                             </HeaderBox>
                                         </Container>
                                         <Container>
-                                            <Grid container spacing={3}>
+                                            <Grid container>
                                                 <Grid item xs={6}>
                                                     <Box padding={1}>
-                                                        <Typography variant='h6'>
+                                                        <Typography className={classes.blue} variant='h6'>
                                                             IMDB
                                                         </Typography>
                                                     </Box>
-                                                    <Box>
-                                                        <Typography variant={'body2'}>
+                                                    <Box style={{padding:"0px 0px 12px 0px"}}>
+                                                        <Typography className={classes.blue} variant={'body2'}>
                                                             {imdbPageReview.imdbScore}
                                                         </Typography>
                                                     </Box>
                                                 </Grid>
                                                 <Grid item xs={6}>
                                                     <Box padding={1}>
-                                                        <Typography variant='h6'>
+                                                        <Typography className={classes.blue} variant='h6'>
                                                             Rotten
                                                         </Typography>
                                                     </Box>
-                                                    <Box>
-                                                        <Typography variant={'body2'}>
+                                                    <Box style={{padding:"0px 0px 12px 0px"}}>
+                                                        <Typography className={classes.blue} variant={'body2'}>
                                                             {rottenPageReview.rottenScore}
                                                         </Typography>
                                                     </Box>
@@ -152,24 +157,23 @@ function MoviePage() {
                                             </Grid>
                                         </Container>
                                     </PosterBox>
-                                </Grid>
-                                <Grid item>
-                                    <PosterBox boxShadow={3}>
+                                </div>
+                                <div style={{margin:"20px"}}>
+                                    <PosterBox boxShadow={3} borderRadius={8}>
                                         <Container>
                                             <HeaderBox>
-                                                <Typography variant='h6' align='left'>
+                                                <Typography className={classes.blue} variant='h6' align='left'>
                                                     Description
                                                 </Typography>
                                             </HeaderBox>
                                             <TextBox>
-                                                <Typography variant={'body2'}>
+                                                <Typography className={classes.blue} variant={'body2'}>
                                                     {movieDetail.description}
                                                 </Typography>
                                             </TextBox>
                                         </Container>
                                     </PosterBox>
-                                </Grid>
-                            </Grid>
+                                </div>
                         </Grid>
                     </Grid>
                 </DetailBox>

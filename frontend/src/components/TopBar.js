@@ -22,8 +22,9 @@ import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 const useStyles = makeStyles(theme => ({
     root: {
         margin:0,
-        backgroundColor: '#E5E5E5',
+        backgroundColor: '#fff',
         marginBottom: '60px',
+        boxShadow: "none"
     },
     test: {
         display: 'flex',

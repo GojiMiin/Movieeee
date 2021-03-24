@@ -1,9 +1,16 @@
-import {Box, Container, Typography} from "@material-ui/core";
+import {Box, Container, makeStyles, Typography} from "@material-ui/core";
 import {Grid} from "@material-ui/core";
 import {withStyles} from "@material-ui/core";
 import {CircularProgress} from "@material-ui/core";
 import { useLocation } from "react-router-dom"
 import {useEffect, useState} from "react";
+
+const useStyles = makeStyles({
+
+    blue:{
+        color:"#485477"
+    }
+});
 
 const HeaderBox = withStyles({
     root:{
@@ -17,7 +24,10 @@ const TextBox = withStyles({
 })(Box);
 const FullReviewBox = withStyles({
     root:{
-        backgroundColor: '#E5E5E5',
+        backgroundColor: '#fff',
+        borderStyle: 'solid',
+        borderWidth: '1px',
+        borderColor: '#8BABBE',
         width:'800px',
         marginTop:'24px',
         height:'auto'
@@ -28,6 +38,7 @@ const FullReviewBox = withStyles({
 
 function FullReviewBoxs({toShowSource, toShowReviewDetail}) {
 
+    const classes = useStyles()
     const predictScore = parseFloat(toShowReviewDetail.score.replace(/[^0-9.]/g, '')).toFixed(4)
 
     if(toShowSource === null || toShowReviewDetail === null){
@@ -35,7 +46,7 @@ function FullReviewBoxs({toShowSource, toShowReviewDetail}) {
     }
 
     return (
-        <FullReviewBox boxShadow={3} borderRadius={8} checkReviewVibe>
+        <FullReviewBox className={classes.blue} boxShadow={3} borderRadius={8} checkReviewVibe>
             <HeaderBox >
                 <Grid container>
                     <Grid item xs={6}>

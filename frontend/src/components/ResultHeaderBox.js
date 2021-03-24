@@ -13,7 +13,10 @@ const TextBox = withStyles({
 })(Box);
 const ResultHeaderBox = withStyles({
     root:{
-        backgroundColor: '#E5E5E5',
+        backgroundColor: '#fff',
+        borderStyle: 'solid',
+        borderWidth: '1px',
+        borderColor: '#8BABBE',
         width:'800px',
         height:'auto'
     }

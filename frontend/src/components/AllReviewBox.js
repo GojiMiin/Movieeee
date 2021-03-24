@@ -1,9 +1,15 @@
-import {Box, Button, Container, Typography} from "@material-ui/core";
+import {Box, Button, Container, makeStyles, Typography} from "@material-ui/core";
 import {Grid} from "@material-ui/core";
 import {withStyles} from "@material-ui/core";
 import {useSelector} from "react-redux";
 import {useHistory, useLocation} from "react-router-dom";
 
+const useStyles = makeStyles({
+
+    blue:{
+        color:"#485477"
+    }
+});
 const HeaderBox = withStyles({
     root:{
         padding:'20px 20px 0px 20px'
@@ -43,7 +49,7 @@ const TypoNoWrap2Line = withStyles({
 })(Typography);
 
 function AllReviewBox(thisReview) {
-
+    const classes = useStyles()
     const history = useHistory()
     const location = useLocation()
     const mDetail = useSelector(state => state.mDetail.allDetail);
@@ -57,7 +63,7 @@ function AllReviewBox(thisReview) {
     }
 
     return (
-        <FullReviewBox boxShadow={3} borderRadius={8} style={parseFloat(thisReview.thisReview.score.replace(/[^0-9.]/g, '')).toFixed(4) <= 0.5 ? { borderStyle:'solid',borderColor:'#ff6961'} : {borderStyle:'solid', borderColor:'#aeffda'}}>
+        <FullReviewBox className={classes.blue} boxShadow={3} borderRadius={8} style={parseFloat(thisReview.thisReview.score.replace(/[^0-9.]/g, '')).toFixed(4) <= 0.5 ? { borderStyle:'solid',borderColor:'#ff6961'} : {borderStyle:'solid', borderColor:'#aeffda'}}>
             <HeaderBox>
                 <Grid container>
                     <Grid item xs={6}>

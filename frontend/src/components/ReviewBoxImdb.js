@@ -15,6 +15,12 @@ const useStyles = makeStyles({
     centeralignitem: {
         display:"flex",
         alignItems:"center"
+    },
+    blue: {
+        color:"#485477"
+    },
+    white: {
+        color: "white"
     }
 });
 const HeaderBox = withStyles({
@@ -31,6 +37,9 @@ const ReviewBoxImdb = withStyles({
     root:{
         position:'relative',
         backgroundColor: '#fff',
+        borderStyle: 'solid',
+        borderWidth: '1px',
+        borderColor: '#8BABBE',
         maxWidth:'800px',
         height:'auto',
         margin:'24px 0px 24px 0px',
@@ -54,6 +63,12 @@ const BottomBox = withStyles({
         padding:'0px 20px 20px 20px'
     }
 })(Box);
+const ButtonBlue = withStyles({
+    root:{
+        backgroundColor: "#1A95B0",
+        borderRadius: "10px"
+    }
+})(Button);
 
 
 function ReviewBoxImdbs({onePageReview}) {
@@ -80,7 +95,7 @@ function ReviewBoxImdbs({onePageReview}) {
 
     return (
         <Container className={classes.center}>
-            <ReviewBoxImdb borderRadius={8} boxShadow={3}>
+            <ReviewBoxImdb className={classes.blue} borderRadius={8} boxShadow={3}>
                 <HeaderBox>
                     <Grid container>
                         <Grid item xs={6}>
@@ -95,11 +110,11 @@ function ReviewBoxImdbs({onePageReview}) {
                                 </Typography>
                             </Grid>
                             <Grid item xs={3}>
-                                <Button>
-                                    <Typography variant={'subtitle2'} onClick={() => toImdbAllReviewPage()}>
+                                <ButtonBlue>
+                                    <Typography className={classes.white} variant={'subtitle2'} onClick={() => toImdbAllReviewPage()}>
                                         IMDB
                                     </Typography>
-                                </Button>
+                                </ButtonBlue>
                             </Grid>
                         </Grid>
                     </Grid>
