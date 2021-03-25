@@ -17,6 +17,8 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {useSelector} from "react-redux";
 import {useLocation} from "react-router-dom";
+import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
+import SkipNextIcon from '@material-ui/icons/SkipNext';
 
 const useStyles = makeStyles({
     root: {
@@ -252,13 +254,36 @@ function AllReviewsPage() {
 
             <Container className={classes.center}>
                 <Box width={800}>
-                    <ButtonBox>
+
+                    <Grid container spacing={3}>
+                        <Grid item sm={6}>
+                            <ButtonBox>
+                                <ColorButton>
+                                    <Button className={classes.white} fullWidth={100}>
+                                        <SkipPreviousIcon/>
+                                        Prev
+                                    </Button>
+                                </ColorButton>
+                            </ButtonBox>
+                        </Grid>
+                        <Grid item sm={6}>
+                            <ButtonBox>
+                                <ColorButton>
+                                    <Button className={classes.white} fullWidth={100}>
+                                        Next
+                                        <SkipNextIcon/>
+                                    </Button>
+                                </ColorButton>
+                            </ButtonBox>
+                        </Grid>
+                    </Grid>
+                    {/*<ButtonBox>
                         <ColorButton>
                             <Button className={classes.white} fullWidth={100} onClick={handleShowMorePosts}>
                                 Load more
                             </Button>
                         </ColorButton>
-                    </ButtonBox>
+                    </ButtonBox>*/}
                 </Box>
             </Container>
 
