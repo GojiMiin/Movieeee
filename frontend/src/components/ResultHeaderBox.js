@@ -14,9 +14,6 @@ const TextBox = withStyles({
 const ResultHeaderBox = withStyles({
     root:{
         backgroundColor: '#fff',
-        borderStyle: 'solid',
-        borderWidth: '1px',
-        borderColor: '#8BABBE',
         width:'800px',
         height:'auto'
     }
@@ -24,7 +21,7 @@ const ResultHeaderBox = withStyles({
 
 function ResultHeaderBoxs({showKey}) {
     return (
-        <ResultHeaderBox boxShadow={3} borderRadius={8}>
+        <ResultHeaderBox>
             <HeaderBox>
                 <Typography variant='h6' align='left'>
                     Result for "{showKey}"

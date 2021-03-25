@@ -1,5 +1,6 @@
 import {Box, Container, Grid, makeStyles, Typography} from "@material-ui/core";
 import {withStyles, Link} from "@material-ui/core";
+import { useHistory } from "react-router-dom";
 import { useLocation } from "react-router-dom"
 import {useEffect} from "react";
 
@@ -38,6 +39,14 @@ const ResultBox = withStyles({
         marginTop:'24px',
         ['@media (min-width:780px)']: { // eslint-disable-line no-useless-computed-key
             width: '800px'
+        },
+        '&:hover':{
+            cursor: 'pointer',
+            transform: 'scale(0.95)',
+            transitionDuration: '0.5s',
+        },
+        '&:after':{
+
         }
     }
 })(Box);
@@ -53,18 +62,25 @@ const ResultDetailBox = withStyles({
 
 function ResultBoxs({mName, mPoster, mCate, mCode, mTime, mRate, mYear}) {
     const classes = useStyles()
+    const history = useHistory()
+    const toMovieReviewPage = () => {
+        history.push({
+            pathname: "/movie/"+mCode
+        })
+    }
 
     return (
-        <ResultBox>
+        <ResultBox onClick={() => toMovieReviewPage()}>
+            <ResultDetailBox boxShadow={3} borderRadius={8}>
             <Grid container>
                 <Grid item xs={4}>
                     <Container>
-                        <img style={{ width: '100%', height: 'auto', borderRadius: '8px'}} src={mPoster} />
+                        <img style={{ width: '100%', height: 'auto', borderRadius: '8px', margin:'10px'}} src={mPoster} />
                     </Container>
                 </Grid>
                 <Grid item xs={8} className={classes.centerColumn}>
                     <Container>
-                        <ResultDetailBox boxShadow={3} borderRadius={8}>
+
                             <HeaderBox>
                                 <Typography variant='h6' align='left'>
                                     <Link href={"/movie/"+mCode} style={{ textDecoration: 'none' , color:"#485477", fontWeight: 'bold'}}>{mName}</Link>
@@ -94,10 +110,16 @@ function ResultBoxs({mName, mPoster, mCate, mCode, mTime, mRate, mYear}) {
                                     </Grid>
                                 </Grid>
                             </TextBox>
-                        </ResultDetailBox>
+                        <TextBox>
+                            <Typography align='left' variant={'body2'} className={classes.blue}>
+                                After being held captive in an Afghan cave, billionaire engineer Tony Stark creates a unique weaponized suit of armor to fight evil.
+                            </Typography>
+                        </TextBox>
+
                     </Container>
                 </Grid>
             </Grid>
+            </ResultDetailBox>
         </ResultBox>
     );
 }
