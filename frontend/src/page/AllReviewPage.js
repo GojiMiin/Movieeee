@@ -93,14 +93,14 @@ function AllReviewsPage() {
     const [allSource, setAllSource] = useState(null)
     const [postsToShow, setPostsToShow] = useState([])
     const [count, setCount] = useState(1)
+    const [clickNext, setClickNext] = useState(1)
+    const [isStartPage, setIsStartPage] = useState(true)
     const mDetail = useSelector(state => state.mDetail.allDetail)
-    var startPage = true
     var arrayForHoldingPosts = [];
     var fetchResult = [];
     var mCodeForm = new FormData();
 
     mCodeForm.append("moviecode", mDetail.code)
-    //mCodeForm.append("numclick","1") Key for choose page to scrape rotten
 
     const onStartLoopThroughPosts = (count) => {
         for (
@@ -129,12 +129,53 @@ function AllReviewsPage() {
         setPostsToShow(arrayForHoldingPosts);
     }
 
+    const onStartPageFetch = async () => {
+        for(
+            let i = 0;
+            i < postsPerPage;
+            i++
+        ) {
+            if (fetchResult.data[0].allReview[i] !== undefined) {
+                arrayForHoldingPosts.push(fetchResult.data[0].allReview[i]);
+            }
+        }
+        setPostsToShow(arrayForHoldingPosts);
+    }
+
+    const onClickNext = async () => {
+        await setClickNext(clickNext+1)
+        for(
+            let i = postsPerPage * clickNext;
+            i < (postsPerPage * clickNext)+postsPerPage;
+            i++
+        ) {
+            if (allSourceReview.allReview[i] !== undefined) {
+                arrayForHoldingPosts.push(allSourceReview.allReview[i]);
+            }
+        }
+        setPostsToShow(arrayForHoldingPosts);
+    }
+
+    const onClickPrev = async () => {
+        await setClickNext(clickNext-1)
+        for(
+            let i = postsPerPage * clickNext;
+            i < (postsPerPage * clickNext)+postsPerPage;
+            i++
+        ) {
+            if (allSourceReview.allReview[i] !== undefined) {
+                arrayForHoldingPosts.push(allSourceReview.allReview[i]);
+            }
+        }
+        setPostsToShow(arrayForHoldingPosts);
+    }
+
     const fetchImdbAllReview = async (getAllImdbReviewCode) => {
         console.log(getAllImdbReviewCode)
         fetchResult = await axios.post("http://localhost:5000/predict_allreview_imdb", getAllImdbReviewCode)
         await setAllSourceReview(fetchResult.data[0])
         setCount((prevCount) => prevCount + 1);
-        await onStartLoopThroughPosts(count)
+        await onStartPageFetch()
         console.log(fetchResult.data)
     }
 
@@ -156,15 +197,14 @@ function AllReviewsPage() {
         let source = location.search.split('?')[1]
         console.log(mDetail.code)
         setAllSource(source)
-        if(startPage === true){
+        if(isStartPage === true){
             if(source === "IMDb") {
                 await fetchImdbAllReview(mCodeForm)
             } else if (source === "Rotten") {
                 await fetchRottenAllReview(mCodeForm)
             }
-            startPage=false
         }
-
+        setIsStartPage(false)
     }, [])
 
     if(allSourceReview === null || allSource === null){
@@ -257,19 +297,31 @@ function AllReviewsPage() {
 
                     <Grid container spacing={3}>
                         <Grid item sm={6}>
-                            <ButtonBox>
-                                <ColorButton>
-                                    <Button className={classes.white} fullWidth={100}>
-                                        <SkipPreviousIcon/>
-                                        Prev
-                                    </Button>
-                                </ColorButton>
-                            </ButtonBox>
+
+                            {clickNext === 1 ? (
+                                <ButtonBox>
+                                    <ColorButton>
+                                        <Button className={classes.white} fullWidth={100} disabled={true} onClick={onClickPrev}>
+                                            <SkipPreviousIcon/>
+                                            Prev
+                                        </Button>
+                                    </ColorButton>
+                                </ButtonBox>
+                            ):(
+                                <ButtonBox>
+                                    <ColorButton>
+                                        <Button className={classes.white} fullWidth={100} onClick={onClickPrev}>
+                                            <SkipPreviousIcon/>
+                                            Prev
+                                        </Button>
+                                    </ColorButton>
+                                </ButtonBox>
+                            )}
                         </Grid>
                         <Grid item sm={6}>
                             <ButtonBox>
                                 <ColorButton>
-                                    <Button className={classes.white} fullWidth={100}>
+                                    <Button className={classes.white} fullWidth={100} onClick={onClickNext}>
                                         Next
                                         <SkipNextIcon/>
                                     </Button>
