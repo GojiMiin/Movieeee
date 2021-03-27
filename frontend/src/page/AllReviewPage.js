@@ -13,7 +13,7 @@ import {
 import {LinearProgress} from "@material-ui/core";
 import ContactBox from "../components/ContactBox";
 import AllReviewBox from "../components/AllReviewBox";
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import axios from "axios";
 import {useSelector} from "react-redux";
 import {useLocation} from "react-router-dom";
@@ -93,8 +93,10 @@ function AllReviewsPage() {
     const [allSource, setAllSource] = useState(null)
     const [postsToShow, setPostsToShow] = useState([])
     const [count, setCount] = useState(1)
-    const [clickNext, setClickNext] = useState(1)
+    const [clickNext, setClickNext] = useState(0)
+    const [isNext, setIsNext] = useState(true)
     const [isStartPage, setIsStartPage] = useState(true)
+    const [isFirstLoad, setIsFirstLoad] = useState(true)
     const mDetail = useSelector(state => state.mDetail.allDetail)
     var arrayForHoldingPosts = [];
     var fetchResult = [];
@@ -129,6 +131,16 @@ function AllReviewsPage() {
         setPostsToShow(arrayForHoldingPosts);
     }
 
+    const addMoreClickNext = () => {
+        setIsNext(true)
+        setClickNext(clickNext+1)
+    }
+
+    const minusClickNext = () => {
+        setIsNext(false)
+        setClickNext(clickNext-1)
+    }
+
     const onStartPageFetch = async () => {
         for(
             let i = 0;
@@ -143,7 +155,6 @@ function AllReviewsPage() {
     }
 
     const onClickNext = async () => {
-        await setClickNext(clickNext+1)
         for(
             let i = postsPerPage * clickNext;
             i < (postsPerPage * clickNext)+postsPerPage;
@@ -157,7 +168,6 @@ function AllReviewsPage() {
     }
 
     const onClickPrev = async () => {
-        await setClickNext(clickNext-1)
         for(
             let i = postsPerPage * clickNext;
             i < (postsPerPage * clickNext)+postsPerPage;
@@ -184,7 +194,7 @@ function AllReviewsPage() {
         fetchResult = await axios.post("http://localhost:5000/predict_allreview_rotten", getAllRottenReviewCode)
         setAllSourceReview(fetchResult.data[0])
         setCount((prevCount) => prevCount + 1);
-        onStartLoopThroughPosts(count)
+        await onStartPageFetch()
         console.log(fetchResult.data[0])
     }
 
@@ -205,7 +215,23 @@ function AllReviewsPage() {
             }
         }
         setIsStartPage(false)
+        setIsFirstLoad(false)
     }, [])
+
+    useEffect( () => {
+        if(isFirstLoad === false){
+            if(isNext){
+                console.log(clickNext)
+                onClickNext()
+            } else {
+                console.log(clickNext)
+                onClickPrev()
+            }
+
+        }
+    },[clickNext])
+
+    //TODO : Disable next btn at end of all review
 
     if(allSourceReview === null || allSource === null){
         return(
@@ -298,7 +324,7 @@ function AllReviewsPage() {
                     <Grid container spacing={3}>
                         <Grid item sm={6}>
 
-                            {clickNext === 1 ? (
+                            {clickNext === 0 ? (
                                 <ButtonBox>
                                     <ColorButton>
                                         <Button className={classes.white} fullWidth={100} disabled={true} onClick={onClickPrev}>
@@ -310,7 +336,7 @@ function AllReviewsPage() {
                             ):(
                                 <ButtonBox>
                                     <ColorButton>
-                                        <Button className={classes.white} fullWidth={100} onClick={onClickPrev}>
+                                        <Button className={classes.white} fullWidth={100} onClick={minusClickNext}>
                                             <SkipPreviousIcon/>
                                             Prev
                                         </Button>
@@ -321,7 +347,7 @@ function AllReviewsPage() {
                         <Grid item sm={6}>
                             <ButtonBox>
                                 <ColorButton>
-                                    <Button className={classes.white} fullWidth={100} onClick={onClickNext}>
+                                    <Button className={classes.white} fullWidth={100} onClick={addMoreClickNext}>
                                         Next
                                         <SkipNextIcon/>
                                     </Button>
