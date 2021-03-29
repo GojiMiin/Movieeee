@@ -116,6 +116,12 @@ function TopBar(props) {
         setAnchorEl2(null);
     };
 
+    const projNameClick = () => {
+        history.push({
+            pathname: "/"
+        })
+    }
+
     const yearClick = year => {
         history.push({
             pathname: "/search/"+year,
@@ -138,7 +144,7 @@ function TopBar(props) {
         <AppBar className={classes.root} position="relative">
             <Container>
                 <Toolbar className={classes.test}>
-                    <Typography className={classes.blue} edge="start" variant='h6'>
+                    <Typography className={classes.blue} edge="start" variant='h6' onClick={projNameClick}>
                         Movie Review Classification
                     </Typography>
                     <Box>

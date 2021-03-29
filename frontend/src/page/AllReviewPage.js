@@ -97,6 +97,7 @@ function AllReviewsPage() {
     const [isNext, setIsNext] = useState(true)
     const [isStartPage, setIsStartPage] = useState(true)
     const [isFirstLoad, setIsFirstLoad] = useState(true)
+    const [endOfReview, setEndOfReview] = useState(false)
     const mDetail = useSelector(state => state.mDetail.allDetail)
     var arrayForHoldingPosts = [];
     var fetchResult = [];
@@ -222,6 +223,9 @@ function AllReviewsPage() {
         if(isFirstLoad === false){
             if(isNext){
                 console.log(clickNext)
+                if((postsPerPage * clickNext)+postsPerPage>=allSourceReview.allReview.length){
+                    setEndOfReview(true)
+                }
                 onClickNext()
             } else {
                 console.log(clickNext)
@@ -343,25 +347,32 @@ function AllReviewsPage() {
                                     </ColorButton>
                                 </ButtonBox>
                             )}
+
                         </Grid>
                         <Grid item sm={6}>
-                            <ButtonBox>
-                                <ColorButton>
-                                    <Button className={classes.white} fullWidth={100} onClick={addMoreClickNext}>
-                                        Next
-                                        <SkipNextIcon/>
-                                    </Button>
-                                </ColorButton>
-                            </ButtonBox>
+
+                            {endOfReview === true ? (
+                                <ButtonBox>
+                                    <ColorButton>
+                                        <Button className={classes.white} fullWidth={100} disabled={true} onClick={addMoreClickNext}>
+                                            Next
+                                            <SkipNextIcon/>
+                                        </Button>
+                                    </ColorButton>
+                                </ButtonBox>
+                            ):(
+                                <ButtonBox>
+                                    <ColorButton>
+                                        <Button className={classes.white} fullWidth={100} onClick={addMoreClickNext}>
+                                            Next
+                                            <SkipNextIcon/>
+                                        </Button>
+                                    </ColorButton>
+                                </ButtonBox>
+                            )}
+
                         </Grid>
                     </Grid>
-                    {/*<ButtonBox>
-                        <ColorButton>
-                            <Button className={classes.white} fullWidth={100} onClick={handleShowMorePosts}>
-                                Load more
-                            </Button>
-                        </ColorButton>
-                    </ButtonBox>*/}
                 </Box>
             </Container>
 

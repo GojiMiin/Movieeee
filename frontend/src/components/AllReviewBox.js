@@ -63,7 +63,7 @@ function AllReviewBox(thisReview) {
     }
 
     return (
-        <FullReviewBox className={classes.blue} boxShadow={3} borderRadius={8} style={parseFloat(thisReview.thisReview.score.replace(/[^0-9.]/g, '')).toFixed(4) <= 0.5 ? { borderStyle:'solid',borderColor:'#ff6961'} : {borderStyle:'solid', borderColor:'#aeffda'}}>
+        <FullReviewBox className={classes.blue} boxShadow={3} borderRadius={8} style={parseFloat(thisReview.thisReview.score.replace(/[^0-9.]/g, '')).toFixed(2) <= 0.5 ? { borderStyle:'solid',borderColor:'#ff6961'} : {borderStyle:'solid', borderColor:'#aeffda'}}>
             <HeaderBox>
                 <Grid container>
                     <Grid item xs={6}>
@@ -95,7 +95,7 @@ function AllReviewBox(thisReview) {
                 <Grid container>
                     <Grid item xs={6}>
                         <Typography variant='subtitle2' align='left'>
-                            Predict Score : {parseFloat(thisReview.thisReview.score.replace(/[^0-9.]/g, '')).toFixed(4)}
+                            Predict Score : {parseFloat(thisReview.thisReview.score.replace(/[^0-9.]/g, '')).toFixed(2)}
                         </Typography>
                     </Grid>
                     <Grid item xs={6}>
