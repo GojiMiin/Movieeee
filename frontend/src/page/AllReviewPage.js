@@ -13,7 +13,7 @@ import {
 import {LinearProgress} from "@material-ui/core";
 import ContactBox from "../components/ContactBox";
 import AllReviewBox from "../components/AllReviewBox";
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import axios from "axios";
 import {useSelector} from "react-redux";
 import {useLocation} from "react-router-dom";
@@ -93,14 +93,17 @@ function AllReviewsPage() {
     const [allSource, setAllSource] = useState(null)
     const [postsToShow, setPostsToShow] = useState([])
     const [count, setCount] = useState(1)
+    const [clickNext, setClickNext] = useState(0)
+    const [isNext, setIsNext] = useState(true)
+    const [isStartPage, setIsStartPage] = useState(true)
+    const [isFirstLoad, setIsFirstLoad] = useState(true)
+    const [endOfReview, setEndOfReview] = useState(false)
     const mDetail = useSelector(state => state.mDetail.allDetail)
-    var startPage = true
     var arrayForHoldingPosts = [];
     var fetchResult = [];
     var mCodeForm = new FormData();
 
     mCodeForm.append("moviecode", mDetail.code)
-    //mCodeForm.append("numclick","1") Key for choose page to scrape rotten
 
     const onStartLoopThroughPosts = (count) => {
         for (
@@ -129,12 +132,61 @@ function AllReviewsPage() {
         setPostsToShow(arrayForHoldingPosts);
     }
 
+    const addMoreClickNext = () => {
+        setIsNext(true)
+        setClickNext(clickNext+1)
+    }
+
+    const minusClickNext = () => {
+        setIsNext(false)
+        setClickNext(clickNext-1)
+    }
+
+    const onStartPageFetch = async () => {
+        for(
+            let i = 0;
+            i < postsPerPage;
+            i++
+        ) {
+            if (fetchResult.data[0].allReview[i] !== undefined) {
+                arrayForHoldingPosts.push(fetchResult.data[0].allReview[i]);
+            }
+        }
+        setPostsToShow(arrayForHoldingPosts);
+    }
+
+    const onClickNext = async () => {
+        for(
+            let i = postsPerPage * clickNext;
+            i < (postsPerPage * clickNext)+postsPerPage;
+            i++
+        ) {
+            if (allSourceReview.allReview[i] !== undefined) {
+                arrayForHoldingPosts.push(allSourceReview.allReview[i]);
+            }
+        }
+        setPostsToShow(arrayForHoldingPosts);
+    }
+
+    const onClickPrev = async () => {
+        for(
+            let i = postsPerPage * clickNext;
+            i < (postsPerPage * clickNext)+postsPerPage;
+            i++
+        ) {
+            if (allSourceReview.allReview[i] !== undefined) {
+                arrayForHoldingPosts.push(allSourceReview.allReview[i]);
+            }
+        }
+        setPostsToShow(arrayForHoldingPosts);
+    }
+
     const fetchImdbAllReview = async (getAllImdbReviewCode) => {
         console.log(getAllImdbReviewCode)
         fetchResult = await axios.post("http://localhost:5000/predict_allreview_imdb", getAllImdbReviewCode)
         await setAllSourceReview(fetchResult.data[0])
         setCount((prevCount) => prevCount + 1);
-        await onStartLoopThroughPosts(count)
+        await onStartPageFetch()
         console.log(fetchResult.data)
     }
 
@@ -143,7 +195,7 @@ function AllReviewsPage() {
         fetchResult = await axios.post("http://localhost:5000/predict_allreview_rotten", getAllRottenReviewCode)
         setAllSourceReview(fetchResult.data[0])
         setCount((prevCount) => prevCount + 1);
-        onStartLoopThroughPosts(count)
+        await onStartPageFetch()
         console.log(fetchResult.data[0])
     }
 
@@ -156,16 +208,34 @@ function AllReviewsPage() {
         let source = location.search.split('?')[1]
         console.log(mDetail.code)
         setAllSource(source)
-        if(startPage === true){
+        if(isStartPage === true){
             if(source === "IMDb") {
                 await fetchImdbAllReview(mCodeForm)
             } else if (source === "Rotten") {
                 await fetchRottenAllReview(mCodeForm)
             }
-            startPage=false
         }
-
+        setIsStartPage(false)
+        setIsFirstLoad(false)
     }, [])
+
+    useEffect( () => {
+        if(isFirstLoad === false){
+            if(isNext){
+                console.log(clickNext)
+                if((postsPerPage * clickNext)+postsPerPage>=allSourceReview.allReview.length){
+                    setEndOfReview(true)
+                }
+                onClickNext()
+            } else {
+                console.log(clickNext)
+                onClickPrev()
+            }
+
+        }
+    },[clickNext])
+
+    //TODO : Disable next btn at end of all review
 
     if(allSourceReview === null || allSource === null){
         return(
@@ -257,33 +327,52 @@ function AllReviewsPage() {
 
                     <Grid container spacing={3}>
                         <Grid item sm={6}>
-                            <ButtonBox>
-                                <ColorButton>
-                                    <Button className={classes.white} fullWidth={100}>
-                                        <SkipPreviousIcon/>
-                                        Prev
-                                    </Button>
-                                </ColorButton>
-                            </ButtonBox>
+
+                            {clickNext === 0 ? (
+                                <ButtonBox>
+                                    <ColorButton>
+                                        <Button className={classes.white} fullWidth={100} disabled={true} onClick={onClickPrev}>
+                                            <SkipPreviousIcon/>
+                                            Prev
+                                        </Button>
+                                    </ColorButton>
+                                </ButtonBox>
+                            ):(
+                                <ButtonBox>
+                                    <ColorButton>
+                                        <Button className={classes.white} fullWidth={100} onClick={minusClickNext}>
+                                            <SkipPreviousIcon/>
+                                            Prev
+                                        </Button>
+                                    </ColorButton>
+                                </ButtonBox>
+                            )}
+
                         </Grid>
                         <Grid item sm={6}>
-                            <ButtonBox>
-                                <ColorButton>
-                                    <Button className={classes.white} fullWidth={100}>
-                                        Next
-                                        <SkipNextIcon/>
-                                    </Button>
-                                </ColorButton>
-                            </ButtonBox>
+
+                            {endOfReview === true ? (
+                                <ButtonBox>
+                                    <ColorButton>
+                                        <Button className={classes.white} fullWidth={100} disabled={true} onClick={addMoreClickNext}>
+                                            Next
+                                            <SkipNextIcon/>
+                                        </Button>
+                                    </ColorButton>
+                                </ButtonBox>
+                            ):(
+                                <ButtonBox>
+                                    <ColorButton>
+                                        <Button className={classes.white} fullWidth={100} onClick={addMoreClickNext}>
+                                            Next
+                                            <SkipNextIcon/>
+                                        </Button>
+                                    </ColorButton>
+                                </ButtonBox>
+                            )}
+
                         </Grid>
                     </Grid>
-                    {/*<ButtonBox>
-                        <ColorButton>
-                            <Button className={classes.white} fullWidth={100} onClick={handleShowMorePosts}>
-                                Load more
-                            </Button>
-                        </ColorButton>
-                    </ButtonBox>*/}
                 </Box>
             </Container>
 
