@@ -229,6 +229,7 @@ function AllReviewsPage() {
                 onClickNext()
             } else {
                 console.log(clickNext)
+                setEndOfReview(false)
                 onClickPrev()
             }
 
