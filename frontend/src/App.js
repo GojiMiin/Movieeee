@@ -24,6 +24,7 @@ function App() {
         <MuiThemeProvider theme={THEME}>
             <Switch>
                 <TopBar/>
+                <div style={{marginTop:'100px'}}></div>
                 <Route path="/" exact component={MainPage} />
                 <Route path="/movie/:movieCode" exact component={MoviePage} />
                 <Route path="/search/:keyword" exact component={SearchPage} />

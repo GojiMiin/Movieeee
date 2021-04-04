@@ -22,8 +22,7 @@ import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 const useStyles = makeStyles(theme => ({
     root: {
         margin:0,
-        backgroundColor: '#fff',
-        marginBottom: '60px',
+        backgroundColor: '#f2f5f3',
         boxShadow: "none"
     },
     test: {
@@ -141,7 +140,7 @@ function TopBar(props) {
     }
 
     return (
-        <AppBar className={classes.root} position="relative">
+        <AppBar className={classes.root} position="fixed">
             <Container>
                 <Toolbar className={classes.test}>
                     <Typography className={classes.blue} edge="start" variant='h6' onClick={projNameClick}>

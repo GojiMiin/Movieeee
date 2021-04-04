@@ -119,43 +119,35 @@ function MoviePage() {
                             <img style={{ width: '100%', height: 'auto', borderRadius: '8px'}} src={movieDetail.poster} />
                         </Grid>
                         <Grid item xs={8} className={classes.directionCenter}>
-                                <div style={{margin:"20px"}}>
-                                    <PosterBox boxShadow={3} borderRadius={8}>
+                                <div style={{margin:"20px", display:'flex', justifyContent: 'center', gap: '12px'}}>  {/* Gap between flex child */}
+                                    <PosterBox boxShadow={3} borderRadius={8} style={{flex: '0 0 48.5%'}}> {/* Flex basis size */}
                                         <Container>
-                                            <HeaderBox>
-                                                <Typography className={classes.blue} variant='h6' align='left'>
-                                                    Score
+                                            <Box padding={2}>
+                                                <Typography className={classes.blue} variant='h6'>
+                                                    IMDB
                                                 </Typography>
-                                            </HeaderBox>
+                                            </Box>
+                                            <Box style={{padding:"0px 0px 12px 0px"}}>
+                                                <Typography className={classes.blue} variant={'body2'}>
+                                                    {imdbPageReview.imdbScore}
+                                                </Typography>
+                                            </Box>
                                         </Container>
+                                    </PosterBox>
+                                    <PosterBox boxShadow={3} borderRadius={8} style={{flex: '0 0 48.5%'}}> {/* Flex basis size */}
                                         <Container>
-                                            <Grid container>
-                                                <Grid item xs={6}>
-                                                    <Box padding={1}>
-                                                        <Typography className={classes.blue} variant='h6'>
-                                                            IMDB
-                                                        </Typography>
-                                                    </Box>
-                                                    <Box style={{padding:"0px 0px 12px 0px"}}>
-                                                        <Typography className={classes.blue} variant={'body2'}>
-                                                            {imdbPageReview.imdbScore}
-                                                        </Typography>
-                                                    </Box>
-                                                </Grid>
-                                                <Grid item xs={6}>
-                                                    <Box padding={1}>
-                                                        <Typography className={classes.blue} variant='h6'>
-                                                            Rotten
-                                                        </Typography>
-                                                    </Box>
-                                                    <Box style={{padding:"0px 0px 12px 0px"}}>
-                                                        <Typography className={classes.blue} variant={'body2'}>
-                                                            {rottenPageReview.rottenScore}
-                                                        </Typography>
-                                                    </Box>
-                                                </Grid>
-                                            </Grid>
+                                            <Box padding={2}>
+                                                <Typography className={classes.blue} variant='h6'>
+                                                    Rotten
+                                                </Typography>
+                                            </Box>
+                                            <Box style={{padding:"0px 0px 12px 0px"}}>
+                                                <Typography className={classes.blue} variant={'body2'}>
+                                                    {rottenPageReview.rottenScore}
+                                                </Typography>
+                                            </Box>
                                         </Container>
+
                                     </PosterBox>
                                 </div>
                                 <div style={{margin:"20px"}}>
