@@ -8,6 +8,12 @@ const useStyles = makeStyles({
 
     blue:{
         color:"#485477"
+    },
+    readmoreHover:{
+        '&:hover':{
+            cursor: 'pointer',
+            textDecoration: 'underline'
+        },
     }
 });
 const HeaderBox = withStyles({
@@ -99,7 +105,7 @@ function AllReviewBox(thisReview) {
                         </Typography>
                     </Grid>
                     <Grid item xs={6}>
-                        <Typography variant='subtitle2' align='right' onClick={() => readMoreReview(thisReview.thisReview)}>
+                        <Typography className={classes.readmoreHover} variant='subtitle2' align='right' onClick={() => readMoreReview(thisReview.thisReview)}>
                             Read More
                         </Typography>
                     </Grid>

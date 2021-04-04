@@ -21,6 +21,12 @@ const useStyles = makeStyles({
     },
     white: {
         color: "white"
+    },
+    readmoreHover:{
+        '&:hover':{
+            cursor: 'pointer',
+            textDecoration: 'underline'
+        },
     }
 });
 const HeaderBox = withStyles({
@@ -110,10 +116,13 @@ function ReviewBoxImdbs({onePageReview}) {
                                 </Typography>
                             </Grid>
                             <Grid item xs={3}>
-                                <ButtonBlue>
-                                    <Typography className={classes.white} variant={'subtitle2'} onClick={() => toImdbAllReviewPage()}>
-                                        IMDB
-                                    </Typography>
+                                <ButtonBlue variant="raised">
+                                    <Link href={"/allreviews/"+movieDetail.code+"?IMDb"} style={{ textDecoration: 'none'}}>
+                                        <Typography className={classes.white} variant={'subtitle2'} onClick={() => toImdbAllReviewPage()}>
+                                            IMDB
+                                        </Typography>
+                                    </Link>
+
                                 </ButtonBlue>
                             </Grid>
                         </Grid>
@@ -156,7 +165,7 @@ function ReviewBoxImdbs({onePageReview}) {
                                     </Grid>
                                     <Grid item xs={4}>
                                         <BottomBox>
-                                            <Typography variant='subtitle2' align='right' onClick={() => readMoreReview(oneReview)}>
+                                            <Typography className={classes.readmoreHover} variant='subtitle2' align='right' onClick={() => readMoreReview(oneReview)}>
                                                 Read More
                                             </Typography>
                                         </BottomBox>

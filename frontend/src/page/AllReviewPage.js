@@ -293,7 +293,25 @@ function AllReviewsPage() {
                                     </Typography>
                                 </HeaderBox>
                                 <TextBox>
-                                    <BorderLinearProgress variant="determinate" value={(allSourceReview.positiveReview/allSourceReview.reviewCount)*100} />
+                                    <Box position="relative">
+                                        <Box
+                                            top={0}
+                                            left={0}
+                                            bottom={0}
+                                            right={0}
+                                            position="absolute"
+                                            display="flex"
+                                            alignItems="center"
+                                            justifyContent="center"
+                                            style={{zIndex:1}}
+                                        >
+                                            <Typography variant="caption" component="div" className={classes.white}>
+                                                {allSourceReview.positiveReview}
+                                            </Typography>
+                                        </Box>
+                                        <BorderLinearProgress variant="determinate" value={(allSourceReview.positiveReview/allSourceReview.reviewCount)*100} />
+
+                                    </Box>
                                 </TextBox>
                                 <TextBox>
                                     <Typography variant={'body2'} align={'left'}>
