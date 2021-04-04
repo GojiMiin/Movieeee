@@ -9,7 +9,7 @@ import {
     MenuItem,
     makeStyles,
     Box,
-    InputAdornment, IconButton
+    InputAdornment, IconButton, Link
 } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import { withStyles } from "@material-ui/core";
@@ -32,6 +32,14 @@ const useStyles = makeStyles(theme => ({
     blue: {
         color: "#485477",
         fontWeight: "bold"
+    },
+    blueHover: {
+        color: "#485477",
+        fontWeight: "bold",
+        '&:hover':{
+            cursor: 'pointer',
+
+        }
     },
     cyan: {
         color: "#8BABBE"
@@ -143,9 +151,17 @@ function TopBar(props) {
         <AppBar className={classes.root} position="fixed">
             <Container>
                 <Toolbar className={classes.test}>
-                    <Typography className={classes.blue} edge="start" variant='h6' onClick={projNameClick}>
-                        Movie Review Classification
-                    </Typography>
+                    <Link href={"/"} style={{ textDecoration: 'none'}}>
+                        <Typography
+                            className={classes.blueHover}
+                            edge="start"
+                            variant='h6'
+                            onClick={projNameClick}
+                        >
+                            Movie Review Classification
+                        </Typography>
+                    </Link>
+
                     <Box>
                         <Button aria-controls="menu-year" aria-haspopup="true" onClick={e => setAnchorEl(e.currentTarget)} className={classes.textTopbar}>
                             <TypoStyled variant={'subtitle2'} className={classes.blue}>
