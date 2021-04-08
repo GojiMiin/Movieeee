@@ -60,7 +60,7 @@ const ResultDetailBox = withStyles({
     }
 })(Box);
 
-function ResultBoxs({mName, mPoster, mCate, mCode, mTime, mRate, mYear}) {
+function ResultBoxs({mName, mPoster, mCate, mCode, mTime, mRate, mYear, mDes}) {
     const classes = useStyles()
     const history = useHistory()
     const toMovieReviewPage = () => {
@@ -112,7 +112,7 @@ function ResultBoxs({mName, mPoster, mCate, mCode, mTime, mRate, mYear}) {
                             </TextBox>
                         <TextBox>
                             <Typography align='left' variant={'body2'} className={classes.blue}>
-                                After being held captive in an Afghan cave, billionaire engineer Tony Stark creates a unique weaponized suit of armor to fight evil.
+                                {mDes}
                             </Typography>
                         </TextBox>
 

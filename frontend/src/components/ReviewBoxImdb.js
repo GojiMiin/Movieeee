@@ -132,7 +132,7 @@ function ReviewBoxImdbs({onePageReview}) {
                 <TextBox>
                     <Grid container spacing={3}>
                         {onePageReview.allReview.map((oneReview) =>
-                            <Grid item xs={6} key={oneReview.score}> {/*imdb review box*/}
+                            <Grid item xs={6} key={oneReview.title}> {/*imdb review box*/}
                             <ReviewTextBox boxShadow={3} borderRadius={8} style={parseFloat(oneReview.score.replace(/[^0-9.]/g, '')).toFixed(2) <= 0.5 ? { borderStyle:'solid',borderColor:'#ff6961'} : {borderStyle:'solid', borderColor:'#aeffda'}}>
                                 <Grid container>
                                     <Grid item xs={9}>
