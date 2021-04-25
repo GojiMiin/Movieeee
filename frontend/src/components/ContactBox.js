@@ -53,7 +53,8 @@ function ContactBoxs() {
                 </HeaderBox>
                 <TextBox>
                     <Typography className={classes.white} variant='body1'>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean at eleifend turpis. Sed efficitur tincidunt lacus in volutpat. Nullam vitae dapibus sapien. Curabitur ac nunc non lacus faucibus efficitur ut quis ex. Etiam pharetra, ipsum a blandit elementum
+                        Supasak Premkusolchai Email : pornajahahabuak@gmail.com <br/>
+                        Supachet  Arunsuksiri Email : got.j@windowslive.com
                     </Typography>
                 </TextBox>
             </ContactBox>

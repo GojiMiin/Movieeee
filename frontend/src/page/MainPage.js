@@ -89,7 +89,7 @@ function MainPage() {
                     </HeaderBox>
                     <TextBox>
                         <Typography variant='body1' className={classes.white}>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean at eleifend turpis. Sed efficitur tincidunt lacus in volutpat. Nullam vitae dapibus sapien. Curabitur ac nunc non lacus faucibus efficitur ut quis ex. Etiam pharetra, ipsum a blandit elementum, arcu ex gravida nisl, et pharetra felis sapien vel diam. Sed laoreet facilisis lobortis. Curabitur et tellus velit. Quisque bibendum, felis fringilla aliquet fermentum, tellus felis auctor velit, at faucibus magna felis et dolor. Praesent vel nibh sapien. Curabitur cursus turpis ut egestas accumsan. Nullam ante ante, interdum sit amet porta nec, fringilla non ex. In eget elementum massa, at consequat ligula.
+                            โปรเจ็คนี้เป็นโปรเจ็คเกี่ยวกับการทำ Natural Process Model สำหรับวิเคราะห์คำวิจารณ์ภาพยนตร์จากเว็บไซด์ IMDb และ RottenTomatoes <br/> โดยทำการเลือก Model 3 ชนิดมาทดสอบคือ RNN, LSTM และ GRU แล้วทำการเลือกโมเดลที่มีประสิทธิภาพดีที่สุดมาพัฒนาเป็นเว็บไซด์สำหรับแสดงผล
                         </Typography>
                     </TextBox>
                 </AboutProjectBox>
