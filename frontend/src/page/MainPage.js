@@ -89,7 +89,9 @@ function MainPage() {
                     </HeaderBox>
                     <TextBox>
                         <Typography variant='body1' className={classes.white}>
-                            โปรเจ็คนี้เป็นโปรเจ็คเกี่ยวกับการทำ Natural Process Model สำหรับวิเคราะห์คำวิจารณ์ภาพยนตร์จากเว็บไซด์ IMDb และ RottenTomatoes <br/> โดยทำการเลือก Model 3 ชนิดมาทดสอบคือ RNN, LSTM และ GRU แล้วทำการเลือกโมเดลที่มีประสิทธิภาพดีที่สุดมาพัฒนาเป็นเว็บไซด์สำหรับแสดงผล
+                            <p>
+                                    โปรเจ็คนี้เป็นโปรเจ็คเกี่ยวกับการทำ Natural language processing model สำหรับวิเคราะห์คำวิจารณ์ภาพยนตร์จากเว็บไซด์ IMDb และ RottenTomatoes โดยทำการเลือก Model 3 ชนิดมาทดสอบคือ RNN, LSTM และ GRU แล้วทำการเลือกโมเดลที่มีประสิทธิภาพดีที่สุดมาพัฒนาเป็นเว็บไซด์สำหรับแสดงผล
+                            </p>
                         </Typography>
                     </TextBox>
                 </AboutProjectBox>

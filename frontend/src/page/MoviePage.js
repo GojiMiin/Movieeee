@@ -124,7 +124,7 @@ function MoviePage() {
                                         <Container>
                                             <Box padding={2}>
                                                 <Typography className={classes.blue} variant='h6'>
-                                                    IMDB
+                                                    IMDb
                                                 </Typography>
                                             </Box>
                                             <Box style={{padding:"0px 0px 12px 0px"}}>
@@ -138,7 +138,7 @@ function MoviePage() {
                                         <Container>
                                             <Box padding={2}>
                                                 <Typography className={classes.blue} variant='h6'>
-                                                    Rotten
+                                                    Rotten Tomatoes
                                                 </Typography>
                                             </Box>
                                             <Box style={{padding:"0px 0px 12px 0px"}}>
