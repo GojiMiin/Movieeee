@@ -33,6 +33,11 @@ const useStyles = makeStyles({
         display:"flex",
         alignItems:"center"
     },
+    directionCenter: {
+        display:"flex",
+        flexDirection:"column",
+        justifyContent:"center",
+    },
     blue:{
         color:"#485477"
     },
@@ -251,11 +256,32 @@ function AllReviewsPage() {
 
             <Container className={classes.center}>
                 <Box width={800}>
-                    <TextBox>
-                        <Typography className={classes.blue} variant={'h6'} align={'left'}>
-                            All review from {allSource}
-                        </Typography>
-                    </TextBox>
+                    <Grid container spacing={3}>
+                        <Grid item xs={6}>
+                            <TextBox>
+                                <Typography className={classes.blue} variant={'h6'} align={'left'}>
+                                    All review from {allSource}
+                                </Typography>
+                            </TextBox>
+                        </Grid>
+
+                        <Grid item xs={6} className={classes.directionCenter}>
+                            <Box display="flex">
+                                <Button fullWidth={20}>
+                                    All Review
+                                </Button>
+                                <Button fullWidth={20}>
+                                    Positive Review Only
+                                </Button>
+                                <Button fullWidth={20}>
+                                    Negative Review Only
+                                </Button>
+                            </Box>
+                        </Grid>
+
+                    </Grid>
+
+
                 </Box>
             </Container>
 
