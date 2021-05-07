@@ -20,6 +20,12 @@ import {useLocation} from "react-router-dom";
 import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
 import SkipNextIcon from '@material-ui/icons/SkipNext';
 
+const styles = theme => ({
+    disabledButton: {
+        backgroundColor: theme.palette.primary || 'red'
+    }
+});
+
 const useStyles = makeStyles({
     root: {
         backgroundColor: '#fff',
@@ -43,7 +49,28 @@ const useStyles = makeStyles({
     },
     white: {
         color: "white"
+    },
+    postiveBox:{
+        color: '#3FA987',
+        borderStyle: 'solid',
+        borderWidth: '2px',
+        borderColor: '#3FA987',
+        borderRadius: '10px'
+    },
+    negativeBox:{
+        color: '#FF6961',
+        borderStyle: 'solid',
+        borderWidth: '2px',
+        borderColor: '#FF6961',
+        borderRadius: '10px'
+    },
+    allreviewBox:{
+        borderStyle: 'solid',
+        borderWidth: '2px',
+        borderColor: '#000',
+        borderRadius: '10px'
     }
+
 
 });
 
@@ -106,7 +133,7 @@ function AllReviewsPage() {
     const [keepAllReview, setKeepAllReview] = useState([])
     const [keepPositiveReview, setKeepPositiveReview] = useState([])
     const [keepNegativeReview, setKeepNegativeReview] = useState([])
-    const [btnChoose, setBtnChoose] = useState(null)
+    const [btnChoose, setBtnChoose] = useState('full')
     const [reviewForShowNum, setReviewForShowNum] = useState(null)
     const mDetail = useSelector(state => state.mDetail.allDetail)
     var arrayForHoldingPosts = [];
@@ -299,27 +326,55 @@ function AllReviewsPage() {
         <div className="AllReviewsPage">
 
             <Container className={classes.center}>
-                <Box width={800}>
+                <Box width={800} style={{marginBottom:'12px'}}>
                     <Grid container spacing={3}>
                         <Grid item xs={6}>
-                            <TextBox>
-                                <Typography className={classes.blue} variant={'h6'} align={'left'}>
-                                    All review from {allSource}
-                                </Typography>
-                            </TextBox>
+                            <Box display='flex' justifyContent='space-between'>
+                                <TextBox>
+                                    <Typography className={classes.blue} variant={'h6'} align={'left'}>
+                                        All review from {allSource}
+                                    </Typography>
+                                </TextBox>
+                                <TextBox>
+                                    <Typography className={classes.blue} variant={'h6'} align={'right'}>
+                                        Filter :
+                                    </Typography>
+                                </TextBox>
+                            </Box>
+
                         </Grid>
 
                         <Grid item xs={6} className={classes.directionCenter}>
-                            <Box display="flex">
-                                <Button fullWidth={20} onClick={onClickFullReviewFilter}>
-                                    All Review
-                                </Button>
-                                <Button fullWidth={20} onClick={onClickPositiveReviewFilter}>
-                                    Positive Review Only
-                                </Button>
-                                <Button fullWidth={20} onClick={onClickNegativeReviewFilter}>
-                                    Negative Review Only
-                                </Button>
+                            <Box display="flex" style={{gap:'12px'}}>
+
+                                { btnChoose=='full' ? (
+                                    <Button className={classes.allreviewBox} fullWidth={100} disabled={true} onClick={onClickFullReviewFilter}>
+                                        All Review
+                                    </Button>
+                                ):(
+                                    <Button className={classes.allreviewBox} fullWidth={100} onClick={onClickFullReviewFilter}>
+                                        All Review
+                                    </Button>
+                                )}
+                                { btnChoose=='positive' ? (
+                                    <Button className={classes.postiveBox} fullWidth={100} disabled={true} onClick={onClickPositiveReviewFilter}>
+                                        Positive Review Only
+                                    </Button>
+                                ):(
+                                    <Button className={classes.postiveBox} fullWidth={100} onClick={onClickPositiveReviewFilter}>
+                                        Positive Review Only
+                                    </Button>
+                                )}
+                                { btnChoose=='negative' ? (
+                                    <Button className={classes.negativeBox} fullWidth={100} disabled={true} onClick={onClickNegativeReviewFilter}>
+                                        Negative Review Only
+                                    </Button>
+                                ):(
+                                    <Button className={classes.negativeBox} fullWidth={100} onClick={onClickNegativeReviewFilter}>
+                                        Negative Review Only
+                                    </Button>
+                                )}
+
                             </Box>
                         </Grid>
 
@@ -359,7 +414,7 @@ function AllReviewsPage() {
                             <ColorBox boxShadow={3} borderRadius={8} height={'100%'} display={'flex'} flexDirection={'column'} justifyContent={'center'}>
                                 <HeaderBox>
                                     <Typography variant={'h6'} align={'left'}>
-                                        From {allSourceReview.reviewCount} Reviews
+                                        Result from model
                                     </Typography>
                                 </HeaderBox>
                                 <TextBox>

@@ -120,30 +120,30 @@ function MoviePage() {
                         </Grid>
                         <Grid item xs={8} className={classes.directionCenter}>
                                 <div style={{margin:"20px", display:'flex', justifyContent: 'center', gap: '12px'}}>  {/* Gap between flex child */}
-                                    <PosterBox boxShadow={3} borderRadius={8} style={{flex: '0 0 48.5%'}}> {/* Flex basis size */}
+                                    <PosterBox display='flex' flexDirection="column" justifyContent="center" boxShadow={3} borderRadius={8} style={{flex: '0 0 48.5%'}}> {/* Flex basis size */}
                                         <Container>
                                             <Box padding={2}>
-                                                <Typography className={classes.blue} variant='h6'>
-                                                    IMDb
+                                                <Typography className={classes.blue} variant='subtitle2'>
+                                                    Score from IMDb
                                                 </Typography>
                                             </Box>
                                             <Box style={{padding:"0px 0px 12px 0px"}}>
                                                 <Typography className={classes.blue} variant={'body2'}>
-                                                    {imdbPageReview.imdbScore}
+                                                    {imdbPageReview.imdbScore}/10 ⭐
                                                 </Typography>
                                             </Box>
                                         </Container>
                                     </PosterBox>
-                                    <PosterBox boxShadow={3} borderRadius={8} style={{flex: '0 0 48.5%'}}> {/* Flex basis size */}
+                                    <PosterBox display='flex' flexDirection="column" justifyContent="center" boxShadow={3} borderRadius={8} style={{flex: '0 0 48.5%'}}> {/* Flex basis size */}
                                         <Container>
                                             <Box padding={2}>
-                                                <Typography className={classes.blue} variant='h6'>
-                                                    Rotten Tomatoes
+                                                <Typography className={classes.blue} variant='subtitle2'>
+                                                    Score from Rotten Tomatoes
                                                 </Typography>
                                             </Box>
                                             <Box style={{padding:"0px 0px 12px 0px"}}>
                                                 <Typography className={classes.blue} variant={'body2'}>
-                                                    {rottenPageReview.rottenScore}
+                                                    {rottenPageReview.rottenScore} 🍅
                                                 </Typography>
                                             </Box>
                                         </Container>
