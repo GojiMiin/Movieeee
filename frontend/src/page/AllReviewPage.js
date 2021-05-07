@@ -97,45 +97,25 @@ function AllReviewsPage() {
     const [allSourceReview, setAllSourceReview] = useState(null)
     const [allSource, setAllSource] = useState(null)
     const [postsToShow, setPostsToShow] = useState([])
-    const [count, setCount] = useState(1)
     const [clickNext, setClickNext] = useState(0)
     const [isNext, setIsNext] = useState(true)
     const [isStartPage, setIsStartPage] = useState(true)
     const [isFirstLoad, setIsFirstLoad] = useState(true)
     const [endOfReview, setEndOfReview] = useState(false)
+    const [allReviewForShow, setAllReviewForShow] = useState([])
+    const [keepAllReview, setKeepAllReview] = useState([])
+    const [keepPositiveReview, setKeepPositiveReview] = useState([])
+    const [keepNegativeReview, setKeepNegativeReview] = useState([])
+    const [btnChoose, setBtnChoose] = useState(null)
+    const [reviewForShowNum, setReviewForShowNum] = useState(null)
     const mDetail = useSelector(state => state.mDetail.allDetail)
     var arrayForHoldingPosts = [];
     var fetchResult = [];
+    var positiveReview = [];
+    var negativeReview = [];
     var mCodeForm = new FormData();
 
     mCodeForm.append("moviecode", mDetail.code)
-
-    const onStartLoopThroughPosts = (count) => {
-        for (
-            let i = count * postsPerPage - postsPerPage;
-            i < postsPerPage * count;
-            i++
-        ) {
-            if (fetchResult.data[0].allReview[i] !== undefined) {
-                arrayForHoldingPosts.push(fetchResult.data[0].allReview[i]);
-            }
-        }
-        setPostsToShow(arrayForHoldingPosts);
-    }
-
-    const loadMoreLoopThroughPosts = (count) => {
-        console.log(arrayForHoldingPosts)
-        for (
-            let i = count * postsPerPage - postsPerPage;
-            i < postsPerPage * count;
-            i++
-        ) {
-            if (allSourceReview.allReview[i] !== undefined) {
-                arrayForHoldingPosts.push(allSourceReview.allReview[i]);
-            }
-        }
-        setPostsToShow(arrayForHoldingPosts);
-    }
 
     const addMoreClickNext = () => {
         setIsNext(true)
@@ -145,6 +125,63 @@ function AllReviewsPage() {
     const minusClickNext = () => {
         setIsNext(false)
         setClickNext(clickNext-1)
+    }
+
+    const onFilterReview = async () => {
+        for(
+            let i = 0;
+            i < postsPerPage;
+            i++
+        ) {
+            if (allReviewForShow[i] !== undefined) {
+                arrayForHoldingPosts.push(allReviewForShow[i]);
+            }
+        }
+        setPostsToShow(arrayForHoldingPosts);
+    }
+
+    const onClickNext = async () => {
+        for(
+            let i = postsPerPage * clickNext;
+            i < (postsPerPage * clickNext)+postsPerPage;
+            i++
+        ) {
+            if (allReviewForShow[i] !== undefined) {
+                arrayForHoldingPosts.push(allReviewForShow[i]);
+            }
+        }
+        setPostsToShow(arrayForHoldingPosts);
+    }
+
+    const onClickPrev = async () => {
+        for(
+            let i = postsPerPage * clickNext;
+            i < (postsPerPage * clickNext)+postsPerPage;
+            i++
+        ) {
+            if (allReviewForShow[i] !== undefined) {
+                arrayForHoldingPosts.push(allReviewForShow[i]);
+            }
+        }
+        setPostsToShow(arrayForHoldingPosts);
+    }
+
+    const onClickFullReviewFilter = async () => {
+        await setAllReviewForShow(keepAllReview)
+        await setReviewForShowNum(keepAllReview.length)
+        await setBtnChoose("full")
+    }
+
+    const onClickPositiveReviewFilter = async () => {
+        await setAllReviewForShow(keepPositiveReview)
+        await setReviewForShowNum(keepPositiveReview.length)
+        await setBtnChoose("positive")
+    }
+
+    const onClickNegativeReviewFilter = async () => {
+        await setAllReviewForShow(keepNegativeReview)
+        await setReviewForShowNum(keepNegativeReview.length)
+        await setBtnChoose("negative")
     }
 
     const onStartPageFetch = async () => {
@@ -160,54 +197,41 @@ function AllReviewsPage() {
         setPostsToShow(arrayForHoldingPosts);
     }
 
-    const onClickNext = async () => {
+    const onFirstLoadPage = async (fetchResult) => {
+        await setAllSourceReview(fetchResult.data[0])
+        setAllReviewForShow(fetchResult.data[0].allReview)
+        setKeepAllReview(fetchResult.data[0].allReview)
+        await onStartPageFetch()
+        console.log(fetchResult.data[0].allReview)
         for(
-            let i = postsPerPage * clickNext;
-            i < (postsPerPage * clickNext)+postsPerPage;
+            let i=0;
+            i<fetchResult.data[0].allReview.length;
             i++
         ) {
-            if (allSourceReview.allReview[i] !== undefined) {
-                arrayForHoldingPosts.push(allSourceReview.allReview[i]);
+            if(parseFloat(fetchResult.data[0].allReview[i].score)<0.5){
+                negativeReview.push(fetchResult.data[0].allReview[i])
+            }
+            else if (parseFloat(fetchResult.data[0].allReview[i].score)>0.5){
+                positiveReview.push(fetchResult.data[0].allReview[i])
             }
         }
-        setPostsToShow(arrayForHoldingPosts);
-    }
-
-    const onClickPrev = async () => {
-        for(
-            let i = postsPerPage * clickNext;
-            i < (postsPerPage * clickNext)+postsPerPage;
-            i++
-        ) {
-            if (allSourceReview.allReview[i] !== undefined) {
-                arrayForHoldingPosts.push(allSourceReview.allReview[i]);
-            }
-        }
-        setPostsToShow(arrayForHoldingPosts);
+        setKeepPositiveReview(positiveReview)
+        setKeepNegativeReview(negativeReview)
+        setReviewForShowNum(fetchResult.data[0].allReview.length)
     }
 
     const fetchImdbAllReview = async (getAllImdbReviewCode) => {
         console.log(getAllImdbReviewCode)
         fetchResult = await axios.post("http://localhost:5000/predict_allreview_imdb", getAllImdbReviewCode)
-        await setAllSourceReview(fetchResult.data[0])
-        setCount((prevCount) => prevCount + 1);
-        await onStartPageFetch()
-        console.log(fetchResult.data)
+        await onFirstLoadPage(fetchResult)
     }
 
     const fetchRottenAllReview = async (getAllRottenReviewCode) => {
         console.log(getAllRottenReviewCode)
         fetchResult = await axios.post("http://localhost:5000/predict_allreview_rotten", getAllRottenReviewCode)
-        setAllSourceReview(fetchResult.data[0])
-        setCount((prevCount) => prevCount + 1);
-        await onStartPageFetch()
-        console.log(fetchResult.data[0])
+        await onFirstLoadPage(fetchResult)
     }
 
-    const handleShowMorePosts = () => {
-        setCount((prevCount) => prevCount + 1);
-        loadMoreLoopThroughPosts(count);
-    };
 
     useEffect(async () => {
         let source = location.search.split('?')[1]
@@ -228,7 +252,7 @@ function AllReviewsPage() {
         if(isFirstLoad === false){
             if(isNext){
                 console.log(clickNext)
-                if((postsPerPage * clickNext)+postsPerPage>=allSourceReview.allReview.length){
+                if((postsPerPage * clickNext)+postsPerPage>=reviewForShowNum){
                     setEndOfReview(true)
                 }
                 onClickNext()
@@ -241,9 +265,29 @@ function AllReviewsPage() {
         }
     },[clickNext])
 
-    //TODO : Disable next btn at end of all review
+    useEffect(async () => {
+        if(isFirstLoad === false){
+            switch (btnChoose) {
+                case "positive":
+                    await setAllReviewForShow(keepPositiveReview)
+                    break;
+                case "negative":
+                    await setAllReviewForShow(keepNegativeReview)
+                    break;
+                case "full":
+                    await setAllReviewForShow(keepAllReview)
+                    break;
+                default:
+                    await setAllReviewForShow(keepAllReview)
+            }
+            console.log(allReviewForShow)
+            onFilterReview()
+        }
+    }, [btnChoose])
 
-    if(allSourceReview === null || allSource === null){
+
+
+    if(allSourceReview === null || allSource === null || allReviewForShow === null){
         return(
             <div style={{position:'absolute',top:'45%',left:'50%'}}>
                 <CircularProgress />
@@ -267,13 +311,13 @@ function AllReviewsPage() {
 
                         <Grid item xs={6} className={classes.directionCenter}>
                             <Box display="flex">
-                                <Button fullWidth={20}>
+                                <Button fullWidth={20} onClick={onClickFullReviewFilter}>
                                     All Review
                                 </Button>
-                                <Button fullWidth={20}>
+                                <Button fullWidth={20} onClick={onClickPositiveReviewFilter}>
                                     Positive Review Only
                                 </Button>
-                                <Button fullWidth={20}>
+                                <Button fullWidth={20} onClick={onClickNegativeReviewFilter}>
                                     Negative Review Only
                                 </Button>
                             </Box>
