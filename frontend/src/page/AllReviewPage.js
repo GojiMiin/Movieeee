@@ -414,36 +414,46 @@ function AllReviewsPage() {
                             <ColorBox boxShadow={3} borderRadius={8} height={'100%'} display={'flex'} flexDirection={'column'} justifyContent={'center'}>
                                 <HeaderBox>
                                     <Typography variant={'h6'} align={'left'}>
-                                        Result from model
+                                        Result from our classification model
                                     </Typography>
                                 </HeaderBox>
                                 <TextBox>
                                     <Box position="relative">
-                                        <Box
-                                            top={0}
-                                            left={0}
-                                            bottom={0}
-                                            right={0}
-                                            position="absolute"
-                                            display="flex"
-                                            alignItems="center"
-                                            justifyContent="center"
-                                            style={{zIndex:1}}
-                                        >
-                                            <Typography variant="caption" component="div" className={classes.white}>
-                                                {allSourceReview.positiveReview}
+                                        <Box display={'flex'} justifyContent={'space-between'}>
+                                            <Typography style={{color: '#3FA987'}}>{
+                                                btnChoose=='full' ? (allSourceReview.positiveReview)
+                                                    : btnChoose=='positive' ? (allSourceReview.positiveReview)
+                                                : ((0))
+                                            }
+
+                                            </Typography>
+                                            <Typography style={{color: '#FF6961'}}>
+                                                {btnChoose=='full' ? (allSourceReview.negativeReview)
+                                                    : btnChoose=='negative' ? (allSourceReview.negativeReview)
+                                                        : ((0))}
                                             </Typography>
                                         </Box>
-                                        <BorderLinearProgress variant="determinate" value={(allSourceReview.positiveReview/allSourceReview.reviewCount)*100} />
+                                        <BorderLinearProgress variant="determinate" value={
+                                            btnChoose=='full' ? ((allSourceReview.positiveReview/allSourceReview.reviewCount)*100)
+                                                : btnChoose=='positive' ? (100)
+                                                : ((0))} />
 
                                     </Box>
                                 </TextBox>
                                 <TextBox>
                                     <Typography variant={'body2'} align={'left'}>
-                                        Positive reviews calculate as {((allSourceReview.positiveReview/allSourceReview.reviewCount)*100).toFixed(2)} % of all reviews
+                                        Positive reviews calculate as {
+                                        btnChoose=='full' ? ((allSourceReview.positiveReview/allSourceReview.reviewCount)*100).toFixed(2)
+                                            : btnChoose=='positive' ? (100)
+                                            : ((0))
+                                    } % of all reviews
                                     </Typography>
                                     <Typography variant={'body2'} align={'left'}>
-                                        Negative reviews calculate as {((allSourceReview.negativeReview/allSourceReview.reviewCount)*100).toFixed(2)} % of all reviews
+                                        Negative reviews calculate as {
+                                        btnChoose=='full' ? ((allSourceReview.negativeReview/allSourceReview.reviewCount)*100).toFixed(2)
+                                            : btnChoose=='positive' ? (0)
+                                            : ((100))
+                                    } % of all reviews
                                     </Typography>
                                 </TextBox>
                             </ColorBox>
